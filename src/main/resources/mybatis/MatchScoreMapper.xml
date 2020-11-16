@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.MatchScoreMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchScore">
+    <!--@mbg.generated-->
+    <!--@Table match_score-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
+    <result column="recordId" jdbcType="BIGINT" property="recordId" />
+    <result column="scoreId" jdbcType="VARCHAR" property="scoreId" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="locked" jdbcType="BOOLEAN" property="locked" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
+    <result column="creatorId" jdbcType="VARCHAR" property="creatorId" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+    <result column="updaterId" jdbcType="VARCHAR" property="updaterId" />
+    <result column="updatedBy" jdbcType="VARCHAR" property="updatedBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, subjectId, recordId, scoreId, score, locked, version, lastAccess, creatorId, 
+    createdBy, createdTime, updaterId, updatedBy
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.MatchScoreExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from match_score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from match_score
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from match_score
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchScoreExample">
+    <!--@mbg.generated-->
+    delete from match_score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchScore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_score (subjectId, recordId, scoreId, 
+      score, locked, version, 
+      lastAccess, creatorId, createdBy, 
+      createdTime, updaterId, updatedBy
+      )
+    values (#{subjectId,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{scoreId,jdbcType=VARCHAR}, 
+      #{score,jdbcType=VARCHAR}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
+      #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchScore" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        subjectId,
+      </if>
+      <if test="recordId != null">
+        recordId,
+      </if>
+      <if test="scoreId != null">
+        scoreId,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastAccess != null">
+        lastAccess,
+      </if>
+      <if test="creatorId != null">
+        creatorId,
+      </if>
+      <if test="createdBy != null">
+        createdBy,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+      <if test="updaterId != null">
+        updaterId,
+      </if>
+      <if test="updatedBy != null">
+        updatedBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="scoreId != null">
+        #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.MatchScoreExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from match_score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update match_score
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null">
+        subjectId = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordId != null">
+        recordId = #{record.recordId,jdbcType=BIGINT},
+      </if>
+      <if test="record.scoreId != null">
+        scoreId = #{record.scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locked != null">
+        locked = #{record.locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastAccess != null">
+        lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="record.creatorId != null">
+        creatorId = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdBy != null">
+        createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updaterId != null">
+        updaterId = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedBy != null">
+        updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update match_score
+    set id = #{record.id,jdbcType=BIGINT},
+      subjectId = #{record.subjectId,jdbcType=BIGINT},
+      recordId = #{record.recordId,jdbcType=BIGINT},
+      scoreId = #{record.scoreId,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=VARCHAR},
+      locked = #{record.locked,jdbcType=BOOLEAN},
+      version = #{record.version,jdbcType=INTEGER},
+      lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      creatorId = #{record.creatorId,jdbcType=VARCHAR},
+      createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      createdTime = #{record.createdTime,jdbcType=BIGINT},
+      updaterId = #{record.updaterId,jdbcType=VARCHAR},
+      updatedBy = #{record.updatedBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchScore">
+    <!--@mbg.generated-->
+    update match_score
+    <set>
+      <if test="subjectId != null">
+        subjectId = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null">
+        recordId = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="scoreId != null">
+        scoreId = #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        lastAccess = #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        creatorId = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        updaterId = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null">
+        updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchScore">
+    <!--@mbg.generated-->
+    update match_score
+    set subjectId = #{subjectId,jdbcType=BIGINT},
+      recordId = #{recordId,jdbcType=BIGINT},
+      scoreId = #{scoreId,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=BOOLEAN},
+      version = #{version,jdbcType=INTEGER},
+      lastAccess = #{lastAccess,jdbcType=BIGINT},
+      creatorId = #{creatorId,jdbcType=VARCHAR},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      createdTime = #{createdTime,jdbcType=BIGINT},
+      updaterId = #{updaterId,jdbcType=VARCHAR},
+      updatedBy = #{updatedBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

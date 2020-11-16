@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.MatchSubjectMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchSubject">
+    <!--@mbg.generated-->
+    <!--@Table match_subject-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="matchId" jdbcType="BIGINT" property="matchId" />
+    <result column="subjectName" jdbcType="VARCHAR" property="subjectName" />
+    <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, matchId, subjectName, lastAccess, createdTime
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.MatchSubjectExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from match_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from match_subject
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from match_subject
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchSubjectExample">
+    <!--@mbg.generated-->
+    delete from match_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchSubject" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_subject (matchId, subjectName, lastAccess, 
+      createdTime)
+    values (#{matchId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{lastAccess,jdbcType=BIGINT}, 
+      #{createdTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchSubject" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="matchId != null">
+        matchId,
+      </if>
+      <if test="subjectName != null">
+        subjectName,
+      </if>
+      <if test="lastAccess != null">
+        lastAccess,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="matchId != null">
+        #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccess != null">
+        #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.MatchSubjectExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from match_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update match_subject
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.matchId != null">
+        matchId = #{record.matchId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectName != null">
+        subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastAccess != null">
+        lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update match_subject
+    set id = #{record.id,jdbcType=BIGINT},
+      matchId = #{record.matchId,jdbcType=BIGINT},
+      subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      createdTime = #{record.createdTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchSubject">
+    <!--@mbg.generated-->
+    update match_subject
+    <set>
+      <if test="matchId != null">
+        matchId = #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        subjectName = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccess != null">
+        lastAccess = #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchSubject">
+    <!--@mbg.generated-->
+    update match_subject
+    set matchId = #{matchId,jdbcType=BIGINT},
+      subjectName = #{subjectName,jdbcType=VARCHAR},
+      lastAccess = #{lastAccess,jdbcType=BIGINT},
+      createdTime = #{createdTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

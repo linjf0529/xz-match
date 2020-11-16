@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.UserInfo">
+    <!--@mbg.generated-->
+    <!--@Table user_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="creatorId" jdbcType="BIGINT" property="creatorId" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+    <result column="updaterId" jdbcType="BIGINT" property="updaterId" />
+    <result column="updatedBy" jdbcType="VARCHAR" property="updatedBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, phone, certificateNo, userName, `passWord`, creatorId, createdBy, createdTime, 
+    updaterId, updatedBy
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.UserInfoExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.UserInfoExample">
+    <!--@mbg.generated-->
+    delete from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.UserInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_info (phone, certificateNo, userName, 
+      `passWord`, creatorId, createdBy, 
+      createdTime, updaterId, updatedBy
+      )
+    values (#{phone,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=BIGINT}, #{updatedBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.UserInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="certificateNo != null">
+        certificateNo,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="passWord != null">
+        `passWord`,
+      </if>
+      <if test="creatorId != null">
+        creatorId,
+      </if>
+      <if test="createdBy != null">
+        createdBy,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+      <if test="updaterId != null">
+        updaterId,
+      </if>
+      <if test="updatedBy != null">
+        updatedBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.UserInfoExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update user_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateNo != null">
+        certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        userName = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passWord != null">
+        `passWord` = #{record.passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        creatorId = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdBy != null">
+        createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updaterId != null">
+        updaterId = #{record.updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.updatedBy != null">
+        updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update user_info
+    set id = #{record.id,jdbcType=BIGINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      userName = #{record.userName,jdbcType=VARCHAR},
+      `passWord` = #{record.passWord,jdbcType=VARCHAR},
+      creatorId = #{record.creatorId,jdbcType=BIGINT},
+      createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      createdTime = #{record.createdTime,jdbcType=BIGINT},
+      updaterId = #{record.updaterId,jdbcType=BIGINT},
+      updatedBy = #{record.updatedBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.UserInfo">
+    <!--@mbg.generated-->
+    update user_info
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        `passWord` = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creatorId = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        updaterId = #{updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.UserInfo">
+    <!--@mbg.generated-->
+    update user_info
+    set phone = #{phone,jdbcType=VARCHAR},
+      certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      userName = #{userName,jdbcType=VARCHAR},
+      `passWord` = #{passWord,jdbcType=VARCHAR},
+      creatorId = #{creatorId,jdbcType=BIGINT},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      createdTime = #{createdTime,jdbcType=BIGINT},
+      updaterId = #{updaterId,jdbcType=BIGINT},
+      updatedBy = #{updatedBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

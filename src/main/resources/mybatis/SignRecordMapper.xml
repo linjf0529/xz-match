@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.SignRecordMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.SignRecord">
+    <!--@mbg.generated-->
+    <!--@Table sign_record-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenantId" jdbcType="BIGINT" property="tenantId" />
+    <result column="orderId" jdbcType="BIGINT" property="orderId" />
+    <result column="matchId" jdbcType="BIGINT" property="matchId" />
+    <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="joinUserId" jdbcType="VARCHAR" property="joinUserId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="payment" jdbcType="TINYINT" property="payment" />
+    <result column="review" jdbcType="TINYINT" property="review" />
+    <result column="drawState" jdbcType="BOOLEAN" property="drawState" />
+    <result column="isPass" jdbcType="BOOLEAN" property="isPass" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="paymentType" jdbcType="TINYINT" property="paymentType" />
+    <result column="paymentTime" jdbcType="BIGINT" property="paymentTime" />
+    <result column="receive" jdbcType="BOOLEAN" property="receive" />
+    <result column="couponId" jdbcType="VARCHAR" property="couponId" />
+    <result column="couponAmount" jdbcType="DECIMAL" property="couponAmount" />
+    <result column="confirmPay" jdbcType="INTEGER" property="confirmPay" />
+    <result column="refundAmount" jdbcType="BIGINT" property="refundAmount" />
+    <result column="locked" jdbcType="BOOLEAN" property="locked" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
+    <result column="creatorId" jdbcType="BIGINT" property="creatorId" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+    <result column="updaterId" jdbcType="BIGINT" property="updaterId" />
+    <result column="updatedBy" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="available" jdbcType="TINYINT" property="available" />
+    <result column="subjectName" jdbcType="VARCHAR" property="subjectName" />
+    <result column="matchName" jdbcType="VARCHAR" property="matchName" />
+    <result column="orderNo" jdbcType="VARCHAR" property="orderNo" />
+    <result column="invitationCode" jdbcType="VARCHAR" property="invitationCode" />
+    <result column="signIn" jdbcType="BOOLEAN" property="signIn" />
+    <result column="expenses" jdbcType="BIGINT" property="expenses" />
+    <result column="memberType" jdbcType="TINYINT" property="memberType" />
+    <result column="matchNo" jdbcType="VARCHAR" property="matchNo" />
+    <result column="gradeNo" jdbcType="INTEGER" property="gradeNo" />
+    <result column="separateAccounts" jdbcType="BOOLEAN" property="separateAccounts" />
+    <result column="separateAccountsTime" jdbcType="BIGINT" property="separateAccountsTime" />
+    <result column="identityCheck" jdbcType="INTEGER" property="identityCheck" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, tenantId, orderId, matchId, subjectId, userId, joinUserId, `type`, `name`, sex, 
+    phone, certificateNo, payment, review, drawState, isPass, remarks, channel, paymentType, 
+    paymentTime, receive, couponId, couponAmount, confirmPay, refundAmount, locked, version, 
+    lastAccess, creatorId, createdBy, createdTime, updaterId, updatedBy, available, subjectName, 
+    matchName, orderNo, invitationCode, signIn, expenses, memberType, matchNo, gradeNo, 
+    separateAccounts, separateAccountsTime, identityCheck, `status`
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.SignRecordExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sign_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sign_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sign_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.SignRecordExample">
+    <!--@mbg.generated-->
+    delete from sign_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.SignRecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sign_record (tenantId, orderId, matchId, 
+      subjectId, userId, joinUserId, 
+      `type`, `name`, sex, phone, 
+      certificateNo, payment, review, 
+      drawState, isPass, remarks, 
+      channel, paymentType, paymentTime, 
+      receive, couponId, couponAmount, 
+      confirmPay, refundAmount, locked, 
+      version, lastAccess, creatorId, 
+      createdBy, createdTime, updaterId, 
+      updatedBy, available, subjectName, 
+      matchName, orderNo, invitationCode, 
+      signIn, expenses, memberType, 
+      matchNo, gradeNo, separateAccounts, 
+      separateAccountsTime, identityCheck, `status`
+      )
+    values (#{tenantId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{matchId,jdbcType=BIGINT}, 
+      #{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{joinUserId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
+      #{certificateNo,jdbcType=VARCHAR}, #{payment,jdbcType=TINYINT}, #{review,jdbcType=TINYINT}, 
+      #{drawState,jdbcType=BOOLEAN}, #{isPass,jdbcType=BOOLEAN}, #{remarks,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{paymentType,jdbcType=TINYINT}, #{paymentTime,jdbcType=BIGINT}, 
+      #{receive,jdbcType=BOOLEAN}, #{couponId,jdbcType=VARCHAR}, #{couponAmount,jdbcType=DECIMAL}, 
+      #{confirmPay,jdbcType=INTEGER}, #{refundAmount,jdbcType=BIGINT}, #{locked,jdbcType=BOOLEAN}, 
+      #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=BIGINT}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=BIGINT}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{available,jdbcType=TINYINT}, #{subjectName,jdbcType=VARCHAR}, 
+      #{matchName,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{invitationCode,jdbcType=VARCHAR}, 
+      #{signIn,jdbcType=BOOLEAN}, #{expenses,jdbcType=BIGINT}, #{memberType,jdbcType=TINYINT}, 
+      #{matchNo,jdbcType=VARCHAR}, #{gradeNo,jdbcType=INTEGER}, #{separateAccounts,jdbcType=BOOLEAN}, 
+      #{separateAccountsTime,jdbcType=BIGINT}, #{identityCheck,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.SignRecord" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sign_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        tenantId,
+      </if>
+      <if test="orderId != null">
+        orderId,
+      </if>
+      <if test="matchId != null">
+        matchId,
+      </if>
+      <if test="subjectId != null">
+        subjectId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="joinUserId != null">
+        joinUserId,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="certificateNo != null">
+        certificateNo,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="review != null">
+        review,
+      </if>
+      <if test="drawState != null">
+        drawState,
+      </if>
+      <if test="isPass != null">
+        isPass,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="paymentType != null">
+        paymentType,
+      </if>
+      <if test="paymentTime != null">
+        paymentTime,
+      </if>
+      <if test="receive != null">
+        receive,
+      </if>
+      <if test="couponId != null">
+        couponId,
+      </if>
+      <if test="couponAmount != null">
+        couponAmount,
+      </if>
+      <if test="confirmPay != null">
+        confirmPay,
+      </if>
+      <if test="refundAmount != null">
+        refundAmount,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastAccess != null">
+        lastAccess,
+      </if>
+      <if test="creatorId != null">
+        creatorId,
+      </if>
+      <if test="createdBy != null">
+        createdBy,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+      <if test="updaterId != null">
+        updaterId,
+      </if>
+      <if test="updatedBy != null">
+        updatedBy,
+      </if>
+      <if test="available != null">
+        available,
+      </if>
+      <if test="subjectName != null">
+        subjectName,
+      </if>
+      <if test="matchName != null">
+        matchName,
+      </if>
+      <if test="orderNo != null">
+        orderNo,
+      </if>
+      <if test="invitationCode != null">
+        invitationCode,
+      </if>
+      <if test="signIn != null">
+        signIn,
+      </if>
+      <if test="expenses != null">
+        expenses,
+      </if>
+      <if test="memberType != null">
+        memberType,
+      </if>
+      <if test="matchNo != null">
+        matchNo,
+      </if>
+      <if test="gradeNo != null">
+        gradeNo,
+      </if>
+      <if test="separateAccounts != null">
+        separateAccounts,
+      </if>
+      <if test="separateAccountsTime != null">
+        separateAccountsTime,
+      </if>
+      <if test="identityCheck != null">
+        identityCheck,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="joinUserId != null">
+        #{joinUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=TINYINT},
+      </if>
+      <if test="review != null">
+        #{review,jdbcType=TINYINT},
+      </if>
+      <if test="drawState != null">
+        #{drawState,jdbcType=BOOLEAN},
+      </if>
+      <if test="isPass != null">
+        #{isPass,jdbcType=BOOLEAN},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        #{paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=BIGINT},
+      </if>
+      <if test="receive != null">
+        #{receive,jdbcType=BOOLEAN},
+      </if>
+      <if test="couponId != null">
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null">
+        #{couponAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmPay != null">
+        #{confirmPay,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=BIGINT},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        #{available,jdbcType=TINYINT},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchName != null">
+        #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationCode != null">
+        #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="signIn != null">
+        #{signIn,jdbcType=BOOLEAN},
+      </if>
+      <if test="expenses != null">
+        #{expenses,jdbcType=BIGINT},
+      </if>
+      <if test="memberType != null">
+        #{memberType,jdbcType=TINYINT},
+      </if>
+      <if test="matchNo != null">
+        #{matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeNo != null">
+        #{gradeNo,jdbcType=INTEGER},
+      </if>
+      <if test="separateAccounts != null">
+        #{separateAccounts,jdbcType=BOOLEAN},
+      </if>
+      <if test="separateAccountsTime != null">
+        #{separateAccountsTime,jdbcType=BIGINT},
+      </if>
+      <if test="identityCheck != null">
+        #{identityCheck,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.SignRecordExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from sign_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update sign_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null">
+        tenantId = #{record.tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null">
+        orderId = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.matchId != null">
+        matchId = #{record.matchId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null">
+        subjectId = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        userId = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.joinUserId != null">
+        joinUserId = #{record.joinUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateNo != null">
+        certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payment != null">
+        payment = #{record.payment,jdbcType=TINYINT},
+      </if>
+      <if test="record.review != null">
+        review = #{record.review,jdbcType=TINYINT},
+      </if>
+      <if test="record.drawState != null">
+        drawState = #{record.drawState,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.isPass != null">
+        isPass = #{record.isPass,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentType != null">
+        paymentType = #{record.paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="record.paymentTime != null">
+        paymentTime = #{record.paymentTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.receive != null">
+        receive = #{record.receive,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.couponId != null">
+        couponId = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponAmount != null">
+        couponAmount = #{record.couponAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.confirmPay != null">
+        confirmPay = #{record.confirmPay,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundAmount != null">
+        refundAmount = #{record.refundAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.locked != null">
+        locked = #{record.locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastAccess != null">
+        lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="record.creatorId != null">
+        creatorId = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdBy != null">
+        createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updaterId != null">
+        updaterId = #{record.updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.updatedBy != null">
+        updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.available != null">
+        available = #{record.available,jdbcType=TINYINT},
+      </if>
+      <if test="record.subjectName != null">
+        subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchName != null">
+        matchName = #{record.matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null">
+        orderNo = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invitationCode != null">
+        invitationCode = #{record.invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signIn != null">
+        signIn = #{record.signIn,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.expenses != null">
+        expenses = #{record.expenses,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberType != null">
+        memberType = #{record.memberType,jdbcType=TINYINT},
+      </if>
+      <if test="record.matchNo != null">
+        matchNo = #{record.matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gradeNo != null">
+        gradeNo = #{record.gradeNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.separateAccounts != null">
+        separateAccounts = #{record.separateAccounts,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.separateAccountsTime != null">
+        separateAccountsTime = #{record.separateAccountsTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.identityCheck != null">
+        identityCheck = #{record.identityCheck,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update sign_record
+    set id = #{record.id,jdbcType=BIGINT},
+      tenantId = #{record.tenantId,jdbcType=BIGINT},
+      orderId = #{record.orderId,jdbcType=BIGINT},
+      matchId = #{record.matchId,jdbcType=BIGINT},
+      subjectId = #{record.subjectId,jdbcType=BIGINT},
+      userId = #{record.userId,jdbcType=BIGINT},
+      joinUserId = #{record.joinUserId,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=TINYINT},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=TINYINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      payment = #{record.payment,jdbcType=TINYINT},
+      review = #{record.review,jdbcType=TINYINT},
+      drawState = #{record.drawState,jdbcType=BOOLEAN},
+      isPass = #{record.isPass,jdbcType=BOOLEAN},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      paymentType = #{record.paymentType,jdbcType=TINYINT},
+      paymentTime = #{record.paymentTime,jdbcType=BIGINT},
+      receive = #{record.receive,jdbcType=BOOLEAN},
+      couponId = #{record.couponId,jdbcType=VARCHAR},
+      couponAmount = #{record.couponAmount,jdbcType=DECIMAL},
+      confirmPay = #{record.confirmPay,jdbcType=INTEGER},
+      refundAmount = #{record.refundAmount,jdbcType=BIGINT},
+      locked = #{record.locked,jdbcType=BOOLEAN},
+      version = #{record.version,jdbcType=INTEGER},
+      lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      creatorId = #{record.creatorId,jdbcType=BIGINT},
+      createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      createdTime = #{record.createdTime,jdbcType=BIGINT},
+      updaterId = #{record.updaterId,jdbcType=BIGINT},
+      updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      available = #{record.available,jdbcType=TINYINT},
+      subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      matchName = #{record.matchName,jdbcType=VARCHAR},
+      orderNo = #{record.orderNo,jdbcType=VARCHAR},
+      invitationCode = #{record.invitationCode,jdbcType=VARCHAR},
+      signIn = #{record.signIn,jdbcType=BOOLEAN},
+      expenses = #{record.expenses,jdbcType=BIGINT},
+      memberType = #{record.memberType,jdbcType=TINYINT},
+      matchNo = #{record.matchNo,jdbcType=VARCHAR},
+      gradeNo = #{record.gradeNo,jdbcType=INTEGER},
+      separateAccounts = #{record.separateAccounts,jdbcType=BOOLEAN},
+      separateAccountsTime = #{record.separateAccountsTime,jdbcType=BIGINT},
+      identityCheck = #{record.identityCheck,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.SignRecord">
+    <!--@mbg.generated-->
+    update sign_record
+    <set>
+      <if test="tenantId != null">
+        tenantId = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        orderId = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="matchId != null">
+        matchId = #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null">
+        subjectId = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="joinUserId != null">
+        joinUserId = #{joinUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=TINYINT},
+      </if>
+      <if test="review != null">
+        review = #{review,jdbcType=TINYINT},
+      </if>
+      <if test="drawState != null">
+        drawState = #{drawState,jdbcType=BOOLEAN},
+      </if>
+      <if test="isPass != null">
+        isPass = #{isPass,jdbcType=BOOLEAN},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        paymentType = #{paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentTime != null">
+        paymentTime = #{paymentTime,jdbcType=BIGINT},
+      </if>
+      <if test="receive != null">
+        receive = #{receive,jdbcType=BOOLEAN},
+      </if>
+      <if test="couponId != null">
+        couponId = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null">
+        couponAmount = #{couponAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmPay != null">
+        confirmPay = #{confirmPay,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        refundAmount = #{refundAmount,jdbcType=BIGINT},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        lastAccess = #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        creatorId = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        updaterId = #{updaterId,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        available = #{available,jdbcType=TINYINT},
+      </if>
+      <if test="subjectName != null">
+        subjectName = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchName != null">
+        matchName = #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        orderNo = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationCode != null">
+        invitationCode = #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="signIn != null">
+        signIn = #{signIn,jdbcType=BOOLEAN},
+      </if>
+      <if test="expenses != null">
+        expenses = #{expenses,jdbcType=BIGINT},
+      </if>
+      <if test="memberType != null">
+        memberType = #{memberType,jdbcType=TINYINT},
+      </if>
+      <if test="matchNo != null">
+        matchNo = #{matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeNo != null">
+        gradeNo = #{gradeNo,jdbcType=INTEGER},
+      </if>
+      <if test="separateAccounts != null">
+        separateAccounts = #{separateAccounts,jdbcType=BOOLEAN},
+      </if>
+      <if test="separateAccountsTime != null">
+        separateAccountsTime = #{separateAccountsTime,jdbcType=BIGINT},
+      </if>
+      <if test="identityCheck != null">
+        identityCheck = #{identityCheck,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.SignRecord">
+    <!--@mbg.generated-->
+    update sign_record
+    set tenantId = #{tenantId,jdbcType=BIGINT},
+      orderId = #{orderId,jdbcType=BIGINT},
+      matchId = #{matchId,jdbcType=BIGINT},
+      subjectId = #{subjectId,jdbcType=BIGINT},
+      userId = #{userId,jdbcType=BIGINT},
+      joinUserId = #{joinUserId,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=TINYINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      payment = #{payment,jdbcType=TINYINT},
+      review = #{review,jdbcType=TINYINT},
+      drawState = #{drawState,jdbcType=BOOLEAN},
+      isPass = #{isPass,jdbcType=BOOLEAN},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      paymentType = #{paymentType,jdbcType=TINYINT},
+      paymentTime = #{paymentTime,jdbcType=BIGINT},
+      receive = #{receive,jdbcType=BOOLEAN},
+      couponId = #{couponId,jdbcType=VARCHAR},
+      couponAmount = #{couponAmount,jdbcType=DECIMAL},
+      confirmPay = #{confirmPay,jdbcType=INTEGER},
+      refundAmount = #{refundAmount,jdbcType=BIGINT},
+      locked = #{locked,jdbcType=BOOLEAN},
+      version = #{version,jdbcType=INTEGER},
+      lastAccess = #{lastAccess,jdbcType=BIGINT},
+      creatorId = #{creatorId,jdbcType=BIGINT},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      createdTime = #{createdTime,jdbcType=BIGINT},
+      updaterId = #{updaterId,jdbcType=BIGINT},
+      updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      available = #{available,jdbcType=TINYINT},
+      subjectName = #{subjectName,jdbcType=VARCHAR},
+      matchName = #{matchName,jdbcType=VARCHAR},
+      orderNo = #{orderNo,jdbcType=VARCHAR},
+      invitationCode = #{invitationCode,jdbcType=VARCHAR},
+      signIn = #{signIn,jdbcType=BOOLEAN},
+      expenses = #{expenses,jdbcType=BIGINT},
+      memberType = #{memberType,jdbcType=TINYINT},
+      matchNo = #{matchNo,jdbcType=VARCHAR},
+      gradeNo = #{gradeNo,jdbcType=INTEGER},
+      separateAccounts = #{separateAccounts,jdbcType=BOOLEAN},
+      separateAccountsTime = #{separateAccountsTime,jdbcType=BIGINT},
+      identityCheck = #{identityCheck,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

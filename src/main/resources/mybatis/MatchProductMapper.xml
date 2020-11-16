@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.MatchProductMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchProduct">
+    <!--@mbg.generated-->
+    <!--@Table match_product-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenantId" jdbcType="BIGINT" property="tenantId" />
+    <result column="subjectName" jdbcType="VARCHAR" property="subjectName" />
+    <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
+    <result column="matchName" jdbcType="VARCHAR" property="matchName" />
+    <result column="matchId" jdbcType="BIGINT" property="matchId" />
+    <result column="inventoryType" jdbcType="VARCHAR" property="inventoryType" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="disabled" jdbcType="INTEGER" property="disabled" />
+    <result column="stockNumber" jdbcType="BIGINT" property="stockNumber" />
+    <result column="locked" jdbcType="BOOLEAN" property="locked" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
+    <result column="creatorId" jdbcType="VARCHAR" property="creatorId" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+    <result column="updaterId" jdbcType="VARCHAR" property="updaterId" />
+    <result column="updatedBy" jdbcType="VARCHAR" property="updatedBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, tenantId, subjectName, subjectId, matchName, matchId, inventoryType, productName, 
+    description, disabled, stockNumber, locked, version, lastAccess, creatorId, createdBy, 
+    createdTime, updaterId, updatedBy
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.MatchProductExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from match_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from match_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from match_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchProductExample">
+    <!--@mbg.generated-->
+    delete from match_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProduct" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_product (tenantId, subjectName, subjectId, 
+      matchName, matchId, inventoryType, 
+      productName, description, disabled, 
+      stockNumber, locked, version, 
+      lastAccess, creatorId, createdBy, 
+      createdTime, updaterId, updatedBy
+      )
+    values (#{tenantId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
+      #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, #{inventoryType,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, 
+      #{stockNumber,jdbcType=BIGINT}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
+      #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProduct" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into match_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        tenantId,
+      </if>
+      <if test="subjectName != null">
+        subjectName,
+      </if>
+      <if test="subjectId != null">
+        subjectId,
+      </if>
+      <if test="matchName != null">
+        matchName,
+      </if>
+      <if test="matchId != null">
+        matchId,
+      </if>
+      <if test="inventoryType != null">
+        inventoryType,
+      </if>
+      <if test="productName != null">
+        productName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="disabled != null">
+        disabled,
+      </if>
+      <if test="stockNumber != null">
+        stockNumber,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastAccess != null">
+        lastAccess,
+      </if>
+      <if test="creatorId != null">
+        creatorId,
+      </if>
+      <if test="createdBy != null">
+        createdBy,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+      <if test="updaterId != null">
+        updaterId,
+      </if>
+      <if test="updatedBy != null">
+        updatedBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="matchName != null">
+        #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryType != null">
+        #{inventoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+      <if test="stockNumber != null">
+        #{stockNumber,jdbcType=BIGINT},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.MatchProductExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from match_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update match_product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null">
+        tenantId = #{record.tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectName != null">
+        subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null">
+        subjectId = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.matchName != null">
+        matchName = #{record.matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchId != null">
+        matchId = #{record.matchId,jdbcType=BIGINT},
+      </if>
+      <if test="record.inventoryType != null">
+        inventoryType = #{record.inventoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        productName = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disabled != null">
+        disabled = #{record.disabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockNumber != null">
+        stockNumber = #{record.stockNumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.locked != null">
+        locked = #{record.locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastAccess != null">
+        lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="record.creatorId != null">
+        creatorId = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdBy != null">
+        createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updaterId != null">
+        updaterId = #{record.updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedBy != null">
+        updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update match_product
+    set id = #{record.id,jdbcType=BIGINT},
+      tenantId = #{record.tenantId,jdbcType=BIGINT},
+      subjectName = #{record.subjectName,jdbcType=VARCHAR},
+      subjectId = #{record.subjectId,jdbcType=BIGINT},
+      matchName = #{record.matchName,jdbcType=VARCHAR},
+      matchId = #{record.matchId,jdbcType=BIGINT},
+      inventoryType = #{record.inventoryType,jdbcType=VARCHAR},
+      productName = #{record.productName,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      disabled = #{record.disabled,jdbcType=INTEGER},
+      stockNumber = #{record.stockNumber,jdbcType=BIGINT},
+      locked = #{record.locked,jdbcType=BOOLEAN},
+      version = #{record.version,jdbcType=INTEGER},
+      lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      creatorId = #{record.creatorId,jdbcType=VARCHAR},
+      createdBy = #{record.createdBy,jdbcType=VARCHAR},
+      createdTime = #{record.createdTime,jdbcType=BIGINT},
+      updaterId = #{record.updaterId,jdbcType=VARCHAR},
+      updatedBy = #{record.updatedBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchProduct">
+    <!--@mbg.generated-->
+    update match_product
+    <set>
+      <if test="tenantId != null">
+        tenantId = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        subjectName = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null">
+        subjectId = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="matchName != null">
+        matchName = #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        matchId = #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryType != null">
+        inventoryType = #{inventoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        disabled = #{disabled,jdbcType=INTEGER},
+      </if>
+      <if test="stockNumber != null">
+        stockNumber = #{stockNumber,jdbcType=BIGINT},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=BOOLEAN},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastAccess != null">
+        lastAccess = #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        creatorId = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        createdBy = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="updaterId != null">
+        updaterId = #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null">
+        updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchProduct">
+    <!--@mbg.generated-->
+    update match_product
+    set tenantId = #{tenantId,jdbcType=BIGINT},
+      subjectName = #{subjectName,jdbcType=VARCHAR},
+      subjectId = #{subjectId,jdbcType=BIGINT},
+      matchName = #{matchName,jdbcType=VARCHAR},
+      matchId = #{matchId,jdbcType=BIGINT},
+      inventoryType = #{inventoryType,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      disabled = #{disabled,jdbcType=INTEGER},
+      stockNumber = #{stockNumber,jdbcType=BIGINT},
+      locked = #{locked,jdbcType=BOOLEAN},
+      version = #{version,jdbcType=INTEGER},
+      lastAccess = #{lastAccess,jdbcType=BIGINT},
+      creatorId = #{creatorId,jdbcType=VARCHAR},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      createdTime = #{createdTime,jdbcType=BIGINT},
+      updaterId = #{updaterId,jdbcType=VARCHAR},
+      updatedBy = #{updatedBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -37,7 +37,7 @@ public class SubjectSignField {
     /**
     * 类型(1-文本,2-下拉框,3-日期,4-文件)
     */
-    private Byte type;
+    private Integer type;
 
     /**
     * HTML
@@ -52,12 +52,12 @@ public class SubjectSignField {
     /**
     * 显示状态(0-不显示,1-显示,2-显示且必填)
     */
-    private Byte state;
+    private Integer state;
 
     /**
     * 不可编辑
     */
-    private Byte editable;
+    private Integer editable;
 
     /**
     * 是否锁定(0.未锁定,1.已锁定)
@@ -144,11 +144,11 @@ public class SubjectSignField {
         this.remarks = remarks;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -168,19 +168,19 @@ public class SubjectSignField {
         this.value = value;
     }
 
-    public Byte getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
-    public Byte getEditable() {
+    public Integer getEditable() {
         return editable;
     }
 
-    public void setEditable(Byte editable) {
+    public void setEditable(Integer editable) {
         this.editable = editable;
     }
 

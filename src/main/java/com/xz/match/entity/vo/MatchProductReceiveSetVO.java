@@ -46,7 +46,7 @@ public class MatchProductReceiveSetVO  implements Serializable {
     /**
      * 赛制类型（0-个人,1-团体）
      */
-    private Byte type;
+    private Integer type;
 
     /**
      * 页面展示参数ID
@@ -93,7 +93,7 @@ public class MatchProductReceiveSetVO  implements Serializable {
     }
 
 
-    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Byte type, String pageShow, String pageShowComment, String tips, Integer status) {
+    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Integer type, String pageShow, String pageShowComment, String tips, Integer status) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.matchId = matchId;
@@ -105,7 +105,7 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.status = status;
     }
 
-    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Byte type, String pageShow, String pageShowComment, String tips, Integer status, List<SubjectSignField> subjectSignFields) {
+    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Integer type, String pageShow, String pageShowComment, String tips, Integer status, List<SubjectSignField> subjectSignFields) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.matchId = matchId;
@@ -150,11 +150,11 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.matchName = matchName;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

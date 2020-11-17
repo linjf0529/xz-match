@@ -49,7 +49,7 @@ public class SignRecord {
     /**
     * 赛制类型（0-个人,1-团体）
     */
-    private Byte type;
+    private Integer type;
 
     /**
     * 姓名
@@ -59,7 +59,7 @@ public class SignRecord {
     /**
     * 性别（0-女,1-男,2-'）
     */
-    private Byte sex;
+    private Integer sex;
 
     /**
     * 手机号
@@ -74,12 +74,12 @@ public class SignRecord {
     /**
     * 支付状态（0-未支付,1-已支付,2-已取消,3-退款中,4-已退款）
     */
-    private Byte payment;
+    private Integer payment;
 
     /**
     * 审核状态(0-不通过,1-成功,2-已取消)
     */
-    private Byte review;
+    private Integer review;
 
     /**
     * 抽签状态(0-抽取中,1-抽中,2-未抽中)
@@ -104,7 +104,7 @@ public class SignRecord {
     /**
     * 支付方式：1-运动豆、2-场馆卡、3-次卡、4-支付宝、5-微信支付、6-红包支付、7-线下支付、8-租户会员卡、9-第三方支付
     */
-    private Byte paymentType;
+    private Integer paymentType;
 
     /**
     * 支付时间
@@ -179,7 +179,7 @@ public class SignRecord {
     /**
     * 是否可用
     */
-    private Byte available;
+    private Integer available;
 
     /**
     * 科目名称
@@ -214,7 +214,7 @@ public class SignRecord {
     /**
     * 报名记录类型(0-个人，1-队长, 2-队员)
     */
-    private Byte memberType;
+    private Integer memberType;
 
     /**
     * 参赛号码
@@ -302,11 +302,11 @@ public class SignRecord {
         this.joinUserId = joinUserId;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -318,11 +318,11 @@ public class SignRecord {
         this.name = name;
     }
 
-    public Byte getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
@@ -342,19 +342,19 @@ public class SignRecord {
         this.certificateNo = certificateNo;
     }
 
-    public Byte getPayment() {
+    public Integer getPayment() {
         return payment;
     }
 
-    public void setPayment(Byte payment) {
+    public void setPayment(Integer payment) {
         this.payment = payment;
     }
 
-    public Byte getReview() {
+    public Integer getReview() {
         return review;
     }
 
-    public void setReview(Byte review) {
+    public void setReview(Integer review) {
         this.review = review;
     }
 
@@ -390,11 +390,11 @@ public class SignRecord {
         this.channel = channel;
     }
 
-    public Byte getPaymentType() {
+    public Integer getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(Byte paymentType) {
+    public void setPaymentType(Integer paymentType) {
         this.paymentType = paymentType;
     }
 
@@ -510,11 +510,11 @@ public class SignRecord {
         this.updatedBy = updatedBy;
     }
 
-    public Byte getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public void setAvailable(Byte available) {
+    public void setAvailable(Integer available) {
         this.available = available;
     }
 
@@ -566,11 +566,11 @@ public class SignRecord {
         this.expenses = expenses;
     }
 
-    public Byte getMemberType() {
+    public Integer getMemberType() {
         return memberType;
     }
 
-    public void setMemberType(Byte memberType) {
+    public void setMemberType(Integer memberType) {
         this.memberType = memberType;
     }
 

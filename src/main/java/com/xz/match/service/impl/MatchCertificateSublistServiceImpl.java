@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.mapper.MatchCertificateSublistMapper;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchCertificateSublistExample;
 import com.xz.match.entity.MatchCertificateSublist;
 import com.xz.match.service.MatchCertificateSublistService;
@@ -13,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
 public class MatchCertificateSublistServiceImpl implements MatchCertificateSublistService{
@@ -74,6 +76,21 @@ public class MatchCertificateSublistServiceImpl implements MatchCertificateSubli
     @Override
     public int updateByPrimaryKey(MatchCertificateSublist record) {
         return matchCertificateSublistMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<MatchCertificateSublist> findBy(Map<String, Object> map) {
+        return matchCertificateSublistMapper.findBy(map);
+    }
+
+    @Override
+    public void deleteSubject(Map<String, Object> map) {
+        matchCertificateSublistMapper.deleteSubject(map);
+    }
+
+    @Override
+    public List<MatchCertificateSublist> getCertificateSublist(Map<String, Object> map) {
+        return matchCertificateSublistMapper.getCertificateSublist(map);
     }
 
 }

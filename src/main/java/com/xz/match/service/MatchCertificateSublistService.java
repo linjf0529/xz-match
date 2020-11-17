@@ -1,6 +1,8 @@
 package com.xz.match.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchCertificateSublistExample;
 import com.xz.match.entity.MatchCertificateSublist;
     /**
@@ -33,4 +35,9 @@ public interface MatchCertificateSublistService{
 
     int updateByPrimaryKey(MatchCertificateSublist record);
 
+    List<MatchCertificateSublist> findBy(Map<String,Object> map);
+
+    void deleteSubject(Map<String,Object> map);
+
+    List<MatchCertificateSublist> getCertificateSublist(Map<String,Object> map);
 }

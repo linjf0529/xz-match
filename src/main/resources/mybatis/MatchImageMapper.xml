@@ -256,4 +256,27 @@
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.MatchImage">
+    <include refid="listSQL" />
+  </select>
+
+  <sql id="listSQL">
+    SELECT * FROM match_image
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    ORDER BY id DESC
+  </sql>
+
+  <sql id="condition_sql">
+    <trim prefixOverrides="AND | OR">
+      <if test="matchId != null">
+        AND matchId = #{matchId}
+      </if>
+      <if test="subjectId != null">
+        AND subjectId = #{subjectId}
+      </if>
+    </trim>
+  </sql>
 </mapper>

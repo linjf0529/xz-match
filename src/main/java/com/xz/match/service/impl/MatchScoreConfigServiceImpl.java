@@ -86,7 +86,13 @@ public class MatchScoreConfigServiceImpl implements MatchScoreConfigService{
 
     @Override
     public ResponseResult save(MatchScoreConfig matchScoreConfig) {
-        matchScoreConfig.setSort(matchScoreConfigMapper.getMaxSort(matchScoreConfig.getSubjectId())+1);
+        Integer sort=matchScoreConfigMapper.getMaxSort(matchScoreConfig.getSubjectId());
+        if(sort==null){
+            sort=1;
+        }else {
+            sort=sort+1;
+        }
+        matchScoreConfig.setSort(sort);
         int cuont;
         matchScoreConfig.setType(2);
         matchScoreConfig.setShowState(1);

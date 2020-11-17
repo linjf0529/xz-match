@@ -84,6 +84,8 @@ public class MatchCertificateSublist {
     */
     private String updatedBy;
 
+    private String score;
+
     public Long getId() {
         return id;
     }
@@ -202,5 +204,13 @@ public class MatchCertificateSublist {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 }

@@ -1,9 +1,15 @@
 package com.xz.match.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchImage;
 import com.xz.match.entity.MatchImageExample;
-    /**
+import com.xz.match.entity.MatchInfo;
+import com.xz.match.utils.PageParam;
+import com.xz.match.utils.ResponseResult;
+
+/**
  *
  * @author chenwf
  * @date 2020/11/17
@@ -33,4 +39,5 @@ public interface MatchImageService{
 
     int updateByPrimaryKey(MatchImage record);
 
+    ResponseResult findBy(PageParam pageParam, Map<String, Object> param);
 }

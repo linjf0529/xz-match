@@ -27,7 +27,7 @@ public class MatchScore {
     /**
     * 参数配置表ID
     */
-    private String scoreId;
+    private Long scoreId;
 
     /**
     * 成绩
@@ -52,7 +52,7 @@ public class MatchScore {
     /**
     * 创建人ID
     */
-    private String creatorId;
+    private Long creatorId;
 
     /**
     * 创建人
@@ -67,12 +67,20 @@ public class MatchScore {
     /**
     * 更新人ID
     */
-    private String updaterId;
+    private Long updaterId;
 
     /**
     * 更新人
     */
     private String updatedBy;
+    /**
+     *成绩参数名
+     */
+    private String scoreParameter;
+    /**
+     * 是否在成绩添加的时候是否显示1.显示2.不显示
+     */
+    private Integer showState;
 
     public Long getId() {
         return id;
@@ -98,11 +106,11 @@ public class MatchScore {
         this.recordId = recordId;
     }
 
-    public String getScoreId() {
+    public Long getScoreId() {
         return scoreId;
     }
 
-    public void setScoreId(String scoreId) {
+    public void setScoreId(Long scoreId) {
         this.scoreId = scoreId;
     }
 
@@ -138,11 +146,11 @@ public class MatchScore {
         this.lastAccess = lastAccess;
     }
 
-    public String getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(String creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -162,11 +170,11 @@ public class MatchScore {
         this.createdTime = createdTime;
     }
 
-    public String getUpdaterId() {
+    public Long getUpdaterId() {
         return updaterId;
     }
 
-    public void setUpdaterId(String updaterId) {
+    public void setUpdaterId(Long updaterId) {
         this.updaterId = updaterId;
     }
 
@@ -176,5 +184,21 @@ public class MatchScore {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getScoreParameter() {
+        return scoreParameter;
+    }
+
+    public void setScoreParameter(String scoreParameter) {
+        this.scoreParameter = scoreParameter;
+    }
+
+    public Integer getShowState() {
+        return showState;
+    }
+
+    public void setShowState(Integer showState) {
+        this.showState = showState;
     }
 }

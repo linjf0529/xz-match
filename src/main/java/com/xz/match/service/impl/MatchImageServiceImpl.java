@@ -1,9 +1,16 @@
 package com.xz.match.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xz.match.entity.vo.SignRecordScoreVO;
+import com.xz.match.utils.PageParam;
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.mapper.MatchImageMapper;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchImage;
 import com.xz.match.entity.MatchImageExample;
 import com.xz.match.service.MatchImageService;
@@ -71,6 +78,13 @@ public class MatchImageServiceImpl implements MatchImageService{
     @Override
     public int updateByPrimaryKey(MatchImage record) {
         return matchImageMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public ResponseResult findBy(PageParam pageParam, Map<String, Object> param) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<MatchImage> MatchImages = matchImageMapper.findBy(param);
+        return ResponseResult.ok().setData(new PageInfo<>(MatchImages));
     }
 
 }

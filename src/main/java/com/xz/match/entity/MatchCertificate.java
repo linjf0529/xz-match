@@ -4,7 +4,10 @@ package com.xz.match.entity;
  *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
+
+import java.util.List;
+
 /**
     * 赛事证书表 
     */
@@ -72,7 +75,13 @@ public class MatchCertificate {
     /**
     * 证书类型 1.赛事证书 2.项目证书
     */
-    private Boolean type;
+    private Integer type;
+
+    private Integer size;
+
+    private String font;
+
+    private List<MatchCertificateSublist> sublist;
 
     public Long getId() {
         return id;
@@ -170,11 +179,35 @@ public class MatchCertificate {
         this.updatedBy = updatedBy;
     }
 
-    public Boolean getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Boolean type) {
+    public void setType(Integer type) {
         this.type = type;
+    }
+
+    public List<MatchCertificateSublist> getSublist() {
+        return sublist;
+    }
+
+    public void setSublist(List<MatchCertificateSublist> sublist) {
+        this.sublist = sublist;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
     }
 }

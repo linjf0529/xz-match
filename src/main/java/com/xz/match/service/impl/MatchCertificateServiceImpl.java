@@ -1,5 +1,9 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.utils.ResponseResult;
+import com.xz.match.utils.StringUtils;
+import com.xz.match.utils.file.FSConstants;
+import com.xz.match.service.WsossService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.entity.MatchCertificateExample;
@@ -21,6 +25,8 @@ public class MatchCertificateServiceImpl implements MatchCertificateService{
     @Resource
     private MatchCertificateMapper matchCertificateMapper;
 
+    @Resource
+    private WsossService wsossService;
     @Override
     public long countByExample(MatchCertificateExample example) {
         return matchCertificateMapper.countByExample(example);
@@ -74,6 +80,19 @@ public class MatchCertificateServiceImpl implements MatchCertificateService{
     @Override
     public int updateByPrimaryKey(MatchCertificate record) {
         return matchCertificateMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public MatchCertificate getCertificateBySubjectId(Long subjectId) {
+        return matchCertificateMapper.getCertificateBySubjectId(subjectId);
+    }
+
+    @Override
+    public ResponseResult uploadImage(byte[] imageContent) {
+        String imageName = StringUtils.getUUID() + ".png";
+        // 指定上传文件夹
+        String fileKeyWithFolder = "match/"+imageName;
+        return wsossService.uploadImage(imageContent,imageName, FSConstants.WSOSS_BUCKET_NAME_DEFAULT, fileKeyWithFolder);
     }
 
 }

@@ -1,8 +1,17 @@
 package com.xz.match.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xz.match.entity.MatchProductReceiveSet;
+import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.vo.SignRecordScoreVO;
+import com.xz.match.utils.PageParam;
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchScore;
 import com.xz.match.entity.MatchScoreExample;
 import com.xz.match.mapper.MatchScoreMapper;
@@ -75,5 +84,18 @@ public class MatchScoreServiceImpl implements MatchScoreService{
     public int updateByPrimaryKey(MatchScore record) {
         return matchScoreMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public List<MatchScore> getMatchScoreList(Map<String, Object> map) {
+        return matchScoreMapper.getMatchScoreList(map);
+    }
+
+    @Override
+    public ResponseResult findSignRecordScore(PageParam pageParam, Map<String, Object> param) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<SignRecordScoreVO> signRecordScoreVOs = matchScoreMapper.findSignRecordScore(param);
+        return ResponseResult.ok().setData(new PageInfo<>(signRecordScoreVOs));
+    }
+
 
 }

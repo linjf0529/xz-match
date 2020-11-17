@@ -3,6 +3,10 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchScore;
 import com.xz.match.entity.MatchScoreExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.vo.SignRecordScoreVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +66,18 @@ public interface MatchScoreMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchScore record);
+
+    /**
+     * 根据报名记录和科目id查询成绩
+     * @param map
+     * @return
+     */
+    List<MatchScore> getMatchScoreList(Map<String,Object> map);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    List<SignRecordScoreVO> findSignRecordScore(Map<String,Object> map);
 }

@@ -35,9 +35,15 @@ public class MatchScoreConfigController extends BaseController{
     @Resource
     private MatchScoreConfigService matchScoreConfigService;
 
+    /**
+     * 根据subjectId获取成绩参数
+     * @param request
+     * @return
+     */
     @GetMapping
     public ResponseResult getScoreConfig(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
+        ValidateUtils.notNull(param.getString("subjectId"),"科目id不能为空");
         List<MatchScoreConfig> matchScoreConfigs= matchScoreConfigService.findBy(param);
         return ResponseResult.ok().setData(matchScoreConfigs);
     }
@@ -49,7 +55,7 @@ public class MatchScoreConfigController extends BaseController{
      */
     @PostMapping
     public ResponseResult saveMatchScoreConfig(@RequestBody MatchScoreConfig matchScoreConfig){
-        ValidateUtils.notNull(matchScoreConfig.getSubjectId(),10001,"赛事id不能为空");
+        ValidateUtils.notNull(matchScoreConfig.getSubjectId(),"科目id不能为空");
         return matchScoreConfigService.save(matchScoreConfig);
     }
     /**

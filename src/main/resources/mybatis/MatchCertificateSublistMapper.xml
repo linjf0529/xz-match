@@ -375,4 +375,55 @@
       updatedBy = #{updatedBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.MatchCertificateSublist">
+    <include refid="listSQL" />
+  </select>
+
+  <sql id="listSQL">
+    SELECT * FROM match_certificate_sublist
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    ORDER BY id DESC
+  </sql>
+
+  <sql id="condition_sql">
+    <trim prefixOverrides="AND | OR">
+      <if test="certificateId != null">
+        AND certificateId = #{certificateId}
+      </if>
+      <if test="scoreId != null">
+        AND scoreId = #{scoreId}
+      </if>
+    </trim>
+  </sql>
+
+  <delete id="deleteSubject" parameterType="map">
+    DELETE FROM match_certificate_sublist
+    WHERE certificateId = #{certificateId}
+    <if test="idList != null and idList.size() > 0">
+      and id not in
+      <foreach collection="idList" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </delete>
+
+  <select id="getCertificateSublist" parameterType="map" resultType="com.xz.match.entity.MatchCertificateSublist">
+        SELECT
+            c.id,
+            c.positionX,
+            c.positionY,
+            c.scoreId,
+            c.colour,
+            c.fontSize,
+            s.score
+        FROM
+            match_certificate_sublist c
+            LEFT JOIN match_score s ON c.scoreId = s.scoreId
+        WHERE
+            c.certificateId = #{certificateId}
+            AND s.recordId = #{recordId}
+    </select>
 </mapper>

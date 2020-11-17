@@ -81,7 +81,7 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, matchId, subjectId, url, locked, version, lastAccess, creatorId, createdBy, createdTime, 
-    updaterId, updatedBy, `type`
+    updaterId, updatedBy, `type`,`size`,`font`
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.MatchCertificateExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -122,12 +122,13 @@
     insert into match_certificate (matchId, subjectId, url, 
       locked, version, lastAccess, 
       creatorId, createdBy, createdTime, 
-      updaterId, updatedBy, `type`
+      updaterId, updatedBy, `type`,`size`,font
       )
     values (#{matchId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, 
       #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, 
       #{creatorId,jdbcType=BIGINT}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, 
-      #{updaterId,jdbcType=BIGINT}, #{updatedBy,jdbcType=VARCHAR}, #{type,jdbcType=BOOLEAN}
+      #{updaterId,jdbcType=BIGINT}, #{updatedBy,jdbcType=VARCHAR}, #{type,jdbcType=BOOLEAN},#{size,jdbcType=INTEGER},
+        #{font,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchCertificate" useGeneratedKeys="true">
@@ -170,6 +171,12 @@
       <if test="type != null">
         `type`,
       </if>
+      <if test="size != null">
+        `size`,
+      </if>
+      <if test="font != null">
+        `font`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="matchId != null">
@@ -207,6 +214,12 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=BOOLEAN},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="font != null">
+        #{font,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -260,6 +273,12 @@
       <if test="record.type != null">
         `type` = #{record.type,jdbcType=BOOLEAN},
       </if>
+      <if test="record.size != null">
+        `size` = #{record.size,jdbcType=INTEGER},
+      </if>
+      <if test="record.font != null">
+        `font` = #{record.font,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -280,7 +299,9 @@
       createdTime = #{record.createdTime,jdbcType=BIGINT},
       updaterId = #{record.updaterId,jdbcType=BIGINT},
       updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
-      `type` = #{record.type,jdbcType=BOOLEAN}
+      `type` = #{record.type,jdbcType=BOOLEAN},
+      `size` = #{record.size,jdbcType=INTEGER},
+      `font` = #{record.font,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -345,4 +366,8 @@
       `type` = #{type,jdbcType=BOOLEAN}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getCertificateBySubjectId" parameterType="java.lang.Long" resultType="com.xz.match.entity.MatchCertificate">
+     SELECT * FROM match_certificate WHERE subjectId=#{subjectId,jdbcType=BIGINT} ORDER BY id DESC LIMIT 1
+  </select>
 </mapper>

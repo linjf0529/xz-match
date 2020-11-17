@@ -3,6 +3,8 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchCertificateSublist;
 import com.xz.match.entity.MatchCertificateSublistExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +64,15 @@ public interface MatchCertificateSublistMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchCertificateSublist record);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    List<MatchCertificateSublist> findBy(Map<String,Object> map);
+
+    void deleteSubject(Map<String,Object> map);
+
+    List<MatchCertificateSublist> getCertificateSublist(Map<String,Object> map);
 }

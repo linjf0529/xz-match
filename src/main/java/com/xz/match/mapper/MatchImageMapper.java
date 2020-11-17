@@ -3,6 +3,9 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchImage;
 import com.xz.match.entity.MatchImageExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.MatchInfo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +65,11 @@ public interface MatchImageMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchImage record);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    List<MatchImage> findBy(Map<String,Object> map);
 }

@@ -62,4 +62,11 @@ public interface MatchCertificateMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchCertificate record);
+
+    /**
+     * 根据项目id获取模板
+     * @param subjectId
+     * @return
+     */
+    MatchCertificate getCertificateBySubjectId(@Param("subjectId")Long subjectId);
 }

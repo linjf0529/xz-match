@@ -1,6 +1,6 @@
 package com.xz.match.utils.enums;
 
-import com.tjcloud.core.utils.StringUtils;
+import com.xz.match.utils.StringUtils;
 
 /**
  * 订单来源:1-WEB、2-租户后台、3-大众点评、4-口碑、5-IOS、6-Android，7-上海银行，8-微信，9-宝山羽协，10-手机，11-其他

@@ -34,5 +34,7 @@ public interface UserInfoService {
     int updateByPrimaryKey(UserInfo record);
 
     UserInfo findByMobile(String phone, Integer type, String certificateNo);
+
+    UserInfo saveUser(String phone, String certificateNo, String name);
 }
 

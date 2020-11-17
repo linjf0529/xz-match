@@ -360,4 +360,33 @@
       updatedBy = #{updatedBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findBy" parameterType="map" resultType="com.xz.match.entity.MatchScoreConfig">
+      <include refid="listSQL" />
+    </select>
+
+    <sql id="listSQL">
+      SELECT * FROM match_score_config
+      <where>
+        <include refid="condition_sql" />
+      </where>
+      ORDER BY sort,lastAccess desc
+    </sql>
+
+    <sql id="condition_sql">
+      <trim prefixOverrides="AND | OR">
+        <if test="subjectId != null">
+          AND (subjectId = #{subjectId} or `type`=1)
+        </if>
+        <if test="type!=null">
+          AND `type`=#{type}
+        </if>
+        <if test="scoreParameter != null and scoreParameter!=''">
+          AND scoreParameter like  CONCAT('%',#{scoreParameter},'%')
+        </if>
+      </trim>
+    </sql>
+
+  <select id="getMaxSort" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT max(sort) from match_score_config where type=1 or subjectId=#{subjectId}
+  </select>
 </mapper>

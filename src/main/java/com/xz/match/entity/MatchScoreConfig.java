@@ -22,12 +22,12 @@ public class MatchScoreConfig {
     /**
     * 类型1.固定参数2.可变参数
     */
-    private Boolean type;
+    private Integer type;
 
     /**
     * 是否在成绩配置的时候显示1.显示2.不显示
     */
-    private Boolean showState;
+    private Integer showState;
 
     /**
     * 成绩参数
@@ -95,19 +95,19 @@ public class MatchScoreConfig {
         this.subjectId = subjectId;
     }
 
-    public Boolean getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Boolean type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public Boolean getShowState() {
+    public Integer getShowState() {
         return showState;
     }
 
-    public void setShowState(Boolean showState) {
+    public void setShowState(Integer showState) {
         this.showState = showState;
     }
 

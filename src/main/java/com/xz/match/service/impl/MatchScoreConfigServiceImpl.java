@@ -1,8 +1,11 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.mapper.MatchScoreConfigMapper;
 import com.xz.match.entity.MatchScoreConfigExample;
 import com.xz.match.entity.MatchScoreConfig;
@@ -71,6 +74,25 @@ public class MatchScoreConfigServiceImpl implements MatchScoreConfigService{
     @Override
     public int updateByPrimaryKey(MatchScoreConfig record) {
         return matchScoreConfigMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<MatchScoreConfig> findBy(Map<String, Object> map) {
+        return matchScoreConfigMapper.findBy(map);
+    }
+
+    @Override
+    public ResponseResult save(MatchScoreConfig matchScoreConfig) {
+        matchScoreConfig.setSort(matchScoreConfigMapper.getMaxSort(matchScoreConfig.getSubjectId())+1);
+        int cuont;
+        matchScoreConfig.setType(2);
+        matchScoreConfig.setShowState(1);
+        if(matchScoreConfig.getId()!=null&&matchScoreConfig.getId()!=0){
+            cuont=matchScoreConfigMapper.updateByPrimaryKeySelective(matchScoreConfig);
+        }else {
+            cuont=matchScoreConfigMapper.insert(matchScoreConfig);
+        }
+        return ResponseResult.ok().setData(cuont);
     }
 
 }

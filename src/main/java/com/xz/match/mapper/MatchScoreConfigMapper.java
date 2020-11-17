@@ -3,6 +3,8 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchScoreConfig;
 import com.xz.match.entity.MatchScoreConfigExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +64,13 @@ public interface MatchScoreConfigMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchScoreConfig record);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    List<MatchScoreConfig> findBy(Map<String,Object> map);
+
+    Integer getMaxSort(@Param("subjectId")Long subjectId);
 }

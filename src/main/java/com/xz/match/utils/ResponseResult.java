@@ -54,7 +54,12 @@ public class ResponseResult {
     }
 
     public static ResponseResult ok() {
-        return (new ResponseResult()).setSuccess("T");
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setSuccess("T");
+        responseResult.setCode(200);
+        responseResult.setMessage("操作成功");
+        responseResult.setTimestamp(System.currentTimeMillis());
+        return responseResult;
     }
 
     public static ResponseResult fail(String message) {

@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchStockServiceImpl implements MatchStockService{
 
     @Resource

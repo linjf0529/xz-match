@@ -7,12 +7,15 @@ import com.xz.match.entity.MatchScore;
 import com.xz.match.entity.MatchScoreExample;
 import com.xz.match.mapper.MatchScoreMapper;
 import com.xz.match.service.MatchScoreService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchScoreServiceImpl implements MatchScoreService{
 
     @Resource

@@ -8,6 +8,7 @@ import com.xz.match.service.MatchProductSubService;
 import com.xz.match.utils.ResponseResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchProductSubServiceImpl implements MatchProductSubService{
 
     @Resource

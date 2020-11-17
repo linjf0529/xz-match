@@ -8,12 +8,14 @@ import java.util.List;
 import com.xz.match.mapper.MatchInfoMapper;
 import com.xz.match.entity.MatchInfo;
 import com.xz.match.service.MatchInfoService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author chenwf
  * @date 2020/11/16
  */
 @Service
+@Transactional
 public class MatchInfoServiceImpl implements MatchInfoService {
 
     @Resource

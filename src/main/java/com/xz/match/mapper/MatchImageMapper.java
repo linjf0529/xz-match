@@ -1,22 +1,22 @@
 package com.xz.match.mapper;
 
-import com.xz.match.entity.UserInfo;
-import com.xz.match.entity.UserInfoExample;
+import com.xz.match.entity.MatchImage;
+import com.xz.match.entity.MatchImageExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
+ *
  * @author chenwf
  * @date 2020/11/17
- */
-public interface UserInfoMapper {
-    long countByExample(UserInfoExample example);
+ */  
+public interface MatchImageMapper {
+    long countByExample(MatchImageExample example);
 
-    int deleteByExample(UserInfoExample example);
+    int deleteByExample(MatchImageExample example);
 
     /**
      * delete by primary key
-     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -24,47 +24,42 @@ public interface UserInfoMapper {
 
     /**
      * insert record to table
-     *
      * @param record the record
      * @return insert count
      */
-    int insert(UserInfo record);
+    int insert(MatchImage record);
 
     /**
      * insert record to table selective
-     *
      * @param record the record
      * @return insert count
      */
-    int insertSelective(UserInfo record);
+    int insertSelective(MatchImage record);
 
-    List<UserInfo> selectByExample(UserInfoExample example);
+    List<MatchImage> selectByExample(MatchImageExample example);
 
     /**
      * select by primary key
-     *
      * @param id primary key
      * @return object by primary key
      */
-    UserInfo selectByPrimaryKey(Long id);
+    MatchImage selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") UserInfo record, @Param("example") UserInfoExample example);
+    int updateByExampleSelective(@Param("record") MatchImage record, @Param("example") MatchImageExample example);
 
-    int updateByExample(@Param("record") UserInfo record, @Param("example") UserInfoExample example);
+    int updateByExample(@Param("record") MatchImage record, @Param("example") MatchImageExample example);
 
     /**
      * update record selective
-     *
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(UserInfo record);
+    int updateByPrimaryKeySelective(MatchImage record);
 
     /**
      * update record
-     *
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(UserInfo record);
+    int updateByPrimaryKey(MatchImage record);
 }

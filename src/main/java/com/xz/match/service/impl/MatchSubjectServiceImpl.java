@@ -7,12 +7,15 @@ import com.xz.match.entity.MatchSubjectExample;
 import com.xz.match.mapper.MatchSubjectMapper;
 import com.xz.match.entity.MatchSubject;
 import com.xz.match.service.MatchSubjectService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchSubjectServiceImpl implements MatchSubjectService{
 
     @Resource

@@ -7,12 +7,15 @@ import java.util.List;
 import com.xz.match.mapper.MatchCertificateMapper;
 import com.xz.match.entity.MatchCertificate;
 import com.xz.match.service.MatchCertificateService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchCertificateServiceImpl implements MatchCertificateService{
 
     @Resource

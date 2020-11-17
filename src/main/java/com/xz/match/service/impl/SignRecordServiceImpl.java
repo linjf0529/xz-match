@@ -10,12 +10,15 @@ import com.xz.match.mapper.SignRecordMapper;
 import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.service.SignRecordService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class SignRecordServiceImpl implements SignRecordService{
 
     @Resource

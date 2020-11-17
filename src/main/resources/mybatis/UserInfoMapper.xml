@@ -9,6 +9,7 @@
     <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="creatorId" jdbcType="BIGINT" property="creatorId" />
     <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, phone, certificateNo, userName, `passWord`, creatorId, createdBy, createdTime, 
+    id, phone, certificateNo, userName, `passWord`, `type`, creatorId, createdBy, createdTime, 
     updaterId, updatedBy
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.UserInfoExample" resultMap="BaseResultMap">
@@ -117,13 +118,13 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.UserInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into user_info (phone, certificateNo, userName, 
-      `passWord`, creatorId, createdBy, 
-      createdTime, updaterId, updatedBy
-      )
+      `passWord`, `type`, creatorId, 
+      createdBy, createdTime, updaterId, 
+      updatedBy)
     values (#{phone,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{passWord,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, #{createdBy,jdbcType=VARCHAR}, 
-      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=BIGINT}, #{updatedBy,jdbcType=VARCHAR}
-      )
+      #{passWord,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{creatorId,jdbcType=BIGINT}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=BIGINT}, 
+      #{updatedBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.UserInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -140,6 +141,9 @@
       </if>
       <if test="passWord != null">
         `passWord`,
+      </if>
+      <if test="type != null">
+        `type`,
       </if>
       <if test="creatorId != null">
         creatorId,
@@ -169,6 +173,9 @@
       </if>
       <if test="passWord != null">
         #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="creatorId != null">
         #{creatorId,jdbcType=BIGINT},
@@ -213,6 +220,9 @@
       <if test="record.passWord != null">
         `passWord` = #{record.passWord,jdbcType=VARCHAR},
       </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
       <if test="record.creatorId != null">
         creatorId = #{record.creatorId,jdbcType=BIGINT},
       </if>
@@ -241,6 +251,7 @@
       certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
       userName = #{record.userName,jdbcType=VARCHAR},
       `passWord` = #{record.passWord,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=INTEGER},
       creatorId = #{record.creatorId,jdbcType=BIGINT},
       createdBy = #{record.createdBy,jdbcType=VARCHAR},
       createdTime = #{record.createdTime,jdbcType=BIGINT},
@@ -265,6 +276,9 @@
       </if>
       <if test="passWord != null">
         `passWord` = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
       </if>
       <if test="creatorId != null">
         creatorId = #{creatorId,jdbcType=BIGINT},
@@ -291,6 +305,7 @@
       certificateNo = #{certificateNo,jdbcType=VARCHAR},
       userName = #{userName,jdbcType=VARCHAR},
       `passWord` = #{passWord,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
       creatorId = #{creatorId,jdbcType=BIGINT},
       createdBy = #{createdBy,jdbcType=VARCHAR},
       createdTime = #{createdTime,jdbcType=BIGINT},

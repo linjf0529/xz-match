@@ -7,12 +7,15 @@ import java.util.List;
 import com.xz.match.entity.MatchCertificateSublistExample;
 import com.xz.match.entity.MatchCertificateSublist;
 import com.xz.match.service.MatchCertificateSublistService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchCertificateSublistServiceImpl implements MatchCertificateSublistService{
 
     @Resource

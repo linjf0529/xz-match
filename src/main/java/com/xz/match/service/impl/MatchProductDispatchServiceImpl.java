@@ -1,36 +1,32 @@
 package com.xz.match.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.LRUMap;
 import com.xz.match.entity.*;
 import com.xz.match.entity.vo.MatchProductDispatchInfoVO;
 import com.xz.match.entity.vo.MatchProductDispatchVO;
 import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import com.xz.match.entity.vo.MatchStockVO;
+import com.xz.match.mapper.MatchProductDispatchMapper;
 import com.xz.match.mapper.MatchProductMapper;
 import com.xz.match.mapper.MatchProductReceiveSetMapper;
 import com.xz.match.mapper.MatchProductSubMapper;
-import com.xz.match.service.*;
-import com.xz.match.utils.PageParam;
+import com.xz.match.service.MatchProductDispatchService;
+import com.xz.match.service.MatchProductSubService;
+import com.xz.match.service.SignRecordFieldTableService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.exception.CommonException;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
-import org.assertj.core.util.Maps;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.xz.match.mapper.MatchProductDispatchMapper;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -38,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchProductDispatchServiceImpl implements MatchProductDispatchService{
 
     @Resource

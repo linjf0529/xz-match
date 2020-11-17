@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xz.match.mapper.MatchImageMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchImage">
+    <!--@mbg.generated-->
+    <!--@Table match_image-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="matchId" jdbcType="BIGINT" property="matchId" />
+    <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="matchNo" jdbcType="VARCHAR" property="matchNo" />
+    <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
+    <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, matchId, subjectId, url, matchNo, lastAccess, createdTime
+  </sql>
+  <select id="selectByExample" parameterType="com.xz.match.entity.MatchImageExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from match_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from match_image
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from match_image
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchImageExample">
+    <!--@mbg.generated-->
+    delete from match_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xz.match.entity.MatchImage">
+    <!--@mbg.generated-->
+    insert into match_image (id, matchId, subjectId, 
+      url, matchNo, lastAccess, 
+      createdTime)
+    values (#{id,jdbcType=BIGINT}, #{matchId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, 
+      #{url,jdbcType=VARCHAR}, #{matchNo,jdbcType=VARCHAR}, #{lastAccess,jdbcType=BIGINT}, 
+      #{createdTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xz.match.entity.MatchImage">
+    <!--@mbg.generated-->
+    insert into match_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="matchId != null">
+        matchId,
+      </if>
+      <if test="subjectId != null">
+        subjectId,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="matchNo != null">
+        matchNo,
+      </if>
+      <if test="lastAccess != null">
+        lastAccess,
+      </if>
+      <if test="createdTime != null">
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="matchNo != null">
+        #{matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccess != null">
+        #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xz.match.entity.MatchImageExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from match_image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update match_image
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.matchId != null">
+        matchId = #{record.matchId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null">
+        subjectId = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchNo != null">
+        matchNo = #{record.matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastAccess != null">
+        lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTime != null">
+        createdTime = #{record.createdTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update match_image
+    set id = #{record.id,jdbcType=BIGINT},
+      matchId = #{record.matchId,jdbcType=BIGINT},
+      subjectId = #{record.subjectId,jdbcType=BIGINT},
+      url = #{record.url,jdbcType=VARCHAR},
+      matchNo = #{record.matchNo,jdbcType=VARCHAR},
+      lastAccess = #{record.lastAccess,jdbcType=BIGINT},
+      createdTime = #{record.createdTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchImage">
+    <!--@mbg.generated-->
+    update match_image
+    <set>
+      <if test="matchId != null">
+        matchId = #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null">
+        subjectId = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="matchNo != null">
+        matchNo = #{matchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccess != null">
+        lastAccess = #{lastAccess,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchImage">
+    <!--@mbg.generated-->
+    update match_image
+    set matchId = #{matchId,jdbcType=BIGINT},
+      subjectId = #{subjectId,jdbcType=BIGINT},
+      url = #{url,jdbcType=VARCHAR},
+      matchNo = #{matchNo,jdbcType=VARCHAR},
+      lastAccess = #{lastAccess,jdbcType=BIGINT},
+      createdTime = #{createdTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

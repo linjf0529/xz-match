@@ -7,13 +7,15 @@ import java.util.List;
 import com.xz.match.mapper.UserInfoMapper;
 import com.xz.match.entity.UserInfo;
 import com.xz.match.service.UserInfoService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
-public class UserInfoServiceImpl implements UserInfoService{
+@Transactional
+public class UserInfoServiceImpl implements UserInfoService {
 
     @Resource
     private UserInfoMapper userInfoMapper;
@@ -54,13 +56,13 @@ public class UserInfoServiceImpl implements UserInfoService{
     }
 
     @Override
-    public int updateByExampleSelective(UserInfo record,UserInfoExample example) {
-        return userInfoMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(UserInfo record, UserInfoExample example) {
+        return userInfoMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(UserInfo record,UserInfoExample example) {
-        return userInfoMapper.updateByExample(record,example);
+    public int updateByExample(UserInfo record, UserInfoExample example) {
+        return userInfoMapper.updateByExample(record, example);
     }
 
     @Override
@@ -73,4 +75,19 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoMapper.updateByPrimaryKey(record);
     }
 
+    @Override
+    public UserInfo findByMobile(String phone, Integer type, String certificateNo) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        UserInfoExample.Criteria criterion = userInfoExample.createCriteria();
+        criterion.andPhoneEqualTo(phone).andTypeEqualTo(type);
+        if(type == 2){
+            criterion.andCertificateNoEqualTo(certificateNo);
+        }
+        List<UserInfo> userInfos = this.selectByExample(userInfoExample);
+        if (!userInfos.isEmpty()) {
+            return userInfos.get(0);
+        }
+        return null;
+    }
 }
+

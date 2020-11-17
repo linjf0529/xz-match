@@ -1,7 +1,5 @@
 package com.xz.match.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.LRUMap;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.*;
@@ -15,9 +13,9 @@ import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import org.assertj.core.util.Lists;
-import org.assertj.core.util.Maps;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -31,6 +29,7 @@ import java.util.Map;
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSetService{
 
     @Resource

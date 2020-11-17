@@ -11,6 +11,14 @@ public class ResponseResult {
     private String message;
     private Object data;
 
+    public ResponseResult(Integer code) {
+        this.code = code;
+    }
+
+    public ResponseResult() {
+
+    }
+
     public Object getData() {
         return this.data;
     }
@@ -78,5 +86,9 @@ public class ResponseResult {
         responseResult.setMessage(message);
         responseResult.setTimestamp(System.currentTimeMillis());
         return responseResult;
+    }
+
+    public static ResponseResult getResponse(Integer code) {
+        return (new ResponseResult(code)).setSuccess("F");
     }
 }

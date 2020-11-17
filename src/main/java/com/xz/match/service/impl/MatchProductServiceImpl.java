@@ -28,6 +28,7 @@ import java.util.Map;
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchProductServiceImpl implements MatchProductService{
 
     @Resource

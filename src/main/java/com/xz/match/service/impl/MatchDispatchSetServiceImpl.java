@@ -19,12 +19,15 @@ import com.xz.match.entity.MatchDispatchSet;
 import com.xz.match.mapper.MatchDispatchSetMapper;
 import com.xz.match.entity.MatchDispatchSetExample;
 import com.xz.match.service.MatchDispatchSetService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
 
     @Resource

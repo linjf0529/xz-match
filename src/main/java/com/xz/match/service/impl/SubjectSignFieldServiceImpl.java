@@ -9,12 +9,15 @@ import com.xz.match.mapper.SubjectSignFieldMapper;
 import com.xz.match.entity.SubjectSignField;
 import com.xz.match.entity.SubjectSignFieldExample;
 import com.xz.match.service.SubjectSignFieldService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/17
  */  
 @Service
+@Transactional
 public class SubjectSignFieldServiceImpl implements SubjectSignFieldService{
 
     @Resource

@@ -10,12 +10,15 @@ import com.xz.match.mapper.MatchScoreConfigMapper;
 import com.xz.match.entity.MatchScoreConfigExample;
 import com.xz.match.entity.MatchScoreConfig;
 import com.xz.match.service.MatchScoreConfigService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
  */  
 @Service
+@Transactional
 public class MatchScoreConfigServiceImpl implements MatchScoreConfigService{
 
     @Resource

@@ -1,56 +1,60 @@
 package com.xz.match.entity;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/17
+ */
 public class UserInfo {
     private Long id;
 
     /**
-    * 手机号
-    */
+     * 手机号
+     */
     private String phone;
 
     /**
-    * 证件号
-    */
+     * 证件号
+     */
     private String certificateNo;
 
     /**
-    * 用户名
-    */
+     * 用户名
+     */
     private String userName;
 
     /**
-    * 密码
-    */
+     * 密码
+     */
     private String passWord;
 
     /**
-    * 创建人ID
-    */
+     * 用户类型 1物资发放人员 2物资领取人员 3系统
+     */
+    private Integer type;
+
+    /**
+     * 创建人ID
+     */
     private Long creatorId;
 
     /**
-    * 创建人名称
-    */
+     * 创建人名称
+     */
     private String createdBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Long createdTime;
 
     /**
-    * 修改人ID
-    */
+     * 修改人ID
+     */
     private Long updaterId;
 
     /**
-    * 修改人名称
-    */
+     * 修改人名称
+     */
     private String updatedBy;
 
     public Long getId() {
@@ -91,6 +95,14 @@ public class UserInfo {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Long getCreatorId() {

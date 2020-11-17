@@ -9,12 +9,15 @@ import java.util.Map;
 import com.xz.match.entity.SignRecordFieldTable;
 import com.xz.match.entity.SignRecordFieldTableExample;
 import com.xz.match.service.SignRecordFieldTableService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/17
  */  
 @Service
+@Transactional
 public class SignRecordFieldTableServiceImpl implements SignRecordFieldTableService{
 
     @Resource

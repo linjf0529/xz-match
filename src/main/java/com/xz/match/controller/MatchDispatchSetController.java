@@ -3,7 +3,9 @@ package com.xz.match.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.service.MatchDispatchSetService;
+import com.xz.match.utils.RedisClient;
 import com.xz.match.utils.ResponseResult;
+import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.exception.CommonException;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,7 +61,7 @@ public class MatchDispatchSetController extends BaseController{
      * @return {@link ResponseResult}
      */
     @PutMapping
-    public ResponseResult editMatchDispatchSet(@RequestParam String id , HttpServletRequest request){
+    public ResponseResult editMatchDispatchSet(@RequestParam Long id , HttpServletRequest request){
         return null;
     }
 

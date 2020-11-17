@@ -5,245 +5,246 @@ import java.math.BigDecimal;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/17
+ */
+
 /**
-    * 报名记录表
-    */
+ * 报名记录表
+ */
 public class SignRecord {
     /**
-    * 自增主键
-    */
+     * 自增主键
+     */
     private Long id;
 
     /**
-    * 租户Id
-    */
+     * 租户Id
+     */
     private Long tenantId;
 
     /**
-    * 订单ID
-    */
-    private Long orderId;
+     * 订单ID
+     */
+    private String orderId;
 
     /**
-    * 赛事Id
-    */
+     * 赛事Id
+     */
     private Long matchId;
 
     /**
-    * 科目ID
-    */
+     * 科目ID
+     */
     private Long subjectId;
 
     /**
-    * 报名用户ID
-    */
+     * 报名用户ID
+     */
     private Long userId;
 
     /**
-    * 参赛体ID（个体为用户表userId，团体为团队表teamId）
-    */
+     * 参赛体ID（个体为用户表userId，团体为团队表teamId）
+     */
     private String joinUserId;
 
     /**
-    * 赛制类型（0-个人,1-团体）
-    */
+     * 赛制类型（0-个人,1-团体）
+     */
     private Integer type;
 
     /**
-    * 姓名
-    */
+     * 姓名
+     */
     private String name;
 
     /**
-    * 性别（0-女,1-男,2-'）
-    */
+     * 性别（0-女,1-男,2-'）
+     */
     private Integer sex;
 
     /**
-    * 手机号
-    */
+     * 手机号
+     */
     private String phone;
 
     /**
-    * 证件号
-    */
+     * 证件号
+     */
     private String certificateNo;
 
     /**
-    * 支付状态（0-未支付,1-已支付,2-已取消,3-退款中,4-已退款）
-    */
+     * 支付状态（0-未支付,1-已支付,2-已取消,3-退款中,4-已退款）
+     */
     private Integer payment;
 
     /**
-    * 审核状态(0-不通过,1-成功,2-已取消)
-    */
+     * 审核状态(0-不通过,1-成功,2-已取消)
+     */
     private Integer review;
 
     /**
-    * 抽签状态(0-抽取中,1-抽中,2-未抽中)
-    */
+     * 抽签状态(0-抽取中,1-抽中,2-未抽中)
+     */
     private Boolean drawState;
 
     /**
-    * 是否通过(0-未通过, 1-已通过)
-    */
+     * 是否通过(0-未通过, 1-已通过)
+     */
     private Boolean isPass;
 
     /**
-    * 驳回原因
-    */
+     * 驳回原因
+     */
     private String remarks;
 
     /**
-    * 报名渠道
-    */
+     * 报名渠道
+     */
     private String channel;
 
     /**
-    * 支付方式：1-运动豆、2-场馆卡、3-次卡、4-支付宝、5-微信支付、6-红包支付、7-线下支付、8-租户会员卡、9-第三方支付
-    */
+     * 支付方式：1-运动豆、2-场馆卡、3-次卡、4-支付宝、5-微信支付、6-红包支付、7-线下支付、8-租户会员卡、9-第三方支付
+     */
     private Integer paymentType;
 
     /**
-    * 支付时间
-    */
+     * 支付时间
+     */
     private Long paymentTime;
 
     /**
-    * 是否领取(0-未领取，1-已领取)
-    */
+     * 是否领取(0-未领取，1-已领取)
+     */
     private Boolean receive;
 
     /**
-    * 优惠券id
-    */
+     * 优惠券id
+     */
     private String couponId;
 
     /**
-    * 优惠金额
-    */
+     * 优惠金额
+     */
     private BigDecimal couponAmount;
 
     /**
-    * 是否确认支付0否 1是
-    */
+     * 是否确认支付0否 1是
+     */
     private Integer confirmPay;
 
     /**
-    * 退款金额
-    */
+     * 退款金额
+     */
     private Long refundAmount;
 
     /**
-    * 是否锁定(0.未锁定,1.已锁定)
-    */
+     * 是否锁定(0.未锁定,1.已锁定)
+     */
     private Boolean locked;
 
     /**
-    * 版本号
-    */
+     * 版本号
+     */
     private Integer version;
 
     /**
-    * 最后更新时间
-    */
+     * 最后更新时间
+     */
     private Long lastAccess;
 
     /**
-    * 创建人ID
-    */
+     * 创建人ID
+     */
     private Long creatorId;
 
     /**
-    * 创建人名称
-    */
+     * 创建人名称
+     */
     private String createdBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Long createdTime;
 
     /**
-    * 修改人ID
-    */
+     * 修改人ID
+     */
     private Long updaterId;
 
     /**
-    * 修改人名称
-    */
+     * 修改人名称
+     */
     private String updatedBy;
 
     /**
-    * 是否可用
-    */
+     * 是否可用
+     */
     private Integer available;
 
     /**
-    * 科目名称
-    */
+     * 科目名称
+     */
     private String subjectName;
 
     /**
-    * 赛事名称
-    */
+     * 赛事名称
+     */
     private String matchName;
 
     /**
-    * 订单号
-    */
+     * 订单号
+     */
     private String orderNo;
 
     /**
-    * 邀请码
-    */
+     * 邀请码
+     */
     private String invitationCode;
 
     /**
-    * 签到
-    */
+     * 签到
+     */
     private Boolean signIn;
 
     /**
-    * 报名费
-    */
+     * 报名费
+     */
     private Long expenses;
 
     /**
-    * 报名记录类型(0-个人，1-队长, 2-队员)
-    */
+     * 报名记录类型(0-个人，1-队长, 2-队员)
+     */
     private Integer memberType;
 
     /**
-    * 参赛号码
-    */
+     * 参赛号码
+     */
     private String matchNo;
 
     /**
-    * 成绩排名
-    */
+     * 成绩排名
+     */
     private Integer gradeNo;
 
     /**
-    * 是否分账（0-未分账、1-已分账）
-    */
+     * 是否分账（0-未分账、1-已分账）
+     */
     private Boolean separateAccounts;
 
     /**
-    * 分账时间
-    */
+     * 分账时间
+     */
     private Long separateAccountsTime;
 
     /**
-    * 是否身份核验成功0否 1是
-    */
+     * 是否身份核验成功0否 1是
+     */
     private Integer identityCheck;
 
     /**
-    * 参赛人员物资发放状态：，2-部分发放，1-已发放，0-未发放
-    */
+     * 参赛人员物资发放状态：，2-部分发放，1-已发放，0-未发放
+     */
     private Integer status;
 
     public Long getId() {
@@ -262,11 +263,11 @@ public class SignRecord {
         this.tenantId = tenantId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

@@ -1,5 +1,6 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.utils.StringUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.entity.UserInfoExample;
@@ -80,7 +81,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         UserInfoExample userInfoExample = new UserInfoExample();
         UserInfoExample.Criteria criterion = userInfoExample.createCriteria();
         criterion.andPhoneEqualTo(phone).andTypeEqualTo(type);
-        if(type == 2){
+        if(type == 2 && StringUtils.isNotEmpty(certificateNo)){
             criterion.andCertificateNoEqualTo(certificateNo);
         }
         List<UserInfo> userInfos = this.selectByExample(userInfoExample);
@@ -88,6 +89,20 @@ public class UserInfoServiceImpl implements UserInfoService {
             return userInfos.get(0);
         }
         return null;
+    }
+
+    @Override
+    public UserInfo saveUser(String phone, String certificateNo, String name) {
+        UserInfo userInfo = findByMobile(phone,2,"");
+        if(userInfo == null){
+            userInfo = new UserInfo();
+            userInfo.setCertificateNo(certificateNo);
+            userInfo.setPhone(phone);
+            userInfo.setType(2);
+            userInfo.setUserName(name);
+            this.insertSelective(userInfo);
+        }
+        return userInfo;
     }
 }
 

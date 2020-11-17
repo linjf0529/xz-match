@@ -1,18 +1,14 @@
 package com.xz.match.mapper;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xz.match.entity.SignRecord;
+import com.alibaba.fastjson.JSONObject;import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.SignRecordExample;
-import java.util.List;
-import java.util.Map;
-
+import java.util.List;import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/17
+ */
 public interface SignRecordMapper {
     long countByExample(SignRecordExample example);
 
@@ -20,6 +16,7 @@ public interface SignRecordMapper {
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -27,6 +24,7 @@ public interface SignRecordMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -34,6 +32,7 @@ public interface SignRecordMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -43,6 +42,7 @@ public interface SignRecordMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -54,6 +54,7 @@ public interface SignRecordMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -61,12 +62,13 @@ public interface SignRecordMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */
     int updateByPrimaryKey(SignRecord record);
 
-    List<Map<String,Object>> countSignRecordDispatchInfo(Map<String, Object> param);
+    List<Map<String, Object>> countSignRecordDispatchInfo(Map<String, Object> param);
 
     List<SignRecord> findBy(JSONObject param);
 }

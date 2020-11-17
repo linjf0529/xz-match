@@ -7,7 +7,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
+ * @date 2020/11/17
  */  
 public class SignRecordExample {
     protected String orderByClause;
@@ -240,52 +240,62 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(Long value) {
+        public Criteria andOrderIdEqualTo(String value) {
             addCriterion("orderId =", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(Long value) {
+        public Criteria andOrderIdNotEqualTo(String value) {
             addCriterion("orderId <>", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(Long value) {
+        public Criteria andOrderIdGreaterThan(String value) {
             addCriterion("orderId >", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andOrderIdGreaterThanOrEqualTo(String value) {
             addCriterion("orderId >=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(Long value) {
+        public Criteria andOrderIdLessThan(String value) {
             addCriterion("orderId <", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
+        public Criteria andOrderIdLessThanOrEqualTo(String value) {
             addCriterion("orderId <=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIn(List<Long> values) {
+        public Criteria andOrderIdLike(String value) {
+            addCriterion("orderId like", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdNotLike(String value) {
+            addCriterion("orderId not like", value, "orderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderIdIn(List<String> values) {
             addCriterion("orderId in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<Long> values) {
+        public Criteria andOrderIdNotIn(List<String> values) {
             addCriterion("orderId not in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(Long value1, Long value2) {
+        public Criteria andOrderIdBetween(String value1, String value2) {
             addCriterion("orderId between", value1, value2, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
+        public Criteria andOrderIdNotBetween(String value1, String value2) {
             addCriterion("orderId not between", value1, value2, "orderId");
             return (Criteria) this;
         }
@@ -550,52 +560,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Byte value) {
+        public Criteria andTypeEqualTo(Integer value) {
             addCriterion("`type` =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Byte value) {
+        public Criteria andTypeNotEqualTo(Integer value) {
             addCriterion("`type` <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Byte value) {
+        public Criteria andTypeGreaterThan(Integer value) {
             addCriterion("`type` >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("`type` >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Byte value) {
+        public Criteria andTypeLessThan(Integer value) {
             addCriterion("`type` <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
             addCriterion("`type` <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Byte> values) {
+        public Criteria andTypeIn(List<Integer> values) {
             addCriterion("`type` in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Byte> values) {
+        public Criteria andTypeNotIn(List<Integer> values) {
             addCriterion("`type` not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Byte value1, Byte value2) {
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
             addCriterion("`type` between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("`type` not between", value1, value2, "type");
             return (Criteria) this;
         }
@@ -680,52 +690,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andSexEqualTo(Byte value) {
+        public Criteria andSexEqualTo(Integer value) {
             addCriterion("sex =", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotEqualTo(Byte value) {
+        public Criteria andSexNotEqualTo(Integer value) {
             addCriterion("sex <>", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThan(Byte value) {
+        public Criteria andSexGreaterThan(Integer value) {
             addCriterion("sex >", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThanOrEqualTo(Byte value) {
+        public Criteria andSexGreaterThanOrEqualTo(Integer value) {
             addCriterion("sex >=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThan(Byte value) {
+        public Criteria andSexLessThan(Integer value) {
             addCriterion("sex <", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThanOrEqualTo(Byte value) {
+        public Criteria andSexLessThanOrEqualTo(Integer value) {
             addCriterion("sex <=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexIn(List<Byte> values) {
+        public Criteria andSexIn(List<Integer> values) {
             addCriterion("sex in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotIn(List<Byte> values) {
+        public Criteria andSexNotIn(List<Integer> values) {
             addCriterion("sex not in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexBetween(Byte value1, Byte value2) {
+        public Criteria andSexBetween(Integer value1, Integer value2) {
             addCriterion("sex between", value1, value2, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotBetween(Byte value1, Byte value2) {
+        public Criteria andSexNotBetween(Integer value1, Integer value2) {
             addCriterion("sex not between", value1, value2, "sex");
             return (Criteria) this;
         }
@@ -880,52 +890,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andPaymentEqualTo(Byte value) {
+        public Criteria andPaymentEqualTo(Integer value) {
             addCriterion("payment =", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentNotEqualTo(Byte value) {
+        public Criteria andPaymentNotEqualTo(Integer value) {
             addCriterion("payment <>", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentGreaterThan(Byte value) {
+        public Criteria andPaymentGreaterThan(Integer value) {
             addCriterion("payment >", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentGreaterThanOrEqualTo(Byte value) {
+        public Criteria andPaymentGreaterThanOrEqualTo(Integer value) {
             addCriterion("payment >=", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentLessThan(Byte value) {
+        public Criteria andPaymentLessThan(Integer value) {
             addCriterion("payment <", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentLessThanOrEqualTo(Byte value) {
+        public Criteria andPaymentLessThanOrEqualTo(Integer value) {
             addCriterion("payment <=", value, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentIn(List<Byte> values) {
+        public Criteria andPaymentIn(List<Integer> values) {
             addCriterion("payment in", values, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentNotIn(List<Byte> values) {
+        public Criteria andPaymentNotIn(List<Integer> values) {
             addCriterion("payment not in", values, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentBetween(Byte value1, Byte value2) {
+        public Criteria andPaymentBetween(Integer value1, Integer value2) {
             addCriterion("payment between", value1, value2, "payment");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentNotBetween(Byte value1, Byte value2) {
+        public Criteria andPaymentNotBetween(Integer value1, Integer value2) {
             addCriterion("payment not between", value1, value2, "payment");
             return (Criteria) this;
         }
@@ -940,52 +950,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewEqualTo(Byte value) {
+        public Criteria andReviewEqualTo(Integer value) {
             addCriterion("review =", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewNotEqualTo(Byte value) {
+        public Criteria andReviewNotEqualTo(Integer value) {
             addCriterion("review <>", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewGreaterThan(Byte value) {
+        public Criteria andReviewGreaterThan(Integer value) {
             addCriterion("review >", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewGreaterThanOrEqualTo(Byte value) {
+        public Criteria andReviewGreaterThanOrEqualTo(Integer value) {
             addCriterion("review >=", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewLessThan(Byte value) {
+        public Criteria andReviewLessThan(Integer value) {
             addCriterion("review <", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewLessThanOrEqualTo(Byte value) {
+        public Criteria andReviewLessThanOrEqualTo(Integer value) {
             addCriterion("review <=", value, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIn(List<Byte> values) {
+        public Criteria andReviewIn(List<Integer> values) {
             addCriterion("review in", values, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewNotIn(List<Byte> values) {
+        public Criteria andReviewNotIn(List<Integer> values) {
             addCriterion("review not in", values, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewBetween(Byte value1, Byte value2) {
+        public Criteria andReviewBetween(Integer value1, Integer value2) {
             addCriterion("review between", value1, value2, "review");
             return (Criteria) this;
         }
 
-        public Criteria andReviewNotBetween(Byte value1, Byte value2) {
+        public Criteria andReviewNotBetween(Integer value1, Integer value2) {
             addCriterion("review not between", value1, value2, "review");
             return (Criteria) this;
         }
@@ -1260,52 +1270,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeEqualTo(Byte value) {
+        public Criteria andPaymentTypeEqualTo(Integer value) {
             addCriterion("paymentType =", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeNotEqualTo(Byte value) {
+        public Criteria andPaymentTypeNotEqualTo(Integer value) {
             addCriterion("paymentType <>", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeGreaterThan(Byte value) {
+        public Criteria andPaymentTypeGreaterThan(Integer value) {
             addCriterion("paymentType >", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andPaymentTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("paymentType >=", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeLessThan(Byte value) {
+        public Criteria andPaymentTypeLessThan(Integer value) {
             addCriterion("paymentType <", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andPaymentTypeLessThanOrEqualTo(Integer value) {
             addCriterion("paymentType <=", value, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeIn(List<Byte> values) {
+        public Criteria andPaymentTypeIn(List<Integer> values) {
             addCriterion("paymentType in", values, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeNotIn(List<Byte> values) {
+        public Criteria andPaymentTypeNotIn(List<Integer> values) {
             addCriterion("paymentType not in", values, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeBetween(Byte value1, Byte value2) {
+        public Criteria andPaymentTypeBetween(Integer value1, Integer value2) {
             addCriterion("paymentType between", value1, value2, "paymentType");
             return (Criteria) this;
         }
 
-        public Criteria andPaymentTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andPaymentTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("paymentType not between", value1, value2, "paymentType");
             return (Criteria) this;
         }
@@ -2190,52 +2200,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andAvailableEqualTo(Byte value) {
+        public Criteria andAvailableEqualTo(Integer value) {
             addCriterion("available =", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableNotEqualTo(Byte value) {
+        public Criteria andAvailableNotEqualTo(Integer value) {
             addCriterion("available <>", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableGreaterThan(Byte value) {
+        public Criteria andAvailableGreaterThan(Integer value) {
             addCriterion("available >", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableGreaterThanOrEqualTo(Byte value) {
+        public Criteria andAvailableGreaterThanOrEqualTo(Integer value) {
             addCriterion("available >=", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableLessThan(Byte value) {
+        public Criteria andAvailableLessThan(Integer value) {
             addCriterion("available <", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableLessThanOrEqualTo(Byte value) {
+        public Criteria andAvailableLessThanOrEqualTo(Integer value) {
             addCriterion("available <=", value, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableIn(List<Byte> values) {
+        public Criteria andAvailableIn(List<Integer> values) {
             addCriterion("available in", values, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableNotIn(List<Byte> values) {
+        public Criteria andAvailableNotIn(List<Integer> values) {
             addCriterion("available not in", values, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableBetween(Byte value1, Byte value2) {
+        public Criteria andAvailableBetween(Integer value1, Integer value2) {
             addCriterion("available between", value1, value2, "available");
             return (Criteria) this;
         }
 
-        public Criteria andAvailableNotBetween(Byte value1, Byte value2) {
+        public Criteria andAvailableNotBetween(Integer value1, Integer value2) {
             addCriterion("available not between", value1, value2, "available");
             return (Criteria) this;
         }
@@ -2650,52 +2660,52 @@ public class SignRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeEqualTo(Byte value) {
+        public Criteria andMemberTypeEqualTo(Integer value) {
             addCriterion("memberType =", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeNotEqualTo(Byte value) {
+        public Criteria andMemberTypeNotEqualTo(Integer value) {
             addCriterion("memberType <>", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeGreaterThan(Byte value) {
+        public Criteria andMemberTypeGreaterThan(Integer value) {
             addCriterion("memberType >", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andMemberTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("memberType >=", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeLessThan(Byte value) {
+        public Criteria andMemberTypeLessThan(Integer value) {
             addCriterion("memberType <", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andMemberTypeLessThanOrEqualTo(Integer value) {
             addCriterion("memberType <=", value, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeIn(List<Byte> values) {
+        public Criteria andMemberTypeIn(List<Integer> values) {
             addCriterion("memberType in", values, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeNotIn(List<Byte> values) {
+        public Criteria andMemberTypeNotIn(List<Integer> values) {
             addCriterion("memberType not in", values, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeBetween(Byte value1, Byte value2) {
+        public Criteria andMemberTypeBetween(Integer value1, Integer value2) {
             addCriterion("memberType between", value1, value2, "memberType");
             return (Criteria) this;
         }
 
-        public Criteria andMemberTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andMemberTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("memberType not between", value1, value2, "memberType");
             return (Criteria) this;
         }

@@ -3,6 +3,7 @@ package com.xz.match.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.*;
+import com.xz.match.service.SignRecordFieldTableService;
 import com.xz.match.service.UserInfoService;
 import com.xz.match.utils.SignRecordFieldUtils;
 import com.xz.match.utils.ValidateUtils;
@@ -24,18 +25,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
-public class SignRecordServiceImpl implements SignRecordService{
+public class SignRecordServiceImpl implements SignRecordService {
 
     @Resource
     private SignRecordMapper signRecordMapper;
     @Resource
     private UserInfoService userInfoService;
+    @Resource
+    private SignRecordFieldTableService signRecordFieldTableService;
 
     @Override
     public long countByExample(SignRecordExample example) {
@@ -73,13 +75,13 @@ public class SignRecordServiceImpl implements SignRecordService{
     }
 
     @Override
-    public int updateByExampleSelective(SignRecord record,SignRecordExample example) {
-        return signRecordMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(SignRecord record, SignRecordExample example) {
+        return signRecordMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(SignRecord record,SignRecordExample example) {
-        return signRecordMapper.updateByExample(record,example);
+    public int updateByExample(SignRecord record, SignRecordExample example) {
+        return signRecordMapper.updateByExample(record, example);
     }
 
     @Override
@@ -93,7 +95,7 @@ public class SignRecordServiceImpl implements SignRecordService{
     }
 
     @Override
-    public List<Map<String,Object>> countSignRecordDispatchInfo(Map<String, Object> param) {
+    public List<Map<String, Object>> countSignRecordDispatchInfo(Map<String, Object> param) {
         return signRecordMapper.countSignRecordDispatchInfo(param);
     }
 
@@ -103,9 +105,9 @@ public class SignRecordServiceImpl implements SignRecordService{
     }
 
     @Override
-    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void importMacthSignRecord(MatchSubject matchSubject, Tuple<List<JSONObject>, List<String>> result, Map<Tuple<String, String>, Integer> relation, JSONObject param) {
-        addSignRecord(result.key,relation, null,matchSubject,param);
+        addSignRecord(result.key, relation, null, matchSubject, param);
 //        if (matchSubject.getType() == SubjectType.SINGLE.getType()) {// 个人赛需要校验导入人数
 //            signRecordApiService.checkLimit(matchSubject, result.key.size(), null);
 //
@@ -125,6 +127,7 @@ public class SignRecordServiceImpl implements SignRecordService{
 
     /**
      * 导入赛事报名记录，添加赛事记录
+     *
      * @param key
      * @param relation
      * @param orderNo
@@ -136,7 +139,7 @@ public class SignRecordServiceImpl implements SignRecordService{
         UserInfo user = null;
         for (JSONObject jsonObject : key) {
             String name = jsonObject.getString(SignRecordFieldUtils.nameControlKey);
-            String phone = jsonObject.getString(SignRecordFieldUtils.phoneControlKey);
+            String phone = jsonObject.getString(SignRecordFieldUtils.phone2ControlKey);
             String certificateNo = jsonObject.getString(SignRecordFieldUtils.cerControlKey);
             String matchNo = jsonObject.getString(SignRecordFieldUtils.matchNoControlKey);
             Integer gradeNo = jsonObject.getInteger(SignRecordFieldUtils.gradeNoControlKey);
@@ -154,14 +157,14 @@ public class SignRecordServiceImpl implements SignRecordService{
             signRecord.setCertificateNo(certificateNo);                  // 证件号码
             signRecord.setMatchNo(matchNo);                                 // 参赛号码
             signRecord.setGradeNo(gradeNo);                                 // 排序
-            signRecord.setChannel(OrderChannel.XM_IMPORT.getStatus()+"");
+            signRecord.setChannel(OrderChannel.XM_IMPORT.getStatus() + "");
             signRecord.setReview(0);                                     //
             signRecord.setAvailable(1);                                  // 是否可用
             signRecord.setExpenses(0L);
-//            user = UserInfoService.saveUser(signRecord.getPhone(), signRecord.getName());
+            user = userInfoService.saveUser(signRecord.getPhone(), signRecord.getCertificateNo(),signRecord.getName());
             signRecord.setMemberType(0);
-//            signRecord.setOrderId(autoOrderId());
-//            signRecord.setOrderNo(signRecord.getOrderId());
+            signRecord.setOrderId(autoOrderId());
+            signRecord.setOrderNo(signRecord.getOrderId());
             // 校验重复报名
 //            signRecordApiService.checkDuplicate(matchSubject, signRecord,null);
             signRecord.setUserId(user.getId());
@@ -172,14 +175,14 @@ public class SignRecordServiceImpl implements SignRecordService{
             relation.forEach(new BiConsumer<Tuple<String, String>, Integer>() {
                 @Override
                 public void accept(Tuple<String, String> tuple, Integer integer) {
-                    if(!SignRecordFieldUtils.subjectIdControlKey.equals(tuple.key) && !teamNames.contains(tuple.key)){
+                    if (!SignRecordFieldUtils.subjectIdControlKey.equals(tuple.key) && !teamNames.contains(tuple.key)) {
                         SignRecordFieldTable table = new SignRecordFieldTable();
                         table.setRecordId(signRecord.getId());
                         table.setComment(tuple.value);
                         table.setControlKey(tuple.key);
                         table.setValue(jsonObject.getString(tuple.key));
 
-//                        signRecordFieldTableService.create(table);
+                        signRecordFieldTableService.insertSelective(table);
                         teamNames.add(tuple.key);
                     }
                 }
@@ -189,13 +192,19 @@ public class SignRecordServiceImpl implements SignRecordService{
 
     /**
      * 生成订单编号  时间戳+3位整数
+     *
      * @return
      */
     @Override
-    public String autoOrderId(){
+    public String autoOrderId() {
         Random rand = new Random();
         //[900]：900个    100：从100
         int x = (rand.nextInt(900) + 100);
-        return DateUtil.format(new Date(),"yyMMddHHmmssSSS") + x;
+        return DateUtil.format(new Date(), "yyMMddHHmmssSSS") + x;
     }
 }
+
+
+
+
+

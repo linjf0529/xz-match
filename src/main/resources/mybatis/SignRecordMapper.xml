@@ -6,7 +6,7 @@
     <!--@Table sign_record-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="tenantId" jdbcType="BIGINT" property="tenantId" />
-    <result column="orderId" jdbcType="BIGINT" property="orderId" />
+    <result column="orderId" jdbcType="VARCHAR" property="orderId" />
     <result column="matchId" jdbcType="BIGINT" property="matchId" />
     <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
     <result column="userId" jdbcType="BIGINT" property="userId" />
@@ -173,7 +173,7 @@
       matchNo, gradeNo, separateAccounts, 
       separateAccountsTime, identityCheck, `status`
       )
-    values (#{tenantId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{matchId,jdbcType=BIGINT}, 
+    values (#{tenantId,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, 
       #{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{joinUserId,jdbcType=VARCHAR}, 
       #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
       #{certificateNo,jdbcType=VARCHAR}, #{payment,jdbcType=TINYINT}, #{review,jdbcType=TINYINT}, 
@@ -338,7 +338,7 @@
         #{tenantId,jdbcType=BIGINT},
       </if>
       <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
+        #{orderId,jdbcType=VARCHAR},
       </if>
       <if test="matchId != null">
         #{matchId,jdbcType=BIGINT},
@@ -492,7 +492,7 @@
         tenantId = #{record.tenantId,jdbcType=BIGINT},
       </if>
       <if test="record.orderId != null">
-        orderId = #{record.orderId,jdbcType=BIGINT},
+        orderId = #{record.orderId,jdbcType=VARCHAR},
       </if>
       <if test="record.matchId != null">
         matchId = #{record.matchId,jdbcType=BIGINT},
@@ -636,7 +636,7 @@
     update sign_record
     set id = #{record.id,jdbcType=BIGINT},
       tenantId = #{record.tenantId,jdbcType=BIGINT},
-      orderId = #{record.orderId,jdbcType=BIGINT},
+      orderId = #{record.orderId,jdbcType=VARCHAR},
       matchId = #{record.matchId,jdbcType=BIGINT},
       subjectId = #{record.subjectId,jdbcType=BIGINT},
       userId = #{record.userId,jdbcType=BIGINT},
@@ -693,7 +693,7 @@
         tenantId = #{tenantId,jdbcType=BIGINT},
       </if>
       <if test="orderId != null">
-        orderId = #{orderId,jdbcType=BIGINT},
+        orderId = #{orderId,jdbcType=VARCHAR},
       </if>
       <if test="matchId != null">
         matchId = #{matchId,jdbcType=BIGINT},
@@ -834,7 +834,7 @@
     <!--@mbg.generated-->
     update sign_record
     set tenantId = #{tenantId,jdbcType=BIGINT},
-      orderId = #{orderId,jdbcType=BIGINT},
+      orderId = #{orderId,jdbcType=VARCHAR},
       matchId = #{matchId,jdbcType=BIGINT},
       subjectId = #{subjectId,jdbcType=BIGINT},
       userId = #{userId,jdbcType=BIGINT},
@@ -887,20 +887,20 @@
             sr.`status`,count(id) dispatchCount
         FROM sign_record sr
         <where>
-            <include refid="condition_sql"/>
+            <include refid="condition_sql" />
         </where>
         GROUP BY sr.`status`
     </select>
 
     <select id="findBy" parameterType="map" resultType="com.xz.match.entity.SignRecord">
-        <include refid="listSQL"/>
+        <include refid="listSQL" />
     </select>
 
     <sql id="listSQL">
         SELECT *
         FROM sign_record sr
         <where>
-            <include refid="condition_sql"/>
+            <include refid="condition_sql" />
         </where>
     </sql>
 
@@ -960,9 +960,9 @@
             <if test="payment != null">
                 AND sr.payment = #{payment}
             </if>
-            <if test="payments != null and payments.size()>0">
+            <if test="payments != null and payments.size()&gt;0">
                 AND sr.payment IN
-                <foreach item="payment" index="index" collection="payments" open="(" separator="," close=")">
+                <foreach close=")" collection="payments" index="index" item="payment" open="(" separator=",">
                     #{payment}
                 </foreach>
             </if>
@@ -1027,9 +1027,9 @@
             <if test="matchNoIsNull != null">
                 AND sr.matchNo =''
             </if>
-            <if test="memberTypes != null and memberTypes.size()>0">
+            <if test="memberTypes != null and memberTypes.size()&gt;0">
                 AND sr.memberType IN
-                <foreach item="memberType" index="index" collection="memberTypes" open="(" separator="," close=")">
+                <foreach close=")" collection="memberTypes" index="index" item="memberType" open="(" separator=",">
                     #{memberType}
                 </foreach>
             </if>

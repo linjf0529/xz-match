@@ -31,7 +31,7 @@ import java.util.function.Consumer;
  * @date 2020/11/17
  */
 @RestController
-@RequestMapping("/match/sign")
+@RequestMapping("/match/sign/record")
 public class SignRecordController extends BaseController {
     @Resource
     private MatchSubjectService matchSubjectService;
@@ -89,7 +89,7 @@ public class SignRecordController extends BaseController {
             throw new CommonException("数据为空");
         }
         String imSubectId = result.key.get(0).getString(SignRecordFieldUtils.subjectIdControlKey);
-        if(!subjectId.equals(imSubectId)){
+        if(subjectId != Integer.parseInt(imSubectId)){
             throw new CommonException("导入的模板有误");
         }
         signRecordService.importMacthSignRecord(matchSubject, result,relation,param);

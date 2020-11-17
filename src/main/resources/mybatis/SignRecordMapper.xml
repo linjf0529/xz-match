@@ -881,4 +881,206 @@
       `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="countSignRecordDispatchInfo" parameterType="map" resultType="map">
+        SELECT
+            sr.`status`,count(id) dispatchCount
+        FROM sign_record sr
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        GROUP BY sr.`status`
+    </select>
+
+    <select id="findBy" parameterType="map" resultType="com.xz.match.entity.SignRecord">
+        <include refid="listSQL"/>
+    </select>
+
+    <sql id="listSQL">
+        SELECT *
+        FROM sign_record sr
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </sql>
+
+    <sql id="condition_sql">
+        <trim prefixOverrides="AND | OR">
+            <if test="id != null">
+                AND sr.id = #{id}
+            </if>
+            <if test="tenantId != null">
+                AND sr.tenantId = #{tenantId}
+            </if>
+            <if test="orderId != null">
+                AND sr.orderId = #{orderId}
+            </if>
+            <if test="matchId != null">
+                AND sr.matchId = #{matchId}
+            </if>
+            <if test="matchName != null">
+                AND sr.matchName = #{matchName}
+            </if>
+            <if test="matchNameLike != null">
+                AND sr.matchName like CONCAT('%',#{matchNameLike},'%')
+            </if>
+            <if test="subjectId != null">
+                AND sr.subjectId = #{subjectId}
+            </if>
+            <if test="subjectName != null">
+                AND sr.subjectName = #{subjectName}
+            </if>
+            <if test="subjectNameLike != null">
+                AND sr.subjectName like CONCAT('%',#{subjectNameLike},'%')
+            </if>
+            <if test="userId != null">
+                AND (sr.userId = #{userId} OR sr.joinUserId = #{userId})
+            </if>
+            <if test="joinUserId != null">
+                AND sr.joinUserId = #{joinUserId}
+            </if>
+            <if test="type != null">
+                AND sr.type = #{type}
+            </if>
+            <if test="name != null">
+                AND sr.name = #{name}
+            </if>
+            <if test="nameLike != null">
+                AND sr.name like CONCAT('%',#{nameLike},'%')
+            </if>
+            <if test="sex != null">
+                AND sr.sex = #{sex}
+            </if>
+            <if test="phone != null and querySign == null">
+                AND sr.phone = #{phone}
+            </if>
+            <if test="certificateNo != null and querySign == null">
+                AND sr.certificateNo = #{certificateNo}
+            </if>
+            <if test="payment != null">
+                AND sr.payment = #{payment}
+            </if>
+            <if test="payments != null and payments.size()>0">
+                AND sr.payment IN
+                <foreach item="payment" index="index" collection="payments" open="(" separator="," close=")">
+                    #{payment}
+                </foreach>
+            </if>
+            <if test="review != null">
+                AND sr.review = #{review}
+            </if>
+           <if test="channel != null and channel != ''">
+                <choose>
+                    <when test="channel == 2">
+                        and sr.channel = #{channel}
+                    </when>
+                     <when test="channel == 28">
+                        and sr.channel = #{channel}
+                    </when>
+                    <when test="channel == 27">
+                        and sr.channel = #{channel}
+                    </when>
+                    <otherwise>
+                         and sr.channel not in (2,28,27)
+                    </otherwise>
+                </choose>
+			</if>
+            <if test="available != null">
+                AND sr.available = #{available}
+            </if>
+            <if test="orderNo != null">
+                AND sr.orderNo = #{orderNo}
+            </if>
+            <if test="invitationCode != null">
+                AND sr.invitationCode = #{invitationCode}
+            </if>
+            <if test="signIn != null">
+                AND sr.signIn = #{signIn}
+            </if>
+            <if test="expenses != null">
+                AND sr.expenses = #{expenses}
+            </if>
+            <if test="drawState != null">
+                AND sr.drawState=#{drawState}
+            </if>
+            <if test="isPass != null">
+                AND sr.isPass=#{isPass}
+            </if>
+            <if test="paymentType != null">
+                AND sr.paymentType = #{paymentType}
+            </if>
+            <if test="paymentTime != null">
+                AND sr.paymentTime = #{paymentTime}
+            </if>
+            <if test="searchDate != null">
+                AND from_unixtime(sr.createdTime/1000, '%Y-%m-%d') <![CDATA[ = ]]> #{searchDate}
+            </if>
+            <if test="memberType != null">
+                AND sr.memberType = #{memberType}
+            </if>
+            <if test="matchNo != null">
+                AND sr.matchNo = #{matchNo}
+            </if>
+            <if test="gradeNo != null">
+                AND sr.gradeNo = #{gradeNo}
+            </if>
+            <if test="matchNoIsNull != null">
+                AND sr.matchNo =''
+            </if>
+            <if test="memberTypes != null and memberTypes.size()>0">
+                AND sr.memberType IN
+                <foreach item="memberType" index="index" collection="memberTypes" open="(" separator="," close=")">
+                    #{memberType}
+                </foreach>
+            </if>
+            <if test="receive != null">
+                AND sr.receive=#{receive}
+            </if>
+            <if test="querySign != null">
+                <if test="phone != null">
+                    AND (sr.phone = #{phone} OR sr.certificateNo = #{phone})
+                </if>
+                <if test="certificateNo != null">
+                    AND (sr.phone = #{certificateNo} OR sr.certificateNo = #{certificateNo})
+                </if>
+            </if>
+            <if test="timeType != null and timeType == 1">
+                <if test="startTime != null">
+                    AND sr.createdTime <![CDATA[ >= ]]> #{startTime}
+                </if>
+                <if test="endTime != null">
+                    AND sr.createdTime <![CDATA[ <= ]]> #{endTime}
+                </if>
+            </if>
+            <if test="timeType != null and timeType == 2">
+                AND sr.review = 1
+                <if test="startTime != null">
+                    AND sr.lastAccess <![CDATA[ >= ]]> #{startTime}
+                </if>
+                <if test="endTime != null">
+                    AND sr.lastAccess <![CDATA[ <= ]]> #{endTime}
+                </if>
+            </if>
+            <if test="timeType == null">
+                <if test="startTime != null">
+                    AND sr.createdTime <![CDATA[ >= ]]> #{startTime}
+                </if>
+                <if test="endTime != null">
+                    AND sr.createdTime <![CDATA[ <= ]]> #{endTime}
+                </if>
+            </if>
+            <if test="separateAccounts != null">
+                AND sr.separateAccounts = #{separateAccounts}
+            </if>
+            <if test="separateAccountsTime != null">
+                AND sr.separateAccountsTime = #{separateAccountsTime}
+            </if>
+            <if test="identityCheck != null">
+                AND sr.identityCheck = #{identityCheck}
+            </if>
+            <if test="status != null">
+                AND sr.`status` = #{status}
+            </if>
+        </trim>
+    </sql>
 </mapper>

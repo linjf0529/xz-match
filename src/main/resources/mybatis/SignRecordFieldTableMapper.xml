@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xz.match.mapper.MatchProductDispatchMapper">
-  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchProductDispatch">
+<mapper namespace="com.xz.match.mapper.SignRecordFieldTableMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.SignRecordFieldTable">
     <!--@mbg.generated-->
-    <!--@Table match_product_dispatch-->
+    <!--@Table sign_record_field_table-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="recordId" jdbcType="BIGINT" property="recordId" />
-    <result column="productId" jdbcType="BIGINT" property="productId" />
-    <result column="productName" jdbcType="VARCHAR" property="productName" />
-    <result column="productSubId" jdbcType="BIGINT" property="productSubId" />
-    <result column="productSubName" jdbcType="VARCHAR" property="productSubName" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="playersId" jdbcType="VARCHAR" property="playersId" />
+    <result column="controlKey" jdbcType="VARCHAR" property="controlKey" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="locked" jdbcType="BOOLEAN" property="locked" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
@@ -83,17 +81,17 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, recordId, productId, productName, productSubId, productSubName, `status`, remark, 
-    locked, version, lastAccess, creatorId, createdBy, createdTime, updaterId, updatedBy
+    id, recordId, playersId, controlKey, `comment`, `value`, locked, version, lastAccess, 
+    creatorId, createdBy, createdTime, updaterId, updatedBy
   </sql>
-  <select id="selectByExample" parameterType="com.xz.match.entity.MatchProductDispatchExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xz.match.entity.SignRecordFieldTableExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from match_product_dispatch
+    from sign_record_field_table
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -105,60 +103,55 @@
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
-    from match_product_dispatch
+    from sign_record_field_table
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
-    delete from match_product_dispatch
+    delete from sign_record_field_table
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchProductDispatchExample">
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.SignRecordFieldTableExample">
     <!--@mbg.generated-->
-    delete from match_product_dispatch
+    delete from sign_record_field_table
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProductDispatch" useGeneratedKeys="true">
+  <insert id="insert" parameterType="com.xz.match.entity.SignRecordFieldTable">
     <!--@mbg.generated-->
-    insert into match_product_dispatch (recordId, productId, productName, 
-      productSubId, productSubName, `status`, 
-      remark, locked, version, 
-      lastAccess, creatorId, createdBy, 
-      createdTime, updaterId, updatedBy
-      )
-    values (#{recordId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, 
-      #{productSubId,jdbcType=BIGINT}, #{productSubName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
-      #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
-      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}
-      )
+    insert into sign_record_field_table (id, recordId, playersId, 
+      controlKey, `comment`, `value`, 
+      locked, version, lastAccess, 
+      creatorId, createdBy, createdTime, 
+      updaterId, updatedBy)
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{playersId,jdbcType=VARCHAR}, 
+      #{controlKey,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, 
+      #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, 
+      #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProductDispatch" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.xz.match.entity.SignRecordFieldTable">
     <!--@mbg.generated-->
-    insert into match_product_dispatch
+    insert into sign_record_field_table
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="recordId != null">
         recordId,
       </if>
-      <if test="productId != null">
-        productId,
+      <if test="playersId != null">
+        playersId,
       </if>
-      <if test="productName != null">
-        productName,
+      <if test="controlKey != null">
+        controlKey,
       </if>
-      <if test="productSubId != null">
-        productSubId,
+      <if test="comment != null">
+        `comment`,
       </if>
-      <if test="productSubName != null">
-        productSubName,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="remark != null">
-        remark,
+      <if test="value != null">
+        `value`,
       </if>
       <if test="locked != null">
         locked,
@@ -186,26 +179,23 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="recordId != null">
         #{recordId,jdbcType=BIGINT},
       </if>
-      <if test="productId != null">
-        #{productId,jdbcType=BIGINT},
+      <if test="playersId != null">
+        #{playersId,jdbcType=VARCHAR},
       </if>
-      <if test="productName != null">
-        #{productName,jdbcType=VARCHAR},
+      <if test="controlKey != null">
+        #{controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="productSubId != null">
-        #{productSubId,jdbcType=BIGINT},
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="productSubName != null">
-        #{productSubName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
       </if>
       <if test="locked != null">
         #{locked,jdbcType=BOOLEAN},
@@ -233,16 +223,16 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xz.match.entity.MatchProductDispatchExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xz.match.entity.SignRecordFieldTableExample" resultType="java.lang.Long">
     <!--@mbg.generated-->
-    select count(*) from match_product_dispatch
+    select count(*) from sign_record_field_table
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--@mbg.generated-->
-    update match_product_dispatch
+    update sign_record_field_table
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -250,23 +240,17 @@
       <if test="record.recordId != null">
         recordId = #{record.recordId,jdbcType=BIGINT},
       </if>
-      <if test="record.productId != null">
-        productId = #{record.productId,jdbcType=BIGINT},
+      <if test="record.playersId != null">
+        playersId = #{record.playersId,jdbcType=VARCHAR},
       </if>
-      <if test="record.productName != null">
-        productName = #{record.productName,jdbcType=VARCHAR},
+      <if test="record.controlKey != null">
+        controlKey = #{record.controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.productSubId != null">
-        productSubId = #{record.productSubId,jdbcType=BIGINT},
+      <if test="record.comment != null">
+        `comment` = #{record.comment,jdbcType=VARCHAR},
       </if>
-      <if test="record.productSubName != null">
-        productSubName = #{record.productSubName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
+      <if test="record.value != null">
+        `value` = #{record.value,jdbcType=VARCHAR},
       </if>
       <if test="record.locked != null">
         locked = #{record.locked,jdbcType=BOOLEAN},
@@ -299,15 +283,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     <!--@mbg.generated-->
-    update match_product_dispatch
+    update sign_record_field_table
     set id = #{record.id,jdbcType=BIGINT},
       recordId = #{record.recordId,jdbcType=BIGINT},
-      productId = #{record.productId,jdbcType=BIGINT},
-      productName = #{record.productName,jdbcType=VARCHAR},
-      productSubId = #{record.productSubId,jdbcType=BIGINT},
-      productSubName = #{record.productSubName,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR},
+      playersId = #{record.playersId,jdbcType=VARCHAR},
+      controlKey = #{record.controlKey,jdbcType=VARCHAR},
+      `comment` = #{record.comment,jdbcType=VARCHAR},
+      `value` = #{record.value,jdbcType=VARCHAR},
       locked = #{record.locked,jdbcType=BOOLEAN},
       version = #{record.version,jdbcType=INTEGER},
       lastAccess = #{record.lastAccess,jdbcType=BIGINT},
@@ -320,30 +302,24 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchProductDispatch">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.SignRecordFieldTable">
     <!--@mbg.generated-->
-    update match_product_dispatch
+    update sign_record_field_table
     <set>
       <if test="recordId != null">
         recordId = #{recordId,jdbcType=BIGINT},
       </if>
-      <if test="productId != null">
-        productId = #{productId,jdbcType=BIGINT},
+      <if test="playersId != null">
+        playersId = #{playersId,jdbcType=VARCHAR},
       </if>
-      <if test="productName != null">
-        productName = #{productName,jdbcType=VARCHAR},
+      <if test="controlKey != null">
+        controlKey = #{controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="productSubId != null">
-        productSubId = #{productSubId,jdbcType=BIGINT},
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="productSubName != null">
-        productSubName = #{productSubName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
       </if>
       <if test="locked != null">
         locked = #{locked,jdbcType=BOOLEAN},
@@ -372,16 +348,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchProductDispatch">
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.SignRecordFieldTable">
     <!--@mbg.generated-->
-    update match_product_dispatch
+    update sign_record_field_table
     set recordId = #{recordId,jdbcType=BIGINT},
-      productId = #{productId,jdbcType=BIGINT},
-      productName = #{productName,jdbcType=VARCHAR},
-      productSubId = #{productSubId,jdbcType=BIGINT},
-      productSubName = #{productSubName,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
+      playersId = #{playersId,jdbcType=VARCHAR},
+      controlKey = #{controlKey,jdbcType=VARCHAR},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
       locked = #{locked,jdbcType=BOOLEAN},
       version = #{version,jdbcType=INTEGER},
       lastAccess = #{lastAccess,jdbcType=BIGINT},
@@ -393,17 +367,63 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMatchProductDispatchByRecordIdAndSubjectId" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductDispatchVO">
-        SELECT
-            a.id productId,
-            a.subjectId,
-            a.productName,
-            a.stockNumber,
-            b.*
-        FROM
-            match_product a
-        LEFT JOIN match_product_dispatch b ON a.id = b.productId   and b.recordId = #{recordId}
-        WHERE
-            a.subjectId = #{subjectId}
-    </select>
+    <select id="findBy" parameterType="map" resultType="com.xz.match.entity.SignRecordFieldTable">
+		<include refid="listSQL" />
+	</select>
+
+
+	<sql id="listSQL">
+		SELECT a.* FROM
+		sign_record_field_table a,
+		sign_record c,
+		subject_sign_field d
+		<where>
+			a.recordId = c.id
+			and c.subjectId = d.subjectId
+			and a.controlKey = d.controlKey
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="recordId != null">
+				AND a.recordId = #{recordId}
+			</if>
+			<if test="playersId != null">
+				AND a.playersId = #{playersId}
+			</if>
+			<if test="controlKey != null">
+				AND a.controlKey = #{controlKey}
+			</if>
+			<if test="comment != null">
+				AND a.comment = #{comment}
+			</if>
+			<if test="value != null">
+				AND a.value = #{value}
+			</if>
+		</where>
+		ORDER BY
+		d.sortNo
+	</sql>
+
+	<sql id="condition_sql">
+		<trim prefixOverrides="AND | OR">
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="recordId != null">
+				AND recordId = #{recordId}
+			</if>
+			<if test="playersId != null">
+				AND playersId = #{playersId}
+			</if>
+			<if test="controlKey != null">
+				AND controlKey = #{controlKey}
+			</if>
+			<if test="comment != null">
+				AND comment = #{comment}
+			</if>
+			<if test="value != null">
+				AND value = #{value}
+			</if>
+		</trim>
+	</sql>
 </mapper>

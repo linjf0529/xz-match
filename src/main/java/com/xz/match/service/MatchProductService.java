@@ -80,4 +80,5 @@ public interface MatchProductService{
      */
     ResponseResult removeMatchProduct(Long id);
 
+    List<MatchProduct> findBy(Map param);
 }

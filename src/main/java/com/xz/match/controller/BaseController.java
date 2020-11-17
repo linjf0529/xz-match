@@ -7,6 +7,7 @@ import com.xz.match.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -52,5 +53,32 @@ public class BaseController {
         }
 
         return pageParam;
+    }
+
+    public Map<String, Object> getParameterMap(HttpServletRequest request) {
+        Map<String, String[]> multiParam = request.getParameterMap();
+        Map<String, Object> params = new LinkedHashMap();
+        Set<String> keySet = multiParam.keySet();
+        Iterator var5 = keySet.iterator();
+
+        while(var5.hasNext()) {
+            String key = (String)var5.next();
+            String[] values = (String[])multiParam.get(key);
+            if (values != null && values.length > 0) {
+                if (values.length == 1) {
+                    if ("pageNo".equals(key)) {
+                        params.put(key, NumberUtils.toInteger(values[0]));
+                    } else if ("pageSize".equals(key)) {
+                        params.put(key, NumberUtils.toInteger(values[0]));
+                    } else {
+                        params.put(key, StringUtils.msNull(values[0]));
+                    }
+                } else {
+                    params.put(key, values);
+                }
+            }
+        }
+
+        return params;
     }
 }

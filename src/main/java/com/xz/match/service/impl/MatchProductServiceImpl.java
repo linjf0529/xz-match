@@ -205,4 +205,8 @@ public class MatchProductServiceImpl implements MatchProductService{
         return ResponseResult.ok();
     }
 
+    @Override
+    public List<MatchProduct> findBy(Map param) {
+        return matchProductMapper.findBy(param);
+    }
 }

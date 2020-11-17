@@ -1,8 +1,11 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.mapper.SignRecordMapper;
 import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
@@ -73,4 +76,13 @@ public class SignRecordServiceImpl implements SignRecordService{
         return signRecordMapper.updateByPrimaryKey(record);
     }
 
+    @Override
+    public List<Map<String,Object>> countSignRecordDispatchInfo(Map<String, Object> param) {
+        return signRecordMapper.countSignRecordDispatchInfo(param);
+    }
+
+    @Override
+    public List<SignRecord> findBy(JSONObject param) {
+        return signRecordMapper.findBy(param);
+    }
 }

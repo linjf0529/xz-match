@@ -1,6 +1,9 @@
 package com.xz.match.service;
 
 import java.util.List;
+import java.util.Map;
+
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
     /**
@@ -33,4 +36,7 @@ public interface SignRecordService{
 
     int updateByPrimaryKey(SignRecord record);
 
+    List<Map<String,Object>> countSignRecordDispatchInfo(Map<String, Object> param);
+
+    List<SignRecord> findBy(JSONObject param);
 }

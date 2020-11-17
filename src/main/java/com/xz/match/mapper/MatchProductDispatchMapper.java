@@ -3,6 +3,9 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchProductDispatch;
 import com.xz.match.entity.MatchProductDispatchExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.vo.MatchProductDispatchVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +65,6 @@ public interface MatchProductDispatchMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchProductDispatch record);
+
+    List<MatchProductDispatchVO> selectMatchProductDispatchByRecordIdAndSubjectId(Map param);
 }

@@ -1,8 +1,11 @@
 package com.xz.match.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.SignRecordExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +65,8 @@ public interface SignRecordMapper {
      * @return update count
      */
     int updateByPrimaryKey(SignRecord record);
+
+    List<Map<String,Object>> countSignRecordDispatchInfo(Map<String, Object> param);
+
+    List<SignRecord> findBy(JSONObject param);
 }

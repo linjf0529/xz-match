@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xz.match.mapper.MatchProductReceiveSetMapper">
-  <resultMap id="BaseResultMap" type="com.xz.match.entity.MatchProductReceiveSet">
+<mapper namespace="com.xz.match.mapper.SubjectSignFieldMapper">
+  <resultMap id="BaseResultMap" type="com.xz.match.entity.SubjectSignField">
     <!--@mbg.generated-->
-    <!--@Table match_product_receive_set-->
+    <!--@Table subject_sign_field-->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="tenantId" jdbcType="BIGINT" property="tenantId" />
-    <result column="matchName" jdbcType="VARCHAR" property="matchName" />
-    <result column="matchId" jdbcType="BIGINT" property="matchId" />
-    <result column="subjectName" jdbcType="VARCHAR" property="subjectName" />
     <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
-    <result column="pageShow" jdbcType="VARCHAR" property="pageShow" />
-    <result column="pageShowComment" jdbcType="VARCHAR" property="pageShowComment" />
-    <result column="tips" jdbcType="VARCHAR" property="tips" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="disabled" jdbcType="INTEGER" property="disabled" />
+    <result column="controlKey" jdbcType="VARCHAR" property="controlKey" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="html" jdbcType="VARCHAR" property="html" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="editable" jdbcType="TINYINT" property="editable" />
     <result column="locked" jdbcType="BOOLEAN" property="locked" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
@@ -24,6 +22,7 @@
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
     <result column="updaterId" jdbcType="VARCHAR" property="updaterId" />
     <result column="updatedBy" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="sortNo" jdbcType="INTEGER" property="sortNo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -87,18 +86,18 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, tenantId, matchName, matchId, subjectName, subjectId, pageShow, pageShowComment, 
-    tips, `status`, remark, disabled, locked, version, lastAccess, creatorId, createdBy, 
-    createdTime, updaterId, updatedBy
+    id, subjectId, controlKey, `comment`, remarks, `type`, html, `value`, `state`, editable, 
+    locked, version, lastAccess, creatorId, createdBy, createdTime, updaterId, updatedBy, 
+    sortNo
   </sql>
-  <select id="selectByExample" parameterType="com.xz.match.entity.MatchProductReceiveSetExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xz.match.entity.SubjectSignFieldExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from match_product_receive_set
+    from subject_sign_field
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,74 +109,71 @@
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
-    from match_product_receive_set
+    from subject_sign_field
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
-    delete from match_product_receive_set
+    delete from subject_sign_field
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchProductReceiveSetExample">
+  <delete id="deleteByExample" parameterType="com.xz.match.entity.SubjectSignFieldExample">
     <!--@mbg.generated-->
-    delete from match_product_receive_set
+    delete from subject_sign_field
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProductReceiveSet" useGeneratedKeys="true">
+  <insert id="insert" parameterType="com.xz.match.entity.SubjectSignField">
     <!--@mbg.generated-->
-    insert into match_product_receive_set (tenantId, matchName, matchId, 
-      subjectName, subjectId, pageShow, 
-      pageShowComment, tips, `status`, 
-      remark, disabled, locked, 
-      version, lastAccess, creatorId, 
-      createdBy, createdTime, updaterId, 
-      updatedBy)
-    values (#{tenantId,jdbcType=BIGINT}, #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, 
-      #{subjectName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, #{pageShow,jdbcType=VARCHAR}, 
-      #{pageShowComment,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, #{locked,jdbcType=BOOLEAN}, 
-      #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, 
-      #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, 
-      #{updatedBy,jdbcType=VARCHAR})
+    insert into subject_sign_field (id, subjectId, controlKey, 
+      `comment`, remarks, `type`, 
+      html, `value`, `state`, 
+      editable, locked, version, 
+      lastAccess, creatorId, createdBy, 
+      createdTime, updaterId, updatedBy, 
+      sortNo)
+    values (#{id,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, #{controlKey,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{html,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{editable,jdbcType=TINYINT}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
+      #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{sortNo,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProductReceiveSet" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.xz.match.entity.SubjectSignField">
     <!--@mbg.generated-->
-    insert into match_product_receive_set
+    insert into subject_sign_field
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tenantId != null">
-        tenantId,
-      </if>
-      <if test="matchName != null">
-        matchName,
-      </if>
-      <if test="matchId != null">
-        matchId,
-      </if>
-      <if test="subjectName != null">
-        subjectName,
+      <if test="id != null">
+        id,
       </if>
       <if test="subjectId != null">
         subjectId,
       </if>
-      <if test="pageShow != null">
-        pageShow,
+      <if test="controlKey != null">
+        controlKey,
       </if>
-      <if test="pageShowComment != null">
-        pageShowComment,
+      <if test="comment != null">
+        `comment`,
       </if>
-      <if test="tips != null">
-        tips,
+      <if test="remarks != null">
+        remarks,
       </if>
-      <if test="status != null">
-        `status`,
+      <if test="type != null">
+        `type`,
       </if>
-      <if test="remark != null">
-        remark,
+      <if test="html != null">
+        html,
       </if>
-      <if test="disabled != null">
-        disabled,
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="editable != null">
+        editable,
       </if>
       <if test="locked != null">
         locked,
@@ -203,40 +199,40 @@
       <if test="updatedBy != null">
         updatedBy,
       </if>
+      <if test="sortNo != null">
+        sortNo,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tenantId != null">
-        #{tenantId,jdbcType=BIGINT},
-      </if>
-      <if test="matchName != null">
-        #{matchName,jdbcType=VARCHAR},
-      </if>
-      <if test="matchId != null">
-        #{matchId,jdbcType=BIGINT},
-      </if>
-      <if test="subjectName != null">
-        #{subjectName,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="subjectId != null">
         #{subjectId,jdbcType=BIGINT},
       </if>
-      <if test="pageShow != null">
-        #{pageShow,jdbcType=VARCHAR},
+      <if test="controlKey != null">
+        #{controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="pageShowComment != null">
-        #{pageShowComment,jdbcType=VARCHAR},
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="tips != null">
-        #{tips,jdbcType=VARCHAR},
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
       </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
+      <if test="html != null">
+        #{html,jdbcType=VARCHAR},
       </if>
-      <if test="disabled != null">
-        #{disabled,jdbcType=INTEGER},
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="editable != null">
+        #{editable,jdbcType=TINYINT},
       </if>
       <if test="locked != null">
         #{locked,jdbcType=BOOLEAN},
@@ -262,54 +258,51 @@
       <if test="updatedBy != null">
         #{updatedBy,jdbcType=VARCHAR},
       </if>
+      <if test="sortNo != null">
+        #{sortNo,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xz.match.entity.MatchProductReceiveSetExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xz.match.entity.SubjectSignFieldExample" resultType="java.lang.Long">
     <!--@mbg.generated-->
-    select count(*) from match_product_receive_set
+    select count(*) from subject_sign_field
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--@mbg.generated-->
-    update match_product_receive_set
+    update subject_sign_field
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.tenantId != null">
-        tenantId = #{record.tenantId,jdbcType=BIGINT},
-      </if>
-      <if test="record.matchName != null">
-        matchName = #{record.matchName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.matchId != null">
-        matchId = #{record.matchId,jdbcType=BIGINT},
-      </if>
-      <if test="record.subjectName != null">
-        subjectName = #{record.subjectName,jdbcType=VARCHAR},
-      </if>
       <if test="record.subjectId != null">
         subjectId = #{record.subjectId,jdbcType=BIGINT},
       </if>
-      <if test="record.pageShow != null">
-        pageShow = #{record.pageShow,jdbcType=VARCHAR},
+      <if test="record.controlKey != null">
+        controlKey = #{record.controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.pageShowComment != null">
-        pageShowComment = #{record.pageShowComment,jdbcType=VARCHAR},
+      <if test="record.comment != null">
+        `comment` = #{record.comment,jdbcType=VARCHAR},
       </if>
-      <if test="record.tips != null">
-        tips = #{record.tips,jdbcType=VARCHAR},
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=TINYINT},
       </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
+      <if test="record.html != null">
+        html = #{record.html,jdbcType=VARCHAR},
       </if>
-      <if test="record.disabled != null">
-        disabled = #{record.disabled,jdbcType=INTEGER},
+      <if test="record.value != null">
+        `value` = #{record.value,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        `state` = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.editable != null">
+        editable = #{record.editable,jdbcType=TINYINT},
       </if>
       <if test="record.locked != null">
         locked = #{record.locked,jdbcType=BOOLEAN},
@@ -335,6 +328,9 @@
       <if test="record.updatedBy != null">
         updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
       </if>
+      <if test="record.sortNo != null">
+        sortNo = #{record.sortNo,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -342,19 +338,17 @@
   </update>
   <update id="updateByExample" parameterType="map">
     <!--@mbg.generated-->
-    update match_product_receive_set
+    update subject_sign_field
     set id = #{record.id,jdbcType=BIGINT},
-      tenantId = #{record.tenantId,jdbcType=BIGINT},
-      matchName = #{record.matchName,jdbcType=VARCHAR},
-      matchId = #{record.matchId,jdbcType=BIGINT},
-      subjectName = #{record.subjectName,jdbcType=VARCHAR},
       subjectId = #{record.subjectId,jdbcType=BIGINT},
-      pageShow = #{record.pageShow,jdbcType=VARCHAR},
-      pageShowComment = #{record.pageShowComment,jdbcType=VARCHAR},
-      tips = #{record.tips,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      disabled = #{record.disabled,jdbcType=INTEGER},
+      controlKey = #{record.controlKey,jdbcType=VARCHAR},
+      `comment` = #{record.comment,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=TINYINT},
+      html = #{record.html,jdbcType=VARCHAR},
+      `value` = #{record.value,jdbcType=VARCHAR},
+      `state` = #{record.state,jdbcType=TINYINT},
+      editable = #{record.editable,jdbcType=TINYINT},
       locked = #{record.locked,jdbcType=BOOLEAN},
       version = #{record.version,jdbcType=INTEGER},
       lastAccess = #{record.lastAccess,jdbcType=BIGINT},
@@ -362,47 +356,42 @@
       createdBy = #{record.createdBy,jdbcType=VARCHAR},
       createdTime = #{record.createdTime,jdbcType=BIGINT},
       updaterId = #{record.updaterId,jdbcType=VARCHAR},
-      updatedBy = #{record.updatedBy,jdbcType=VARCHAR}
+      updatedBy = #{record.updatedBy,jdbcType=VARCHAR},
+      sortNo = #{record.sortNo,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.MatchProductReceiveSet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xz.match.entity.SubjectSignField">
     <!--@mbg.generated-->
-    update match_product_receive_set
+    update subject_sign_field
     <set>
-      <if test="tenantId != null">
-        tenantId = #{tenantId,jdbcType=BIGINT},
-      </if>
-      <if test="matchName != null">
-        matchName = #{matchName,jdbcType=VARCHAR},
-      </if>
-      <if test="matchId != null">
-        matchId = #{matchId,jdbcType=BIGINT},
-      </if>
-      <if test="subjectName != null">
-        subjectName = #{subjectName,jdbcType=VARCHAR},
-      </if>
       <if test="subjectId != null">
         subjectId = #{subjectId,jdbcType=BIGINT},
       </if>
-      <if test="pageShow != null">
-        pageShow = #{pageShow,jdbcType=VARCHAR},
+      <if test="controlKey != null">
+        controlKey = #{controlKey,jdbcType=VARCHAR},
       </if>
-      <if test="pageShowComment != null">
-        pageShowComment = #{pageShowComment,jdbcType=VARCHAR},
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="tips != null">
-        tips = #{tips,jdbcType=VARCHAR},
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
+      <if test="type != null">
+        `type` = #{type,jdbcType=TINYINT},
       </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
+      <if test="html != null">
+        html = #{html,jdbcType=VARCHAR},
       </if>
-      <if test="disabled != null">
-        disabled = #{disabled,jdbcType=INTEGER},
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="editable != null">
+        editable = #{editable,jdbcType=TINYINT},
       </if>
       <if test="locked != null">
         locked = #{locked,jdbcType=BOOLEAN},
@@ -428,23 +417,24 @@
       <if test="updatedBy != null">
         updatedBy = #{updatedBy,jdbcType=VARCHAR},
       </if>
+      <if test="sortNo != null">
+        sortNo = #{sortNo,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.MatchProductReceiveSet">
+  <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.SubjectSignField">
     <!--@mbg.generated-->
-    update match_product_receive_set
-    set tenantId = #{tenantId,jdbcType=BIGINT},
-      matchName = #{matchName,jdbcType=VARCHAR},
-      matchId = #{matchId,jdbcType=BIGINT},
-      subjectName = #{subjectName,jdbcType=VARCHAR},
-      subjectId = #{subjectId,jdbcType=BIGINT},
-      pageShow = #{pageShow,jdbcType=VARCHAR},
-      pageShowComment = #{pageShowComment,jdbcType=VARCHAR},
-      tips = #{tips,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      disabled = #{disabled,jdbcType=INTEGER},
+    update subject_sign_field
+    set subjectId = #{subjectId,jdbcType=BIGINT},
+      controlKey = #{controlKey,jdbcType=VARCHAR},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=TINYINT},
+      html = #{html,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=TINYINT},
+      editable = #{editable,jdbcType=TINYINT},
       locked = #{locked,jdbcType=BOOLEAN},
       version = #{version,jdbcType=INTEGER},
       lastAccess = #{lastAccess,jdbcType=BIGINT},
@@ -452,57 +442,70 @@
       createdBy = #{createdBy,jdbcType=VARCHAR},
       createdTime = #{createdTime,jdbcType=BIGINT},
       updaterId = #{updaterId,jdbcType=VARCHAR},
-      updatedBy = #{updatedBy,jdbcType=VARCHAR}
+      updatedBy = #{updatedBy,jdbcType=VARCHAR},
+      sortNo = #{sortNo,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMatchProductReceiveSetBySubjectId" parameterType="string" resultType="com.xz.match.entity.MatchProductReceiveSet">
-        SELECT * FROM match_product_receive_set
-        WHERE subjectId = #{subjectId}
-    </select>
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.SubjectSignField">
+		<include refid="listSQL" />
+	</select>
 
-     <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductReceiveSetVO">
-        <include refid="listSQL"/>
-    </select>
+	<sql id="listSQL">
+		SELECT * FROM subject_sign_field
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		ORDER BY sortNo ASC
+	</sql>
 
-    <sql id="listSQL">
-        SELECT
-        a.*,
-        IFNULL(b.`status`, 0) `status`,
-        b.pageShow,
-        b.pageShowComment,
-        b.tips
-        FROM match_subject a
-        LEFT JOIN match_product_receive_set b
-        ON a.id = b.subjectId
-        <where>
-            <include refid="condition_sql"/>
-        </where>
-    </sql>
-
-    <sql id="condition_sql">
-        <trim prefixOverrides="AND | OR">
-            <if test="id != null">
-                AND a.id = #{id}
-            </if>
-            <if test="matchId != null">
-                AND a.matchId = #{matchId}
-            </if>
-            <if test="matchName != null">
-                AND a.matchName = #{matchName}
-            </if>
-            <if test="subject != null">
-                AND a.subject = #{subject}
-            </if>
-            <if test="state != null">
-                AND a.state = #{state}
-            </if>
-            <if test="type != null">
-                AND a.type = #{type}
-            </if>
-            <if test="tenantId != null">
-                AND a.tenantId = #{tenantId}
-            </if>
-        </trim>
-    </sql>
+	<sql id="condition_sql">
+		<trim prefixOverrides="AND | OR">
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="subjectId != null">
+				AND subjectId = #{subjectId}
+			</if>
+			<if test="controlKey != null">
+				AND controlKey = #{controlKey}
+			</if>
+			<if test="comment != null">
+				AND comment = #{comment}
+			</if>
+			<if test="remarks != null">
+				AND remarks = #{remarks}
+			</if>
+			<if test="type != null">
+				AND type = #{type}
+			</if>
+			<if test="typeList != null">
+				AND type IN
+				<foreach item="type" index="index" collection="typeList" open="(" separator="," close=")">
+					#{type}
+				</foreach>
+			</if>
+			<if test="html != null">
+				AND html = #{html}
+			</if>
+			<if test="value != null">
+				AND value = #{value}
+			</if>
+			<if test="state != null">
+				AND state = #{state}
+			</if>
+			<if test="stateList != null">
+				AND state IN
+				<foreach item="state" index="index" collection="stateList" open="(" separator="," close=")">
+					#{state}
+				</foreach>
+			</if>
+			<if test="editable != null">
+				AND editable = #{editable}
+			</if>
+			<if test="sortNo != null">
+				AND sortNo = #{sortNo}
+			</if>
+		</trim>
+	</sql>
 </mapper>

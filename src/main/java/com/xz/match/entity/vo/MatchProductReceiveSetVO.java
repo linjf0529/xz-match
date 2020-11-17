@@ -2,6 +2,8 @@ package com.xz.match.entity.vo;
 
 
 import com.xz.match.entity.MatchProduct;
+import com.xz.match.entity.SignRecordFieldTable;
+import com.xz.match.entity.SubjectSignField;
 
 import java.io.Serializable;
 import java.util.List;
@@ -71,15 +73,15 @@ public class MatchProductReceiveSetVO  implements Serializable {
      */
     private String tenantId;
 
-//    /**
-//     * 赛事科目报名字段
-//     */
-//    private List<SubjectSignField> subjectSignFields;
-//
-//    /**
-//     * 赛事科目报名信息
-//     */
-//    private List<SignRecordFieldTable> SignRecordFieldTables;
+    /**
+     * 赛事科目报名字段
+     */
+    private List<SubjectSignField> subjectSignFields;
+
+    /**
+     * 赛事科目报名信息
+     */
+    private List<SignRecordFieldTable> SignRecordFieldTables;
 
     /**
      * 赛事项目物资清单
@@ -103,18 +105,18 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.status = status;
     }
 
-//    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Byte type, String pageShow, String pageShowComment, String tips, Integer status, List<SubjectSignField> subjectSignFields) {
-//        this.subjectId = subjectId;
-//        this.subjectName = subjectName;
-//        this.matchId = matchId;
-//        this.matchName = matchName;
-//        this.type = type;
-//        this.pageShow = pageShow;
-//        this.pageShowComment = pageShowComment;
-//        this.tips = tips;
-//        this.status = status;
-//        this.subjectSignFields = subjectSignFields;
-//    }
+    public MatchProductReceiveSetVO(String subjectId, String subjectName, String matchId, String matchName, Byte type, String pageShow, String pageShowComment, String tips, Integer status, List<SubjectSignField> subjectSignFields) {
+        this.subjectId = subjectId;
+        this.subjectName = subjectName;
+        this.matchId = matchId;
+        this.matchName = matchName;
+        this.type = type;
+        this.pageShow = pageShow;
+        this.pageShowComment = pageShowComment;
+        this.tips = tips;
+        this.status = status;
+        this.subjectSignFields = subjectSignFields;
+    }
 
     public String getSubjectId() {
         return subjectId;
@@ -188,13 +190,13 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.status = status;
     }
 
-//    public List<SubjectSignField> getSubjectSignFields() {
-//        return subjectSignFields;
-//    }
-//
-//    public void setSubjectSignFields(List<SubjectSignField> subjectSignFields) {
-//        this.subjectSignFields = subjectSignFields;
-//    }
+    public List<SubjectSignField> getSubjectSignFields() {
+        return subjectSignFields;
+    }
+
+    public void setSubjectSignFields(List<SubjectSignField> subjectSignFields) {
+        this.subjectSignFields = subjectSignFields;
+    }
 
     public List<MatchProduct> getMatchProducts() {
         return MatchProducts;
@@ -212,13 +214,13 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.id = id;
     }
 
-//    public List<SignRecordFieldTable> getSignRecordFieldTables() {
-//        return SignRecordFieldTables;
-//    }
-//
-//    public void setSignRecordFieldTables(List<SignRecordFieldTable> signRecordFieldTables) {
-//        SignRecordFieldTables = signRecordFieldTables;
-//    }
+    public List<SignRecordFieldTable> getSignRecordFieldTables() {
+        return SignRecordFieldTables;
+    }
+
+    public void setSignRecordFieldTables(List<SignRecordFieldTable> signRecordFieldTables) {
+        SignRecordFieldTables = signRecordFieldTables;
+    }
 
     public String getTenantId() {
         return tenantId;

@@ -13,8 +13,8 @@ import javax.websocket.server.PathParam;
 /**
  * 物资子项明细表facade
  *
- * @author gaorh
- * @create 2020-11-05
+ * @author chenwf
+ * @create 2020-11-17
  */
 @RestController
 @RequestMapping("/match/products/sub")

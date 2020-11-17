@@ -15,8 +15,8 @@ import java.util.Map;
 /**
  * 发放人员配置表facade
  *
- * @author gaorh
- * @create 2020-11-15
+ * @author chenwf
+ * @create 2020-11-17
  */
 @RestController
 @RequestMapping("/matchs/config")

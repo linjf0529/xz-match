@@ -91,7 +91,7 @@ public class MatchCertificateServiceImpl implements MatchCertificateService{
     public ResponseResult uploadImage(byte[] imageContent) {
         String imageName = StringUtils.getUUID() + ".png";
         // 指定上传文件夹
-        String fileKeyWithFolder = "match/"+imageName;
+        String fileKeyWithFolder = "xz-match/"+imageName;
         return wsossService.uploadImage(imageContent,imageName, FSConstants.WSOSS_BUCKET_NAME_DEFAULT, fileKeyWithFolder);
     }
 

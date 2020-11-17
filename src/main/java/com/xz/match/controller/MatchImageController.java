@@ -67,7 +67,7 @@ public class MatchImageController extends BaseController{
 
         String bucketName = FSConstants.WSOSS_BUCKET_NAME_DEFAULT;
         // 指定上传文件夹
-        String fileKeyWithFolder = StringUtils.msNull(multipartRequest.getParameter("folder")) + "/" + imageName + System.currentTimeMillis();
+        String fileKeyWithFolder = StringUtils.msNull("xz-match") + "/" + imageName + System.currentTimeMillis();
         logger.debug("^_^ file upload image name is {}, bucket name is {},fileKeyWithFolder is {}", imageName, bucketName, fileKeyWithFolder);
         String tmpFilename=filename.toLowerCase();
         ValidateUtils.isTrue((tmpFilename.endsWith(".jpg") || tmpFilename.endsWith(".png") || tmpFilename.endsWith(".jpeg")

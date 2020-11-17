@@ -62,4 +62,10 @@ public interface MatchProductSubMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchProductSub record);
+
+    List<MatchProductSub> selectMatchProductSubByProductId(Long productId);
+
+    void updateToAddMatchStockByProductSubId(MatchProductSub matchProductSub);
+
+    int updateToMinusMatchStockByProductSubId(MatchProductSub matchProductSub);
 }

@@ -440,4 +440,81 @@
       updatedBy = #{updatedBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductVO">
+        <include refid="listSQL" />
+    </select>
+
+
+    <sql id="listSQL">
+        SELECT
+        a.*,
+        b.productId,
+        GROUP_CONCAT( b.productSubName SEPARATOR '、' ) productSubName,
+        CASE GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' )
+            WHEN '' THEN a.stockNumber
+            ELSE GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' )
+        END stockNumberSub
+        FROM
+            match_product a
+        LEFT JOIN
+            match_product_sub b
+        ON a.id = b.productId
+        <where>
+            <include refid="condition_sql" />
+        </where>
+        GROUP BY  b.productId
+        ORDER BY a.lastAccess DESC
+    </sql>
+
+  <sql id="condition_sql">
+        <trim prefixOverrides="AND | OR">
+            <if test="id != null">
+                AND a.id = #{id}
+            </if>
+            <if test="tenantId != null">
+                AND a.tenantId = #{tenantId}
+            </if>
+            <if test="subjectName != null">
+                AND a.subjectName = #{subjectName}
+            </if>
+            <if test="subjectId != null">
+                AND a.subjectId = #{subjectId}
+            </if>
+            <if test="matchName != null">
+                AND a.matchName = #{matchName}
+            </if>
+            <if test="matchId != null">
+                AND a.matchId = #{matchId}
+            </if>
+            <if test="inventoryType != null">
+                AND a.inventoryType = #{inventoryType}
+            </if>
+            <if test="productName != null">
+                AND a.productName = #{productName}
+            </if>
+            <if test="description != null">
+                AND a.description = #{description}
+            </if>
+            <if test="stockNumber != null">
+                AND a.stockNumber = #{stockNumber}
+            </if>
+            <if test="disabled != null">
+                AND a.disabled = #{disabled}
+            </if>
+        </trim>
+    </sql>
+
+     <update id="updateToAddMatchStockByProductId" parameterType="com.xz.match.entity.vo.MatchStockVO">
+        UPDATE match_product set
+        stockNumber = stockNumber + #{stockNumber}
+        where id = #{productId}
+   </update>
+
+   <update id="updateToMinusMatchStockByProductId" parameterType="com.xz.match.entity.vo.MatchStockVO">
+        UPDATE
+        match_product set
+        stockNumber = stockNumber - #{stockNumber}
+        where id = #{productId} and stockNumber >= #{stockNumber}
+   </update>
 </mapper>

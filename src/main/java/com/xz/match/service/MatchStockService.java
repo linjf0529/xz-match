@@ -3,7 +3,10 @@ package com.xz.match.service;
 import com.xz.match.entity.MatchStockExample;
 import java.util.List;
 import com.xz.match.entity.MatchStock;
-    /**
+import com.xz.match.entity.vo.MatchStockVO;
+import com.xz.match.utils.ResponseResult;
+
+/**
  *
  * @author chenwf
  * @date 2020/11/16
@@ -33,4 +36,20 @@ public interface MatchStockService{
 
     int updateByPrimaryKey(MatchStock record);
 
+    /**
+     * 添加库存
+     *
+     * @param matchStockVO 库存VO
+     * @return {@link ResponseResult}
+     */
+    ResponseResult addMatchStock(MatchStockVO matchStockVO);
+
+
+    /**
+     * 根据产品id查询物资库存
+     *
+     * @param productId 产品id
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchStock(Long productId);
 }

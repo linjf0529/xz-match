@@ -71,9 +71,9 @@ public class MatchDispatchSetController extends BaseController{
      */
     @GetMapping
     public ResponseResult queryMatchDispatchSet(HttpServletRequest request){
-//        JSONObject param = getJSONObject(request);
-//        param.put("disabled",0);
-        return matchDispatchSetService.findMatchDispatchSet(new HashMap<>());
+        JSONObject param = getJSONObject(request);
+        param.put("disabled",0);
+        return matchDispatchSetService.findMatchDispatchSet(getPageParam(request),param);
     }
 
     /**

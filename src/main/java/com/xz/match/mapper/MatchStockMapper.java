@@ -62,4 +62,6 @@ public interface MatchStockMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchStock record);
+
+    List<MatchStock> selectMatchStockByProductId(Long productId);
 }

@@ -1,12 +1,16 @@
 package com.xz.match.service.impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
-import com.xz.match.mapper.MatchProductSubMapper;
 import com.xz.match.entity.MatchProductSub;
 import com.xz.match.entity.MatchProductSubExample;
+import com.xz.match.entity.vo.MatchProductSubVO;
+import com.xz.match.mapper.MatchProductSubMapper;
 import com.xz.match.service.MatchProductSubService;
+import com.xz.match.utils.ResponseResult;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 /**
  *
  * @author chenwf
@@ -17,6 +21,9 @@ public class MatchProductSubServiceImpl implements MatchProductSubService{
 
     @Resource
     private MatchProductSubMapper matchProductSubMapper;
+
+    @Resource
+    private MatchProductSubMapper matchProductSubDao;
 
     @Override
     public long countByExample(MatchProductSubExample example) {
@@ -73,4 +80,53 @@ public class MatchProductSubServiceImpl implements MatchProductSubService{
         return matchProductSubMapper.updateByPrimaryKey(record);
     }
 
+
+
+    /**
+     * 根据产品id查询物资子项
+     *
+     * @param productId id
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public List<MatchProductSub> findMatchProductSubByProductId(Long productId) {
+        return matchProductSubDao.selectMatchProductSubByProductId(productId);
+    }
+
+    /**
+     * 找到匹配的产品子通过id
+     *
+     * @param id id
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult findMatchProductSubById(Long id) {
+        return ResponseResult.ok().setData(this.selectByPrimaryKey(id));
+    }
+
+    /**
+     * 修改物资子项
+     *
+     * @param matchProductSubVO 物资子项VO
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult modifyMatchProductSub(MatchProductSubVO matchProductSubVO) {
+        MatchProductSub matchProductSub = new MatchProductSub();
+        BeanUtils.copyProperties(matchProductSubVO, matchProductSub);
+        this.updateByPrimaryKeySelective(matchProductSub);
+        return ResponseResult.ok().setData(matchProductSub);
+    }
+
+    /**
+     * 删除物资子项
+     *
+     * @param id id
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult removeMatchProductSub(Long id) {
+        this.deleteByPrimaryKey(id);
+        return ResponseResult.ok();
+    }
 }

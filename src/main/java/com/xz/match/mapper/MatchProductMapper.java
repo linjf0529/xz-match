@@ -3,6 +3,9 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchProduct;
 import com.xz.match.entity.MatchProductExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.vo.MatchStockVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +65,10 @@ public interface MatchProductMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchProduct record);
+
+    List<MatchProduct> findBy(Map<String, Object> params);
+
+    void updateToAddMatchStockByProductId(MatchStockVO matchStockVO);
+
+    int updateToMinusMatchStockByProductId(MatchStockVO matchStockVO);
 }

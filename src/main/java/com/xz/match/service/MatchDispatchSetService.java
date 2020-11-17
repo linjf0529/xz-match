@@ -54,7 +54,7 @@ public interface MatchDispatchSetService{
      * @param params    参数个数
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchDispatchSet( Map<String, Object> params);
+    ResponseResult findMatchDispatchSet(PageParam pageParam, Map<String, Object> params);
     /**
      * 添加发放人员配置
      *

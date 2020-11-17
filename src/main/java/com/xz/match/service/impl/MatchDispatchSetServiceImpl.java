@@ -103,8 +103,8 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchDispatchSet(Map<String, Object> params) {
-        PageHelper.startPage(2, 2);
+    public ResponseResult findMatchDispatchSet(PageParam pageParam,Map<String, Object> params) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
         List<MatchDispatchSet> matchDispatchSets = this.matchDispatchSetMapper.findBy(params);
         return ResponseResult.ok().setData(new PageInfo<>(matchDispatchSets));
     }

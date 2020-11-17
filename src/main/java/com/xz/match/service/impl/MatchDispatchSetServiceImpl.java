@@ -1,5 +1,6 @@
 package com.xz.match.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
@@ -98,13 +99,12 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
      * 找到发放人员配置
      *
      *
-     * @param pageParam
      * @param params    参数个数
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchDispatchSet(PageParam pageParam, Map<String, Object> params) {
-        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+    public ResponseResult findMatchDispatchSet(Map<String, Object> params) {
+        PageHelper.startPage(2, 2);
         List<MatchDispatchSet> matchDispatchSets = this.matchDispatchSetMapper.findBy(params);
         return ResponseResult.ok().setData(new PageInfo<>(matchDispatchSets));
     }

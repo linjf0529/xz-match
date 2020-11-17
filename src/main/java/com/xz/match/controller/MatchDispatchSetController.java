@@ -1,8 +1,16 @@
 package com.xz.match.controller;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alibaba.fastjson.JSONObject;
+import com.xz.match.entity.vo.MatchDispatchSetVO;
+import com.xz.match.service.MatchDispatchSetService;
+import com.xz.match.utils.ResponseResult;
+import com.xz.match.utils.exception.CommonException;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 发放人员配置表facade
@@ -12,91 +20,74 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/matchs/config")
-@Slf4j
-public class MatchDispatchSetController{
+public class MatchDispatchSetController extends BaseController{
+    @Resource
+    private MatchDispatchSetService matchDispatchSetService;
 
-//    /**
-//     * 创建发放人员配置
-//     *
-//     * @param request 请求
-//     * @return {@link ResponseResult}
-//     * @throws BusinessException 业务异常
-//     */
-//    @PostMapping
-//    public ResponseResult createMatchDispatchSet(@RequestBody MatchDispatchSetVO matchDispatchSetVO, HttpServletRequest request){
-//        log.debug("~~~~~ post param = {}", JSON.toJSONString(matchDispatchSetVO));
-//        ValidateUtils.notNull(matchDispatchSetVO, MessageLocale.NOT_NULL);
-//        String authId = getCurrentAuthId(request);
-//        TenantUser tenantUser = tenantUserService.findTenantUserByAuthId(authId);
-//        if(ObjectUtils.isEmpty(tenantUser)){
-//            return ResponseResult.getResponse(UserMessageLocale.USER_NOT_ENTER);
-//        }else{
-//            matchDispatchSetVO.setTenantId(tenantUser.getTenantId());
-//        }
-//        return matchDispatchSetService.addMatchDispatchSet(matchDispatchSetVO);
-//    }
-//
-//
-//    /**
-//     * 删除发放人员配置
-//     *
-//     * @param id      id
-//     * @param request 请求
-//     * @return {@link ResponseResult}
-//     * @throws BusinessException 业务异常
-//     */
-//    @DeleteMapping("/{id:\\w+}")
-//    public ResponseResult deleteMatchDispatchSet(@PathVariable("id") String id, HttpServletRequest request) throws BusinessException{
-//        return matchDispatchSetService.removeMatchDispatchSet(id);
-//    }
-//
-//    /**
-//     * 编辑发放人员配置
-//     *
-//     * @param id      id
-//     * @param request 请求
-//     * @return {@link ResponseResult}
-//     * @throws BusinessException 业务异常
-//     */
-//    @PutMapping
-//    public ResponseResult editMatchDispatchSet(@RequestParam String id , HttpServletRequest request) throws BusinessException{
-//        return null;
-//    }
-//
-//    /**
-//     * 查询发放人员配置
-//     *
-//     * @param request 请求
-//     * @return {@link ResponseResult}
-//     * @throws BusinessException 业务异常
-//     */
-//    @GetMapping
-//    public ResponseResult queryMatchDispatchSet(HttpServletRequest request) throws BusinessException{
-//        JSONObject param = getJSONObject(request);
-//        String authId = getCurrentAuthId(request);
-//        TenantUser tenantUser = tenantUserService.findTenantUserByAuthId(authId);
-//        if(ObjectUtils.isEmpty(tenantUser)){
-//            return ResponseResult.getResponse(UserMessageLocale.USER_NOT_ENTER);
-//        }else{
-//            param.put("tenantId",tenantUser.getTenantId());
-//        }
-//        param.put("disabled",0);
-//        return matchDispatchSetService.findMatchDispatchSet(getPageParam(request),param);
-//    }
-//
-//    /**
-//     * 通过电话查询发放人员
-//     *
-//     * @param request 请求
-//     * @param mobile  移动
-//     * @return {@link ResponseResult}
-//     * @throws BusinessException 业务异常
-//     */
-//    @GetMapping("/{mobile:\\w+}")
-//    public ResponseResult queryMatchDispatchSetByPhone(@PathVariable("mobile") String mobile, HttpServletRequest request) throws BusinessException{
-//        Map param = Maps.newHashMap();
-//        param.put("mobile", mobile);
-//        param.put("disabled",0);
-//        return matchDispatchSetService.findMatchDispatchSetByPhone(param);
-//    }
+    /**
+     * 创建发放人员配置
+     *
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @PostMapping
+    public ResponseResult createMatchDispatchSet(@RequestBody MatchDispatchSetVO matchDispatchSetVO, HttpServletRequest request){
+        if(matchDispatchSetVO == null){
+            throw new CommonException("请求参数出错");
+        }
+        return matchDispatchSetService.addMatchDispatchSet(matchDispatchSetVO);
+    }
+
+
+    /**
+     * 删除发放人员配置
+     *
+     * @param id      id
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @DeleteMapping("/{id:\\w+}")
+    public ResponseResult deleteMatchDispatchSet(@PathVariable("id") Long id, HttpServletRequest request){
+        return matchDispatchSetService.removeMatchDispatchSet(id);
+    }
+
+    /**
+     * 编辑发放人员配置
+     *
+     * @param id      id
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @PutMapping
+    public ResponseResult editMatchDispatchSet(@RequestParam String id , HttpServletRequest request){
+        return null;
+    }
+
+    /**
+     * 查询发放人员配置
+     *
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @GetMapping
+    public ResponseResult queryMatchDispatchSet(HttpServletRequest request){
+        JSONObject param = getJSONObject(request);
+        param.put("disabled",0);
+        return matchDispatchSetService.findMatchDispatchSet(getPageParam(request),param);
+    }
+
+    /**
+     * 通过电话查询发放人员
+     *
+     * @param request 请求
+     * @param mobile  移动
+     * @return {@link ResponseResult}
+     */
+    @GetMapping("/{mobile:\\w+}")
+    public ResponseResult queryMatchDispatchSetByPhone(@PathVariable("mobile") String mobile, HttpServletRequest request){
+        Map param = new HashMap();
+        param.put("mobile", mobile);
+        param.put("disabled",0);
+        return matchDispatchSetService.findMatchDispatchSetByPhone(param);
+    }
 }

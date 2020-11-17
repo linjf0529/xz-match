@@ -375,4 +375,44 @@
       updatedBy = #{updatedBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.MatchDispatchSet">
+        <include refid="listSQL"/>
+    </select>
+
+
+    <sql id="listSQL">
+        SELECT * FROM  match_dispatch_set
+        <where>
+            <include refid="condition_sql" />
+        </where>
+        ORDER BY createdTime ASC
+    </sql>
+
+    <sql id="condition_sql">
+        <trim prefixOverrides="AND | OR">
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="tenantId != null">
+                AND tenantId = #{tenantId}
+            </if>
+            <if test="name != null">
+                AND `name` = #{name}
+            </if>
+            <if test="mobile != null">
+                AND mobile = #{mobile}
+            </if>
+            <if test="permission != null">
+                AND permission = #{permission}
+            </if>
+            <if test="remark != null">
+                AND remark = #{remark}
+            </if>
+            <if test="disabled != null">
+                AND disabled = #{disabled}
+            </if>
+        </trim>
+    </sql>
 </mapper>

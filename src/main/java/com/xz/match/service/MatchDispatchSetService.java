@@ -1,9 +1,15 @@
 package com.xz.match.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.MatchDispatchSet;
 import com.xz.match.entity.MatchDispatchSetExample;
-    /**
+import com.xz.match.entity.vo.MatchDispatchSetVO;
+import com.xz.match.utils.PageParam;
+import com.xz.match.utils.ResponseResult;
+
+/**
  *
  * @author chenwf
  * @date 2020/11/16
@@ -32,5 +38,38 @@ public interface MatchDispatchSetService{
     int updateByPrimaryKeySelective(MatchDispatchSet record);
 
     int updateByPrimaryKey(MatchDispatchSet record);
+
+    /**
+     * 通过电话查询发放人员配置
+     *
+     * @param param 参数
+     * @return {@link ResponseResult}
+
+     */
+    ResponseResult findMatchDispatchSetByPhone(Map<String, Object> param);
+
+    /**
+     * 找到发放人员配置
+     *
+     * @param pageParam
+     * @param params    参数个数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchDispatchSet(PageParam pageParam, Map<String, Object> params);
+    /**
+     * 添加发放人员配置
+     *
+     * @param matchDispatchSetVO 发放人员配置VO
+     * @return {@link ResponseResult}
+     */
+    ResponseResult addMatchDispatchSet(MatchDispatchSetVO matchDispatchSetVO);
+
+    /**
+     * 删除发放人员配置
+     *
+     * @param id id
+     * @return {@link ResponseResult}
+     */
+    ResponseResult removeMatchDispatchSet(Long id);
 
 }

@@ -3,6 +3,8 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchDispatchSet;
 import com.xz.match.entity.MatchDispatchSetExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +64,6 @@ public interface MatchDispatchSetMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchDispatchSet record);
+
+    List<MatchDispatchSet> findBy(Map param);
 }

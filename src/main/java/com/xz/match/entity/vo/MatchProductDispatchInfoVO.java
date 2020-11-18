@@ -1,5 +1,7 @@
 package com.xz.match.entity.vo;
 
+import com.xz.match.entity.SignRecord;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +23,11 @@ public class MatchProductDispatchInfoVO implements Serializable {
      */
     private MatchProductReceiveSetVO signRecordInfo;
 
+    /**
+     * 报名表
+     */
+    private SignRecord signRecord;
+
     public MatchProductDispatchInfoVO() {
     }
 
@@ -38,6 +45,14 @@ public class MatchProductDispatchInfoVO implements Serializable {
 
     public void setSignRecordInfo(MatchProductReceiveSetVO signRecordInfo) {
         this.signRecordInfo = signRecordInfo;
+    }
+
+    public SignRecord getSignRecord() {
+        return signRecord;
+    }
+
+    public void setSignRecord(SignRecord signRecord) {
+        this.signRecord = signRecord;
     }
 
     @Override

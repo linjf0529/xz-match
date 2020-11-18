@@ -7,7 +7,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/17
+ * @date 2020/11/18
  */  
 public class SignRecordExample {
     protected String orderByClause;
@@ -3077,6 +3077,76 @@ public class SignRecordExample {
 
         public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("`status` not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicIsNull() {
+            addCriterion("signPic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicIsNotNull() {
+            addCriterion("signPic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicEqualTo(String value) {
+            addCriterion("signPic =", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicNotEqualTo(String value) {
+            addCriterion("signPic <>", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicGreaterThan(String value) {
+            addCriterion("signPic >", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicGreaterThanOrEqualTo(String value) {
+            addCriterion("signPic >=", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicLessThan(String value) {
+            addCriterion("signPic <", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicLessThanOrEqualTo(String value) {
+            addCriterion("signPic <=", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicLike(String value) {
+            addCriterion("signPic like", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicNotLike(String value) {
+            addCriterion("signPic not like", value, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicIn(List<String> values) {
+            addCriterion("signPic in", values, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicNotIn(List<String> values) {
+            addCriterion("signPic not in", values, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicBetween(String value1, String value2) {
+            addCriterion("signPic between", value1, value2, "signPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignPicNotBetween(String value1, String value2) {
+            addCriterion("signPic not between", value1, value2, "signPic");
             return (Criteria) this;
         }
     }

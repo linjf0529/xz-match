@@ -1,29 +1,30 @@
 package com.xz.match.service.impl;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.*;
 import com.xz.match.service.SignRecordFieldTableService;
 import com.xz.match.service.UserInfoService;
+import com.xz.match.service.WsossService;
+import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.SignRecordFieldUtils;
-import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.enums.OrderChannel;
 import com.xz.match.utils.enums.Sex;
-import com.xz.match.utils.enums.SubjectType;
 import com.xz.match.utils.excel.Tuple;
 import com.xz.match.utils.exception.CommonException;
+import com.xz.match.utils.file.FSConstants;
+import com.xz.match.utils.file.Image;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 import com.xz.match.mapper.SignRecordMapper;
 import com.xz.match.service.SignRecordService;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 /**
  * @author chenwf
@@ -39,6 +40,8 @@ public class SignRecordServiceImpl implements SignRecordService {
     private UserInfoService userInfoService;
     @Resource
     private SignRecordFieldTableService signRecordFieldTableService;
+    @Resource
+    private WsossService wsossService;
 
     @Override
     public long countByExample(SignRecordExample example) {
@@ -161,12 +164,12 @@ public class SignRecordServiceImpl implements SignRecordService {
             signRecord.setReview(0);                                     //
             signRecord.setAvailable(1);                                  // 是否可用
             signRecord.setExpenses(0L);
-            user = userInfoService.saveUser(signRecord.getPhone(), signRecord.getCertificateNo(),signRecord.getName());
+            user = userInfoService.saveUser(signRecord.getPhone(), signRecord.getCertificateNo(), signRecord.getName());
             signRecord.setMemberType(0);
             signRecord.setOrderId(autoOrderId());
             signRecord.setOrderNo(signRecord.getOrderId());
             // 校验重复报名
-            checkDuplicate(matchSubject, signRecord,null);
+            checkDuplicate(matchSubject, signRecord, null);
             signRecord.setUserId(user.getId());
             insertSelective(signRecord);
 
@@ -192,11 +195,11 @@ public class SignRecordServiceImpl implements SignRecordService {
 
     private void checkDuplicate(MatchSubject matchSubject, SignRecord signRecord, Object o) {
         JSONObject param = new JSONObject();
-        param.put("certificateNo",signRecord.getCertificateNo());
-        param.put("subjectId",signRecord.getSubjectId());
+        param.put("certificateNo", signRecord.getCertificateNo());
+        param.put("subjectId", signRecord.getSubjectId());
         List<SignRecord> signRecords = findBy(param);
-        if(!signRecords.isEmpty()){
-            throw new CommonException("相同的证件号码已报名该赛事:"+signRecord.getCertificateNo());
+        if (!signRecords.isEmpty()) {
+            throw new CommonException("相同的证件号码已报名该赛事:" + signRecord.getCertificateNo());
         }
     }
 
@@ -212,7 +215,42 @@ public class SignRecordServiceImpl implements SignRecordService {
         int x = (rand.nextInt(900) + 100);
         return DateUtil.format(new Date(), "yyMMddHHmmssSSS") + x;
     }
+
+    /**
+     * 物资领取完，签字
+     *  @param recordId
+     * @param picData
+     */
+    @Override
+    public ResponseResult uploadSignPic(Long recordId, String picData) {
+        SignRecord signRecord = this.selectByPrimaryKey(recordId);
+        if(signRecord == null){
+            throw new CommonException("未找到该选手");
+        }
+        if(signRecord.getStatus() != 1){
+            throw new CommonException("物资未全部领取");
+        }
+        if(StringUtils.isNotEmpty(signRecord.getSignPic())){
+            throw new CommonException("您已签字");
+        }
+        String imageName = StringUtils.getUUID() + ".png";
+        // 指定上传文件夹
+        String fileKeyWithFolder = "xz-match/"+imageName;
+        ResponseResult responseResult = wsossService.uploadImage(Base64.decode(picData), imageName, FSConstants.WSOSS_BUCKET_NAME_DEFAULT, fileKeyWithFolder);
+        if(responseResult.isSuccess()){
+            Image image = JSONObject.parseObject(JSONObject.toJSONString(responseResult.getData()),Image.class);
+            if(image != null){
+                SignRecord update = new SignRecord();
+                update.setId(recordId);
+                update.setSignPic(image.getImageUrl());
+                this.updateByPrimaryKeySelective(update);
+                return ResponseResult.ok();
+            }
+        }
+        return ResponseResult.fail("上传失败");
+    }
 }
+
 
 
 

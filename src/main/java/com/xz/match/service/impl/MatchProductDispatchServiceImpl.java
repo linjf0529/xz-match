@@ -118,14 +118,15 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
     @Override
     public ResponseResult findMatchProductDispatch(Long recordId, Long subjectId)  {
         // 赛事报名信息
+        SignRecord signRecord = signRecordService.selectByPrimaryKey(recordId);
         Map paramMap = new HashMap();
         paramMap.put("recordId", recordId);
         List<SignRecordFieldTable> signRecordFieldTables = signRecordFieldTableService.findBy(paramMap);
 
         // 物资领取信息
         MatchProductReceiveSet matchProductReceiveSet = matchProductReceiveSetMapper.selectMatchProductReceiveSetBySubjectId(subjectId);
-
         MatchProductDispatchInfoVO matchProductDispatchInfoVO = new MatchProductDispatchInfoVO();
+        matchProductDispatchInfoVO.setSignRecord(signRecord);
         // 比对物资领取配置信息，方便对APP物资领取信息页面控制
         MatchProductReceiveSetVO matchProductReceiveSetVO = new MatchProductReceiveSetVO();
         ValidateUtils.notNull(matchProductReceiveSet, "物资领取信息未配置");
@@ -142,7 +143,7 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
                     }
                 }
             }
-            matchProductReceiveSetVO.setSignRecordFieldTables(signRecordFieldTableList);
+            signRecord.setSignRecordInfo(signRecordFieldTableList);
             // 1、物资发放信息
             matchProductDispatchInfoVO.setSignRecordInfo(matchProductReceiveSetVO);
         }
@@ -158,6 +159,14 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
                     matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
                 }
             }
+            Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
+            if(matchProductDispatchVO.getId() == null){
+                grantButton = 1;
+                if(Integer.parseInt(matchProductDispatchVO.getStockNumber()) == 0){
+                    grantButton = 2;
+                }
+            }
+            matchProductDispatchVO.setGrantButton(grantButton);
         }
         matchProductDispatchInfoVO.setMatchProductList(MatchProductDispatchVOList);
         return ResponseResult.ok().setData(matchProductDispatchInfoVO);

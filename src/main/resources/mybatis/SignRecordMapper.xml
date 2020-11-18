@@ -51,6 +51,7 @@
     <result column="separateAccountsTime" jdbcType="BIGINT" property="separateAccountsTime" />
     <result column="identityCheck" jdbcType="INTEGER" property="identityCheck" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="signPic" jdbcType="VARCHAR" property="signPic" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -119,7 +120,7 @@
     paymentTime, receive, couponId, couponAmount, confirmPay, refundAmount, locked, version, 
     lastAccess, creatorId, createdBy, createdTime, updaterId, updatedBy, available, subjectName, 
     matchName, orderNo, invitationCode, signIn, expenses, memberType, matchNo, gradeNo, 
-    separateAccounts, separateAccountsTime, identityCheck, `status`
+    separateAccounts, separateAccountsTime, identityCheck, `status`, signPic
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.SignRecordExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -171,8 +172,8 @@
       matchName, orderNo, invitationCode, 
       signIn, expenses, memberType, 
       matchNo, gradeNo, separateAccounts, 
-      separateAccountsTime, identityCheck, `status`
-      )
+      separateAccountsTime, identityCheck, `status`, 
+      signPic)
     values (#{tenantId,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, 
       #{subjectId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{joinUserId,jdbcType=VARCHAR}, 
       #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
@@ -187,8 +188,8 @@
       #{matchName,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{invitationCode,jdbcType=VARCHAR}, 
       #{signIn,jdbcType=BOOLEAN}, #{expenses,jdbcType=BIGINT}, #{memberType,jdbcType=TINYINT}, 
       #{matchNo,jdbcType=VARCHAR}, #{gradeNo,jdbcType=INTEGER}, #{separateAccounts,jdbcType=BOOLEAN}, 
-      #{separateAccountsTime,jdbcType=BIGINT}, #{identityCheck,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
-      )
+      #{separateAccountsTime,jdbcType=BIGINT}, #{identityCheck,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{signPic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.SignRecord" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -332,6 +333,9 @@
       <if test="status != null">
         `status`,
       </if>
+      <if test="signPic != null">
+        signPic,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="tenantId != null">
@@ -471,6 +475,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="signPic != null">
+        #{signPic,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -626,6 +633,9 @@
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.signPic != null">
+        signPic = #{record.signPic,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -680,7 +690,8 @@
       separateAccounts = #{record.separateAccounts,jdbcType=BOOLEAN},
       separateAccountsTime = #{record.separateAccountsTime,jdbcType=BIGINT},
       identityCheck = #{record.identityCheck,jdbcType=INTEGER},
-      `status` = #{record.status,jdbcType=INTEGER}
+      `status` = #{record.status,jdbcType=INTEGER},
+      signPic = #{record.signPic,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -827,6 +838,9 @@
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
       </if>
+      <if test="signPic != null">
+        signPic = #{signPic,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -878,7 +892,8 @@
       separateAccounts = #{separateAccounts,jdbcType=BOOLEAN},
       separateAccountsTime = #{separateAccountsTime,jdbcType=BIGINT},
       identityCheck = #{identityCheck,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=INTEGER}
+      `status` = #{status,jdbcType=INTEGER},
+      signPic = #{signPic,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

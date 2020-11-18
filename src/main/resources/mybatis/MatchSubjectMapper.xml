@@ -218,4 +218,25 @@
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.MatchSubject">
+      select * from match_info a
+      inner join match_subject b on a.id = b.matchId
+      <where>
+        <include refid="condition_sql" />
+      </where>
+      ORDER BY b.matchId desc,b.id desc
+    </select>
+
+    <sql id="condition_sql">
+		<trim prefixOverrides="AND | OR">
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="subjectId != null">
+				AND matchId = #{matchId}
+			</if>
+		</trim>
+	</sql>
+
 </mapper>

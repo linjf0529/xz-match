@@ -1,5 +1,6 @@
 package com.xz.match.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchSubject;
 import com.xz.match.entity.MatchSubjectExample;
 import java.util.List;
@@ -62,4 +63,6 @@ public interface MatchSubjectMapper {
      * @return update count
      */
     int updateByPrimaryKey(MatchSubject record);
+
+    List<MatchSubject> findBy(JSONObject param);
 }

@@ -1,8 +1,11 @@
 package com.xz.match.service;
 
 import java.util.List;
+
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchSubjectExample;
 import com.xz.match.entity.MatchSubject;
+import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 
 /**
@@ -35,5 +38,7 @@ public interface MatchSubjectService{
 
     int updateByPrimaryKey(MatchSubject record);
 
-        ResponseResult findSubjectByMatchId(Long matchId);
-    }
+    ResponseResult findSubjectByMatchId(Long matchId);
+
+    ResponseResult allSubject(PageParam pageParam, JSONObject param);
+}

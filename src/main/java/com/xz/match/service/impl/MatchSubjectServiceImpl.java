@@ -1,5 +1,9 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -87,5 +91,12 @@ public class MatchSubjectServiceImpl implements MatchSubjectService{
         MatchSubjectExample matchSubjectExample = new MatchSubjectExample();
         matchSubjectExample.createCriteria().andMatchIdEqualTo(matchId);
         return ResponseResult.ok().setData(this.selectByExample(matchSubjectExample));
+    }
+
+    @Override
+    public ResponseResult allSubject(PageParam pageParam, JSONObject param) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<MatchSubject> matchSubjects = matchSubjectMapper.findBy(param);
+        return ResponseResult.ok().setData(new PageInfo<>(matchSubjects));
     }
 }

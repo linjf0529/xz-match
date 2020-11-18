@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
+ * @date 2020/11/18
  */  
 public class MatchSubjectExample {
     protected String orderByClause;
@@ -226,6 +226,76 @@ public class MatchSubjectExample {
 
         public Criteria andMatchIdNotBetween(Long value1, Long value2) {
             addCriterion("matchId not between", value1, value2, "matchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameIsNull() {
+            addCriterion("matchName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameIsNotNull() {
+            addCriterion("matchName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameEqualTo(String value) {
+            addCriterion("matchName =", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameNotEqualTo(String value) {
+            addCriterion("matchName <>", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameGreaterThan(String value) {
+            addCriterion("matchName >", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameGreaterThanOrEqualTo(String value) {
+            addCriterion("matchName >=", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameLessThan(String value) {
+            addCriterion("matchName <", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameLessThanOrEqualTo(String value) {
+            addCriterion("matchName <=", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameLike(String value) {
+            addCriterion("matchName like", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameNotLike(String value) {
+            addCriterion("matchName not like", value, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameIn(List<String> values) {
+            addCriterion("matchName in", values, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameNotIn(List<String> values) {
+            addCriterion("matchName not in", values, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameBetween(String value1, String value2) {
+            addCriterion("matchName between", value1, value2, "matchName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMatchNameNotBetween(String value1, String value2) {
+            addCriterion("matchName not between", value1, value2, "matchName");
             return (Criteria) this;
         }
 

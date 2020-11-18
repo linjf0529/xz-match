@@ -9,11 +9,10 @@ import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
-public interface MatchSubjectService{
+ */
+public interface MatchSubjectService {
 
 
     long countByExample(MatchSubjectExample example);
@@ -30,9 +29,9 @@ public interface MatchSubjectService{
 
     MatchSubject selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(MatchSubject record,MatchSubjectExample example);
+    int updateByExampleSelective(MatchSubject record, MatchSubjectExample example);
 
-    int updateByExample(MatchSubject record,MatchSubjectExample example);
+    int updateByExample(MatchSubject record, MatchSubjectExample example);
 
     int updateByPrimaryKeySelective(MatchSubject record);
 
@@ -42,3 +41,4 @@ public interface MatchSubjectService{
 
     ResponseResult allSubject(PageParam pageParam, JSONObject param);
 }
+

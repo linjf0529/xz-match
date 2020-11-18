@@ -15,13 +15,12 @@ import com.xz.match.service.MatchSubjectService;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
-public class MatchSubjectServiceImpl implements MatchSubjectService{
+public class MatchSubjectServiceImpl implements MatchSubjectService {
 
     @Resource
     private MatchSubjectMapper matchSubjectMapper;
@@ -62,13 +61,13 @@ public class MatchSubjectServiceImpl implements MatchSubjectService{
     }
 
     @Override
-    public int updateByExampleSelective(MatchSubject record,MatchSubjectExample example) {
-        return matchSubjectMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(MatchSubject record, MatchSubjectExample example) {
+        return matchSubjectMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(MatchSubject record,MatchSubjectExample example) {
-        return matchSubjectMapper.updateByExample(record,example);
+    public int updateByExample(MatchSubject record, MatchSubjectExample example) {
+        return matchSubjectMapper.updateByExample(record, example);
     }
 
     @Override
@@ -83,6 +82,7 @@ public class MatchSubjectServiceImpl implements MatchSubjectService{
 
     /**
      * 赛事对应科目
+     *
      * @param matchId
      * @return
      */
@@ -95,8 +95,9 @@ public class MatchSubjectServiceImpl implements MatchSubjectService{
 
     @Override
     public ResponseResult allSubject(PageParam pageParam, JSONObject param) {
-        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
         List<MatchSubject> matchSubjects = matchSubjectMapper.findBy(param);
         return ResponseResult.ok().setData(new PageInfo<>(matchSubjects));
     }
 }
+

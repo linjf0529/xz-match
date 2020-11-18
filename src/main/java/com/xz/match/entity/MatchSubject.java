@@ -1,24 +1,28 @@
 package com.xz.match.entity;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/18
+ */
 public class MatchSubject {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 赛事id
-    */
+     * 赛事id
+     */
     private Long matchId;
 
     /**
-    * 科目名称
-    */
+     * 赛事名称
+     */
+    private String matchName;
+
+    /**
+     * 科目名称
+     */
     private String subjectName;
 
     private Long lastAccess;
@@ -39,6 +43,14 @@ public class MatchSubject {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
     }
 
     public String getSubjectName() {

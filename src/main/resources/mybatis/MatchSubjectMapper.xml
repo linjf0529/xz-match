@@ -6,6 +6,7 @@
     <!--@Table match_subject-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="matchId" jdbcType="BIGINT" property="matchId" />
+    <result column="matchName" jdbcType="VARCHAR" property="matchName" />
     <result column="subjectName" jdbcType="VARCHAR" property="subjectName" />
     <result column="lastAccess" jdbcType="BIGINT" property="lastAccess" />
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, matchId, subjectName, lastAccess, createdTime
+    id, matchId, matchName, subjectName, lastAccess, createdTime
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.MatchSubjectExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -110,10 +111,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchSubject" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into match_subject (matchId, subjectName, lastAccess, 
-      createdTime)
-    values (#{matchId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{lastAccess,jdbcType=BIGINT}, 
-      #{createdTime,jdbcType=BIGINT})
+    insert into match_subject (matchId, matchName, subjectName, 
+      lastAccess, createdTime)
+    values (#{matchId,jdbcType=BIGINT}, #{matchName,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR}, 
+      #{lastAccess,jdbcType=BIGINT}, #{createdTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchSubject" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -121,6 +122,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="matchId != null">
         matchId,
+      </if>
+      <if test="matchName != null">
+        matchName,
       </if>
       <if test="subjectName != null">
         subjectName,
@@ -135,6 +139,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="matchId != null">
         #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="matchName != null">
+        #{matchName,jdbcType=VARCHAR},
       </if>
       <if test="subjectName != null">
         #{subjectName,jdbcType=VARCHAR},
@@ -164,6 +171,9 @@
       <if test="record.matchId != null">
         matchId = #{record.matchId,jdbcType=BIGINT},
       </if>
+      <if test="record.matchName != null">
+        matchName = #{record.matchName,jdbcType=VARCHAR},
+      </if>
       <if test="record.subjectName != null">
         subjectName = #{record.subjectName,jdbcType=VARCHAR},
       </if>
@@ -183,6 +193,7 @@
     update match_subject
     set id = #{record.id,jdbcType=BIGINT},
       matchId = #{record.matchId,jdbcType=BIGINT},
+      matchName = #{record.matchName,jdbcType=VARCHAR},
       subjectName = #{record.subjectName,jdbcType=VARCHAR},
       lastAccess = #{record.lastAccess,jdbcType=BIGINT},
       createdTime = #{record.createdTime,jdbcType=BIGINT}
@@ -196,6 +207,9 @@
     <set>
       <if test="matchId != null">
         matchId = #{matchId,jdbcType=BIGINT},
+      </if>
+      <if test="matchName != null">
+        matchName = #{matchName,jdbcType=VARCHAR},
       </if>
       <if test="subjectName != null">
         subjectName = #{subjectName,jdbcType=VARCHAR},
@@ -213,6 +227,7 @@
     <!--@mbg.generated-->
     update match_subject
     set matchId = #{matchId,jdbcType=BIGINT},
+      matchName = #{matchName,jdbcType=VARCHAR},
       subjectName = #{subjectName,jdbcType=VARCHAR},
       lastAccess = #{lastAccess,jdbcType=BIGINT},
       createdTime = #{createdTime,jdbcType=BIGINT}

@@ -1,16 +1,14 @@
 package com.xz.match.mapper;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xz.match.entity.MatchSubject;
+import com.alibaba.fastjson.JSONObject;import com.xz.match.entity.MatchSubject;
 import com.xz.match.entity.MatchSubjectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/18
+ */
 public interface MatchSubjectMapper {
     long countByExample(MatchSubjectExample example);
 
@@ -18,6 +16,7 @@ public interface MatchSubjectMapper {
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -25,6 +24,7 @@ public interface MatchSubjectMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -32,6 +32,7 @@ public interface MatchSubjectMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -41,6 +42,7 @@ public interface MatchSubjectMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -52,6 +54,7 @@ public interface MatchSubjectMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -59,6 +62,7 @@ public interface MatchSubjectMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

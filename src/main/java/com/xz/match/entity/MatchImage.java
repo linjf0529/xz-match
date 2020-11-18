@@ -38,6 +38,8 @@ public class MatchImage {
     */
     private Long createdTime;
 
+    private Integer sort;
+
     public Long getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class MatchImage {
 
     public void setCreatedTime(Long createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

@@ -3,6 +3,9 @@ package com.xz.match.mapper;
 import com.xz.match.entity.ReserveInfo;
 import com.xz.match.entity.ReserveInfoExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.vo.ReserveInfoVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +65,11 @@ public interface ReserveInfoMapper {
      * @return update count
      */
     int updateByPrimaryKey(ReserveInfo record);
+
+    /**
+     * 查询预约时段记录
+     * @param map
+     * @return
+     */
+    List<ReserveInfoVO> findBy(Map<String,Object> map);
 }

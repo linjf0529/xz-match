@@ -265,4 +265,20 @@
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.ReserveSublist">
+        select * from reserve_sublist
+        <where>
+          <include refid="condition_sql" />
+        </where>
+        order createdTime desc
+  </select>
+
+    <sql id="condition_sql">
+      <trim prefixOverrides="AND | OR">
+        <if test="reserveId != null">
+          AND reserveId = #{reserveId}
+        </if>
+      </trim>
+    </sql>
 </mapper>

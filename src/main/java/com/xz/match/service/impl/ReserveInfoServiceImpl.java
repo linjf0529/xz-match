@@ -1,9 +1,17 @@
 package com.xz.match.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xz.match.entity.vo.ReserveInfoVO;
+import com.xz.match.entity.vo.SignRecordScoreVO;
+import com.xz.match.utils.PageParam;
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.entity.ReserveInfo;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.ReserveInfoExample;
 import com.xz.match.mapper.ReserveInfoMapper;
 import com.xz.match.service.ReserveInfoService;
@@ -74,6 +82,13 @@ public class ReserveInfoServiceImpl implements ReserveInfoService{
     @Override
     public int updateByPrimaryKey(ReserveInfo record) {
         return reserveInfoMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public ResponseResult findBy(PageParam pageParam, Map<String, Object> param) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<ReserveInfoVO> reserveInfoVOS = reserveInfoMapper.findBy(param);
+        return ResponseResult.ok().setData(new PageInfo<>(reserveInfoVOS));
     }
 
 }

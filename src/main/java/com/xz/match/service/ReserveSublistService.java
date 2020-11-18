@@ -2,6 +2,8 @@ package com.xz.match.service;
 
 import com.xz.match.entity.ReserveSublistExample;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.ReserveSublist;
     /**
  *
@@ -33,4 +35,5 @@ public interface ReserveSublistService{
 
     int updateByPrimaryKey(ReserveSublist record);
 
+    List<ReserveSublist> findBy(Map<String,Object> map);
 }

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.entity.ReserveSublistExample;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.mapper.ReserveSublistMapper;
 import com.xz.match.entity.ReserveSublist;
 import com.xz.match.service.ReserveSublistService;
@@ -74,6 +76,11 @@ public class ReserveSublistServiceImpl implements ReserveSublistService{
     @Override
     public int updateByPrimaryKey(ReserveSublist record) {
         return reserveSublistMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<ReserveSublist> findBy(Map<String, Object> map) {
+        return reserveSublistMapper.findBy(map);
     }
 
 }

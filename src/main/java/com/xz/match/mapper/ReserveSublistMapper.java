@@ -3,6 +3,8 @@ package com.xz.match.mapper;
 import com.xz.match.entity.ReserveSublist;
 import com.xz.match.entity.ReserveSublistExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -62,4 +64,11 @@ public interface ReserveSublistMapper {
      * @return update count
      */
     int updateByPrimaryKey(ReserveSublist record);
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    List<ReserveSublist> findBy(Map<String,Object> map);
 }

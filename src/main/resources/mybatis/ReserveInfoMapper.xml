@@ -298,4 +298,30 @@
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.ReserveInfoVO">
+    SELECT
+        i.*,
+        s.id AS subListId,
+        s.reserveLimit,
+        s.reserveNumber,
+        concat( i.reserveDate, ' ', s.startTime, '-', s.endTime ) AS reserveDateTime
+    FROM
+        reserve_info i
+        INNER JOIN reserve_sublist s ON i.id = s.reserveId
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    order i.createdTime desc
+  </select>
+
+  <sql id="condition_sql">
+    <trim prefixOverrides="AND | OR">
+      <if test="matchId != null">
+        AND i.matchId = #{matchId}
+      </if>
+      <if test="subjectId != null">
+        AND i.subjectId = #{subjectId}
+      </if>
+    </trim>
+  </sql>
 </mapper>

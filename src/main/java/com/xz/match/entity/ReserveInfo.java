@@ -52,6 +52,10 @@ public class ReserveInfo {
     * 创建时间
     */
     private Long createdTime;
+    /**
+     * 时间段
+     */
+    private ReserveSublist sublist;
 
     public Long getId() {
         return id;
@@ -131,5 +135,13 @@ public class ReserveInfo {
 
     public void setCreatedTime(Long createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public ReserveSublist getSublist() {
+        return sublist;
+    }
+
+    public void setSublist(ReserveSublist sublist) {
+        this.sublist = sublist;
     }
 }

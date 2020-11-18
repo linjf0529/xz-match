@@ -209,7 +209,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             throw new CommonException("未找到该选手的报名信息");
         }
         StringBuffer sb = new StringBuffer();
-        sb.append("www.baidu.com");
+        sb.append("http://192.168.100.9:8080/#/suppliesIssue");
         sb.append("?subjectId="+subjectId);
         sb.append("&recordId="+signRecords.get(0).getId());
         CodeUtils.creatRrCode(sb.toString(),250,250,response);

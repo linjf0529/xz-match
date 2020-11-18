@@ -1,6 +1,7 @@
 package com.xz.match.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -246,6 +247,17 @@ public class SignRecord {
      * 参赛人员物资发放状态：，2-部分发放，1-已发放，0-未发放
      */
     private Integer status;
+
+    private List<SignRecordFieldTable> signRecordInfo;
+
+    public List<SignRecordFieldTable> getSignRecordInfo() {
+        return signRecordInfo;
+    }
+
+    public void setSignRecordInfo(List<SignRecordFieldTable> signRecordInfo) {
+        this.signRecordInfo = signRecordInfo;
+    }
+
 
     public Long getId() {
         return id;

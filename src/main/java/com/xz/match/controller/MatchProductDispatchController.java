@@ -70,20 +70,15 @@ public class MatchProductDispatchController extends BaseController{
 //        param.put("subjectId", "d275a322f26d11eaaa7cfa163eba29ed");
 //        param.put("isPass", true);
 //        param.put("review", 1);
-        List<MatchSignRecordVO> matchSignRecordesList = new ArrayList<>();
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<SignRecord> dataList = signRecordService.findBy(param);
-
-        for(SignRecord signRecord:dataList){
-            MatchSignRecordVO matchSignRecordVO = new MatchSignRecordVO();
-            BeanUtils.copyProperties(signRecord, matchSignRecordVO);
+        PageInfo<SignRecord> pageInfo = new PageInfo<SignRecord>(dataList);
+        for(SignRecord signRecord:pageInfo.getList()){
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put("recordId", signRecord.getId());
             List<SignRecordFieldTable> recordFieldTables = signRecordFieldTableService.findBy(paramMap);
-            matchSignRecordVO.setSignRecordInfo(recordFieldTables);
-            matchSignRecordesList.add(matchSignRecordVO);
+            signRecord.setSignRecordInfo(recordFieldTables);
         }
-        PageInfo<MatchSignRecordVO> pageInfo = new PageInfo<MatchSignRecordVO>(matchSignRecordesList);
         return ResponseResult.ok().setData(pageInfo);
     }
 

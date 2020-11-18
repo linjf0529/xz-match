@@ -43,7 +43,7 @@ public class ExceptionHandlerAdvice {
      * @return the result
      */
     @ExceptionHandler(CommonException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseResult handleException(CommonException e) {
         if (e.getErrorClass() != null) {
             final Logger logger = LoggerFactory.getLogger(e.getErrorClass());

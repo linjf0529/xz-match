@@ -6,6 +6,7 @@ import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -23,13 +24,10 @@ import java.io.PrintWriter;
  */
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
-    @Bean
-    public RedisClient getRedisClient() {
-        return redisClient;
-    }
-
-    @Resource
+    @Autowired
     private RedisClient redisClient;
+
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

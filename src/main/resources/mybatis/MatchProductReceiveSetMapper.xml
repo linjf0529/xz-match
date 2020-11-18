@@ -456,7 +456,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMatchProductReceiveSetBySubjectId" parameterType="string" resultType="com.xz.match.entity.MatchProductReceiveSet">
+  <select id="selectMatchProductReceiveSetBySubjectId" parameterType="long" resultType="com.xz.match.entity.MatchProductReceiveSet">
         SELECT * FROM match_product_receive_set
         WHERE subjectId = #{subjectId}
     </select>

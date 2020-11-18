@@ -361,7 +361,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMatchProductSubByProductId" parameterType="string" resultType="com.xz.match.entity.MatchProductSub">
+  <select id="selectMatchProductSubByProductId" parameterType="long" resultType="com.xz.match.entity.MatchProductSub">
         SELECT * FROM match_product_sub
         WHERE disabled = 0 AND productId = #{productId}
     </select>

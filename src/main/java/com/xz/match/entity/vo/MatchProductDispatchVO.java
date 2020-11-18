@@ -25,6 +25,11 @@ public class MatchProductDispatchVO extends MatchProductDispatch {
      */
     private String stockNumber;
 
+    /**
+     * 发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
+     */
+    private Integer grantButton;
+
 
     private List<MatchProductSub> MatchProductSubList;
 
@@ -52,4 +57,11 @@ public class MatchProductDispatchVO extends MatchProductDispatch {
         MatchProductSubList = matchProductSubList;
     }
 
+    public Integer getGrantButton() {
+        return grantButton;
+    }
+
+    public void setGrantButton(Integer grantButton) {
+        this.grantButton = grantButton;
+    }
 }

@@ -10,6 +10,7 @@ import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,10 +36,11 @@ public class MatchScoreController extends BaseController{
     private SignRecordService signRecordService;
 
 
+    @AllowAnonymous
     @GetMapping("/record")
     public ResponseResult findSignRecordScore(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
-        return ResponseResult.ok().setData(matchScoreService.findSignRecordScore(getPageParam(request),param));
+        return matchScoreService.findSignRecordScore(getPageParam(request),param);
     }
     @GetMapping
     public ResponseResult getScore(HttpServletRequest request){

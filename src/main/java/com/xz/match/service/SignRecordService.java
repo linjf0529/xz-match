@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchSubject;
 import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
+import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.excel.Tuple;
 
 /**
@@ -45,6 +46,13 @@ public interface SignRecordService {
     void importMacthSignRecord(MatchSubject matchSubject, Tuple<List<JSONObject>, List<String>> result, Map<Tuple<String, String>, Integer> relation, JSONObject param);
 
     String autoOrderId();
+
+    /**
+     * 物资领取完，签字
+     * @param recordId
+     * @param picData
+     */
+    ResponseResult uploadSignPic(Long recordId, String picData);
 }
 
 

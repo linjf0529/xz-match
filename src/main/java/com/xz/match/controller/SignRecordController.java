@@ -11,19 +11,21 @@ import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.SignRecordFieldUtils;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
-import com.xz.match.utils.enums.SubjectType;
 import com.xz.match.utils.excel.ExcelUtils;
 import com.xz.match.utils.excel.Tuple;
 import com.xz.match.utils.exception.CommonException;
-import org.assertj.core.util.Maps;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -95,5 +97,16 @@ public class SignRecordController extends BaseController {
         signRecordService.importMacthSignRecord(matchSubject, result,relation,param);
 
         return ResponseResult.ok();
+    }
+
+
+    /**
+     * 物资领取完，签字
+     * @param json  base64
+     * @return
+     */
+    @PostMapping("/uploadSignPic")
+    public ResponseResult uploadSignPic(@RequestBody JSONObject json){
+        return signRecordService.uploadSignPic(json.getLong("recordId"),json.getString("picData"));
     }
 }

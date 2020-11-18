@@ -91,4 +91,8 @@ public class ResponseResult {
     public static ResponseResult getResponse(Integer code) {
         return (new ResponseResult(code)).setSuccess("F");
     }
+
+    public boolean isSuccess() {
+        return "T".equals(this.success);
+    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/17
+ * @date 2020/11/18
  */
 
 /**
@@ -244,9 +244,14 @@ public class SignRecord {
     private Integer identityCheck;
 
     /**
-     * 参赛人员物资发放状态：，2-部分发放，1-已发放，0-未发放
+     * 参赛人员物资发放状态：，2-部分发放，1-全部已发放，0-未发放
      */
     private Integer status;
+
+    /**
+     * 签字图片
+     */
+    private String signPic;
 
     private List<SignRecordFieldTable> signRecordInfo;
 
@@ -633,5 +638,13 @@ public class SignRecord {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getSignPic() {
+        return signPic;
+    }
+
+    public void setSignPic(String signPic) {
+        this.signPic = signPic;
     }
 }

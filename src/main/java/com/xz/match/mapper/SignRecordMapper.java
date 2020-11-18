@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * @author chenwf
- * @date 2020/11/17
+ * @date 2020/11/18
  */
 public interface SignRecordMapper {
     long countByExample(SignRecordExample example);

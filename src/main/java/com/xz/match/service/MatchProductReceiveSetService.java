@@ -78,4 +78,12 @@ public interface MatchProductReceiveSetService{
     ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId) ;
 
     void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
+
+    /**
+     * 下载赛事科目二维码
+     * @param subjectId
+     * @param matchId
+     * @param response
+     */
+    void downloadBarCode(Long subjectId, Long matchId, HttpServletResponse response);
 }

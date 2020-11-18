@@ -1,6 +1,7 @@
 package com.xz.match.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.chinanetcenter.api.util.EncodeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.*;
@@ -11,6 +12,7 @@ import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.constants.UrlConstants;
 import com.xz.match.utils.exception.CommonException;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +22,11 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -209,9 +216,31 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             throw new CommonException("未找到该选手的报名信息");
         }
         StringBuffer sb = new StringBuffer();
-        sb.append("http://192.168.100.9:8080/#/suppliesIssue");
+        sb.append(UrlConstants.MATCH_H5_HOST + "/suppliesIssue");
         sb.append("?subjectId="+subjectId);
         sb.append("&recordId="+signRecords.get(0).getId());
         CodeUtils.creatRrCode(sb.toString(),250,250,response);
+    }
+
+    /**
+     * 下载赛事科目二维码
+     *
+     * @param subjectId
+     * @param matchId
+     * @param response
+     */
+    @Override
+    public void downloadBarCode(Long subjectId, Long matchId, HttpServletResponse response) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(UrlConstants.MATCH_H5_HOST + "/home");
+        sb.append("?subjectId="+subjectId);
+        sb.append("&matchId="+matchId);
+        try {
+            response.setContentType("multipart/form-data");
+            response.setHeader("Content-Disposition", "attachment;filename=matchCode.png");
+            CodeUtils.creatRrCode(sb.toString(),500,500,response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

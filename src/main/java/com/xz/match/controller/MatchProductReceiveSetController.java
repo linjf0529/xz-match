@@ -67,7 +67,6 @@ public class MatchProductReceiveSetController extends BaseController{
     public ResponseResult editMatchProductReceiveSet(@RequestBody MatchProductReceiveSetVO matchProductReceiveSetVO, HttpServletRequest request)  {
         ValidateUtils.notNull(matchProductReceiveSetVO, "请求参数出错");
 
-
         return matchProductReceiveSetService.modifyMatchProductReceiveSet(matchProductReceiveSetVO);
     }
 
@@ -94,5 +93,18 @@ public class MatchProductReceiveSetController extends BaseController{
     public void barCode(@RequestParam Long subjectId,@RequestParam Long userId, HttpServletResponse response) {
         //  要生成二维码的链接
         matchProductReceiveSetService.getBarCode(subjectId,userId,response);
+    }
+
+    /**
+     * 下载赛事科目二维码
+     *
+     * @param subjectId 科目id
+     * @param response 响应
+     */
+    @GetMapping("/downloadBarCode")
+    @AllowAnonymous
+    public void downloadBarCode(@RequestParam Long subjectId,@RequestParam Long matchId, HttpServletResponse response) {
+        //  要生成二维码的链接
+        matchProductReceiveSetService.downloadBarCode(subjectId,matchId,response);
     }
 }

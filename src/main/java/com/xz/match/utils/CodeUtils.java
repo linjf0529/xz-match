@@ -10,6 +10,8 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 

@@ -1,18 +1,17 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.*;
 import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import com.xz.match.mapper.MatchProductReceiveSetMapper;
-import com.xz.match.service.MatchProductReceiveSetService;
-import com.xz.match.service.MatchProductService;
-import com.xz.match.service.SignRecordFieldTableService;
-import com.xz.match.service.SubjectSignFieldService;
+import com.xz.match.service.*;
 import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.exception.CommonException;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,9 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
 
     @Resource
     private MatchProductService matchProductService;
+
+    @Resource
+    private SignRecordService signRecordService;
 
     @Override
     public long countByExample(MatchProductReceiveSetExample example) {
@@ -197,54 +199,19 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         return ResponseResult.ok().setData(matchProductReceiveSetVO);
     }
 
-    /**
-     * 获取微信小程序码
-     *
-     * @return {@link Byte[]}
-     */
-
-
-    @Override
-    public byte[] findWxCode(String recordId)  {
-
-
-
-//        // 本地调试用
-//        String appId = "wxd058d9de2f6e9e79";
-//        String secret = "0d03ae14c53339fdd069f99afd08e233";
-//
-//        String  wxKey  = "wx_access_token_" + appId + secret;
-//        Object accessToken = reqCache.get(wxKey);
-//
-//        if(StringUtils.isEmpty(accessToken)){
-//            String wxResult = getAccessToken(appId,secret);
-//            JSONObject js = JSONObject.parseObject(wxResult);
-//            accessToken = js.getString("access_token");
-//            if(!StringUtils.isEmpty(accessToken)){
-//                reqCache.put(wxKey, accessToken);
-//            }
-//            ValidateUtils.notNull(accessToken,"access_token值为空");
-//        }
-//
-//        String url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="+accessToken;
-//        Map<String,String> dataMap = new HashMap<>();
-//        dataMap.put("page","pages/step");
-//        dataMap.put("scene",recordId);
-//        byte[] bytes = HttpRequest.post(url).body(JSONObject.toJSONString(dataMap)).execute().bodyBytes();
-        return null;
-    }
-
-    private String getAccessToken(String appid, String secret) {
-//        ValidateUtils.notNull(appid,"appId为空");
-//        ValidateUtils.notNull(secret,"appSecret为空");
-//        String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".concat(appid).concat("&secret=").concat(secret);
-        return null;
-    }
-
     @Override
     public void getBarCode(Long subjectId, Long userId, HttpServletResponse response) {
-        String contents = "";
-
-        CodeUtils.creatRrCode(contents,250,250,response);
+        JSONObject param = new JSONObject();
+        param.put("userId",userId);
+        param.put("subjectId",subjectId);
+        List<SignRecord> signRecords = signRecordService.findBy(param);
+        if(signRecords.isEmpty()){
+            throw new CommonException("未找到该选手的报名信息");
+        }
+        StringBuffer sb = new StringBuffer();
+        sb.append("www.baidu.com");
+        sb.append("?subjectId="+subjectId);
+        sb.append("&recordId="+signRecords.get(0).getId());
+        CodeUtils.creatRrCode(sb.toString(),250,250,response);
     }
 }

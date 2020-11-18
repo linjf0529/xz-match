@@ -136,7 +136,6 @@ public class SignRecordServiceImpl implements SignRecordService {
      * @param param
      */
     private void addSignRecord(List<JSONObject> key, Map<Tuple<String, String>, Integer> relation, String orderNo, MatchSubject matchSubject, JSONObject param) {
-        List<String> idCards = new ArrayList<>();
         UserInfo user = null;
         for (JSONObject jsonObject : key) {
             String name = jsonObject.getString(SignRecordFieldUtils.nameControlKey);

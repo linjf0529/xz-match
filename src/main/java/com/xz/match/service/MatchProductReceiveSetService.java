@@ -77,14 +77,5 @@ public interface MatchProductReceiveSetService{
      */
     ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId) ;
 
-    /**
-     * 找到wx代码
-     * 获取微信小程序码
-     *
-     * @param recordId 记录id
-     * @return {@link Byte[]}
-     */
-    byte[] findWxCode(String recordId) ;
-
     void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
 }

@@ -13,11 +13,11 @@ public class MatchProductDispatchInfoVO implements Serializable {
     private static final long serialVersionUID = -2589126217461321874L;
 
     /**
-     * 报名信息
+     * 物资清单
      */
     List<MatchProductDispatchVO> matchProductList;
     /**
-     * 物资清单
+     * 报名信息
      */
     private MatchProductReceiveSetVO signRecordInfo;
 

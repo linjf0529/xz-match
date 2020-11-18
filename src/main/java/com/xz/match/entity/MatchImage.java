@@ -1,5 +1,7 @@
 package com.xz.match.entity;
 
+import java.util.List;
+
 /**
  *
  * @author chenwf
@@ -39,6 +41,8 @@ public class MatchImage {
     private Long createdTime;
 
     private Integer sort;
+
+    private List<String> backgroundURL;
 
     public Long getId() {
         return id;
@@ -102,5 +106,13 @@ public class MatchImage {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public List<String> getBackgroundURL() {
+        return backgroundURL;
+    }
+
+    public void setBackgroundURL(List<String> backgroundURL) {
+        this.backgroundURL = backgroundURL;
     }
 }

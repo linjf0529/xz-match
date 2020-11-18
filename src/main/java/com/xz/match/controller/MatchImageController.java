@@ -119,6 +119,27 @@ public class MatchImageController extends BaseController{
         JSONObject param = getJSONObject(request);
         return matchImageService.findBy(getPageParam(request),param);
     }
+    /**
+     * 批量保存赛事照片
+     * @param matchImage
+     * @return
+     */
+    @AllowAnonymous
+    @PostMapping("/batch")
+    public ResponseResult batchSaveMatchImage(@RequestBody MatchImage matchImage){
+        ValidateUtils.notNull(matchImage.getMatchId(),"赛事id不能为空");
+        ValidateUtils.notNull(matchImage.getSubjectId(),"科目id不能为空");
+        ValidateUtils.notNull(matchImage.getBackgroundURL(),"背景图片不能为空");
+        String timestamp = String.valueOf(new Date().getTime());
+        for(String url:matchImage.getBackgroundURL()){
+            matchImage.setUrl(url);
+            matchImage.setCreatedTime(Long.valueOf(timestamp));
+            matchImageService.insert(matchImage);
+            matchImage.setId(null);
+            matchImage.setUrl(null);
+        }
+        return ResponseResult.ok();
+    }
 
     /**
      * 保存赛事照片

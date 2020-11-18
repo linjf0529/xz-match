@@ -1,20 +1,32 @@
 package com.xz.match.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import com.xz.match.service.MatchProductReceiveSetService;
+import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.enums.SignFieldState;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
+import javax.swing.filechooser.FileSystemView;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
@@ -87,40 +99,16 @@ public class MatchProductReceiveSetController extends BaseController{
     }
 
     /**
-     * 获取微信小程序码
+     * 获取二维码
      *
-     * @param recordId 记录id
+     * @param subjectId 科目id
      * @param response 响应
      */
-    @GetMapping("/wxCode")
-    public void fetchWxCode(@RequestParam String recordId, HttpServletResponse response) {
-        byte[] bytes = matchProductReceiveSetService.findWxCode(recordId);
-        //二维码输出到页面
-        PrintWriter out = null;
-        InputStream is = null;
-        try {
-            out = response.getWriter();
-            is = new ByteArrayInputStream(bytes);
-            int a = is.read();
-            while (a != -1) {
-                out.print((char) a);
-                a = is.read();
-            }
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(out != null){
-                out.close();
-            }
-            if(is != null){
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    @GetMapping("/barCode")
+    @AllowAnonymous
+    public void barCode(@RequestParam Long subjectId,@RequestParam Long userId, HttpServletResponse response) {
+        //  要生成二维码的链接
+        String contents = "http://www.baidu.com";
+        matchProductReceiveSetService.getBarCode(subjectId,userId,response);
     }
 }

@@ -448,22 +448,18 @@
 
     <sql id="listSQL">
         SELECT
-        a.*,
-        b.productId,
-        GROUP_CONCAT( b.productSubName SEPARATOR '、' ) productSubName,
-        CASE GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' )
-            WHEN '' THEN a.stockNumber
-            ELSE GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' )
+            a.*,
+            (select GROUP_CONCAT( b.productSubName SEPARATOR '、' ) from  match_product_sub b where a.id = b.productId) as productSubName,
+        CASE
+            (select GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId)
+        WHEN '' THEN
+            a.stockNumber ELSE (select GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId)
         END stockNumberSub
         FROM
             match_product a
-        LEFT JOIN
-            match_product_sub b
-        ON a.id = b.productId
         <where>
             <include refid="condition_sql" />
         </where>
-        GROUP BY  b.productId
         ORDER BY a.lastAccess DESC
     </sql>
 

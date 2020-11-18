@@ -9,6 +9,7 @@ import com.xz.match.service.MatchProductReceiveSetService;
 import com.xz.match.service.MatchProductService;
 import com.xz.match.service.SignRecordFieldTableService;
 import com.xz.match.service.SubjectSignFieldService;
+import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ import java.util.Map;
  *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
 public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSetService{
@@ -237,5 +239,12 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
 //        ValidateUtils.notNull(secret,"appSecret为空");
 //        String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".concat(appid).concat("&secret=").concat(secret);
         return null;
+    }
+
+    @Override
+    public void getBarCode(Long subjectId, Long userId, HttpServletResponse response) {
+        String contents = "";
+
+        CodeUtils.creatRrCode(contents,250,250,response);
     }
 }

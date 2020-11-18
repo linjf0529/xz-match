@@ -11,6 +11,7 @@ import com.xz.match.utils.enums.OrderChannel;
 import com.xz.match.utils.enums.Sex;
 import com.xz.match.utils.enums.SubjectType;
 import com.xz.match.utils.excel.Tuple;
+import com.xz.match.utils.exception.CommonException;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -166,7 +167,7 @@ public class SignRecordServiceImpl implements SignRecordService {
             signRecord.setOrderId(autoOrderId());
             signRecord.setOrderNo(signRecord.getOrderId());
             // 校验重复报名
-//            signRecordApiService.checkDuplicate(matchSubject, signRecord,null);
+            checkDuplicate(matchSubject, signRecord,null);
             signRecord.setUserId(user.getId());
             insertSelective(signRecord);
 
@@ -187,6 +188,16 @@ public class SignRecordServiceImpl implements SignRecordService {
                     }
                 }
             });
+        }
+    }
+
+    private void checkDuplicate(MatchSubject matchSubject, SignRecord signRecord, Object o) {
+        JSONObject param = new JSONObject();
+        param.put("certificateNo",signRecord.getCertificateNo());
+        param.put("subjectId",signRecord.getSubjectId());
+        List<SignRecord> signRecords = findBy(param);
+        if(!signRecords.isEmpty()){
+            throw new CommonException("相同的证件号码已报名该赛事:"+signRecord.getCertificateNo());
         }
     }
 

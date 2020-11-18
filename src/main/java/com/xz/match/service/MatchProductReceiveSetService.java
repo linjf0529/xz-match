@@ -9,11 +9,13 @@ import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 public interface MatchProductReceiveSetService{
 
 
@@ -39,48 +41,50 @@ public interface MatchProductReceiveSetService{
 
     int updateByPrimaryKey(MatchProductReceiveSet record);
 
-        /**
-         * 查找所有个人项目
-         *
-         * @param pageParam 页面参数
-         * @param param     参数
-         * @return {@link ResponseResult}
-         */
-        ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param) ;
+    /**
+     * 查找所有个人项目
+     *
+     * @param pageParam 页面参数
+     * @param param     参数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param) ;
 
 
-        /**
-         * 查找赛事项目报名字段
-         *
-         * @param param 参数
-         * @return {@link MatchProductReceiveSetVO}
-         */
-        MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param) ;
+    /**
+     * 查找赛事项目报名字段
+     *
+     * @param param 参数
+     * @return {@link MatchProductReceiveSetVO}
+     */
+    MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param) ;
 
 
-        /**
-         * 修改物资领取配置
-         *
-         * @param matchProductReceiveSetVO 物资领取配置VO
-         * @return {@link ResponseResult}
-         */
-        ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO) ;
+    /**
+     * 修改物资领取配置
+     *
+     * @param matchProductReceiveSetVO 物资领取配置VO
+     * @return {@link ResponseResult}
+     */
+    ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO) ;
 
-        /**
-         * 根据报名记录id和科目id查询物资领取信息
-         *
-         * @param recordId  记录id
-         * @param subjectId 对象id
-         * @return {@link ResponseResult}
-         */
-        ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId) ;
+    /**
+     * 根据报名记录id和科目id查询物资领取信息
+     *
+     * @param recordId  记录id
+     * @param subjectId 对象id
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId) ;
 
-        /**
-         * 找到wx代码
-         * 获取微信小程序码
-         *
-         * @param recordId 记录id
-         * @return {@link Byte[]}
-         */
-        byte[] findWxCode(String recordId) ;
+    /**
+     * 找到wx代码
+     * 获取微信小程序码
+     *
+     * @param recordId 记录id
+     * @return {@link Byte[]}
+     */
+    byte[] findWxCode(String recordId) ;
+
+    void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
 }

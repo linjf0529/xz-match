@@ -2,6 +2,7 @@ package com.xz.match.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.SignRecordFieldTable;
 import com.xz.match.entity.vo.MatchProductDispatchVO;
@@ -67,14 +68,14 @@ public class MatchProductDispatchController extends BaseController{
         JSONObject param = getJSONObject(request);
 
 //        param.put("subjectId", "d275a322f26d11eaaa7cfa163eba29ed");
-        param.put("isPass", true);
-        param.put("review", 1);
+//        param.put("isPass", true);
+//        param.put("review", 1);
         List<MatchSignRecordVO> matchSignRecordesList = new ArrayList<>();
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<SignRecord> dataList = signRecordService.findBy(param);
-        MatchSignRecordVO matchSignRecordVO = new MatchSignRecordVO();
 
         for(SignRecord signRecord:dataList){
+            MatchSignRecordVO matchSignRecordVO = new MatchSignRecordVO();
             BeanUtils.copyProperties(signRecord, matchSignRecordVO);
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put("recordId", signRecord.getId());
@@ -82,7 +83,8 @@ public class MatchProductDispatchController extends BaseController{
             matchSignRecordVO.setSignRecordInfo(recordFieldTables);
             matchSignRecordesList.add(matchSignRecordVO);
         }
-        return ResponseResult.ok().setData(matchSignRecordesList);
+        PageInfo<MatchSignRecordVO> pageInfo = new PageInfo<MatchSignRecordVO>(matchSignRecordesList);
+        return ResponseResult.ok().setData(pageInfo);
     }
 
 

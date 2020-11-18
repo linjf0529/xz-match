@@ -7,12 +7,15 @@ import java.util.List;
 import com.xz.match.entity.ReserveInfoExample;
 import com.xz.match.mapper.ReserveInfoMapper;
 import com.xz.match.service.ReserveInfoService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/18
  */  
 @Service
+@Transactional
 public class ReserveInfoServiceImpl implements ReserveInfoService{
 
     @Resource

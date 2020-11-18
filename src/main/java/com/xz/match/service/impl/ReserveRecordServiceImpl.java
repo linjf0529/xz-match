@@ -7,12 +7,15 @@ import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveRecordExample;
 import com.xz.match.mapper.ReserveRecordMapper;
 import com.xz.match.service.ReserveRecordService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/18
  */  
 @Service
+@Transactional
 public class ReserveRecordServiceImpl implements ReserveRecordService{
 
     @Resource

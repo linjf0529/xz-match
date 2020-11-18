@@ -7,12 +7,15 @@ import java.util.List;
 import com.xz.match.mapper.ReserveSublistMapper;
 import com.xz.match.entity.ReserveSublist;
 import com.xz.match.service.ReserveSublistService;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author chenwf
  * @date 2020/11/18
  */  
 @Service
+@Transactional
 public class ReserveSublistServiceImpl implements ReserveSublistService{
 
     @Resource

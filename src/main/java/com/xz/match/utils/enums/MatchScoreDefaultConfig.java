@@ -1,4 +1,4 @@
-package com.xz.match.emums;
+package com.xz.match.utils.enums;
 
 public enum MatchScoreDefaultConfig {
     /**赛事名称*/

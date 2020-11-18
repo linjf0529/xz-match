@@ -1,21 +1,15 @@
 package com.xz.match.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xz.match.emums.MatchScoreDefaultConfig;
 import com.xz.match.entity.MatchScore;
-import com.xz.match.entity.MatchScoreConfig;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.service.MatchScoreService;
 import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.ResponseResult;
-import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.xz.match.utils.enums.MatchScoreDefaultConfig;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

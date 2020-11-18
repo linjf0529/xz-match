@@ -4,6 +4,7 @@ import com.xz.match.entity.vo.LoginVo;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.service.LoginService;
 import com.xz.match.utils.ResponseResult;
+import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.exception.CommonException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping
+    @AllowAnonymous
     public ResponseResult login(@RequestBody LoginVo loginVo, HttpServletRequest request){
         if(loginVo == null){
             throw new CommonException("请求参数出错");

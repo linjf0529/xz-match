@@ -56,13 +56,16 @@ public class MatchDispatchSetController extends BaseController{
     /**
      * 编辑发放人员配置
      *
-     * @param id      id
-     * @param request 请求
+     * @param request            请求
+     * @param matchDispatchSetVO 匹配调度组签证官
      * @return {@link ResponseResult}
      */
     @PutMapping
-    public ResponseResult editMatchDispatchSet(@RequestParam Long id , HttpServletRequest request){
-        return null;
+    public ResponseResult editMatchDispatchSet(@RequestBody MatchDispatchSetVO matchDispatchSetVO, HttpServletRequest request){
+        if(matchDispatchSetVO == null){
+            throw new CommonException("请求参数出错");
+        }
+        return matchDispatchSetService.modifyMatchDispatchSet(matchDispatchSetVO);
     }
 
     /**
@@ -71,7 +74,7 @@ public class MatchDispatchSetController extends BaseController{
      * @param request 请求
      * @return {@link ResponseResult}
      */
-    @GetMapping
+    @GetMapping("/info")
     public ResponseResult queryMatchDispatchSet(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
         param.put("disabled",0);
@@ -85,11 +88,23 @@ public class MatchDispatchSetController extends BaseController{
      * @param mobile  移动
      * @return {@link ResponseResult}
      */
-    @GetMapping("/{mobile:\\w+}")
-    public ResponseResult queryMatchDispatchSetByPhone(@PathVariable("mobile") String mobile, HttpServletRequest request){
+    @GetMapping
+    public ResponseResult queryMatchDispatchSetByPhone(@RequestParam("mobile") String mobile, @RequestParam("subjectId") String subjectId,HttpServletRequest request){
         Map param = new HashMap();
         param.put("mobile", mobile);
         param.put("disabled",0);
-        return matchDispatchSetService.findMatchDispatchSetByPhone(param);
+        return matchDispatchSetService.findMatchDispatchSetByPhone(subjectId,param);
     }
+    /**
+     * 获取发放人员权限
+     *
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @GetMapping("/permission")
+    public ResponseResult fetchMatchDispatchPermissionById(HttpServletRequest request){
+        JSONObject param = getJSONObject(request);
+        return matchDispatchSetService.findMatchDispatchSetById(param);
+    }
+
 }

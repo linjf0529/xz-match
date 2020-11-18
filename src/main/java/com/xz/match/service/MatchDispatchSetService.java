@@ -42,11 +42,11 @@ public interface MatchDispatchSetService{
     /**
      * 通过电话查询发放人员配置
      *
-     * @param param 参数
+     * @param param     参数
+     * @param subjectId 对象id
      * @return {@link ResponseResult}
-
      */
-    ResponseResult findMatchDispatchSetByPhone(Map<String, Object> param);
+    ResponseResult findMatchDispatchSetByPhone(String subjectId,Map<String, Object> param);
 
     /**
      * 找到发放人员配置
@@ -70,5 +70,21 @@ public interface MatchDispatchSetService{
      * @return {@link ResponseResult}
      */
     ResponseResult removeMatchDispatchSet(Long id);
+
+    /**
+     * 修改发放人员配置
+     *
+     * @param matchDispatchSetVO
+     * @return {@link ResponseResult}
+     */
+    ResponseResult modifyMatchDispatchSet(MatchDispatchSetVO matchDispatchSetVO);
+
+    /**
+     * 根据id查找发放人员配置
+     *
+     * @param params 参数个数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchDispatchSetById(Map<String, Object> params);
 
 }

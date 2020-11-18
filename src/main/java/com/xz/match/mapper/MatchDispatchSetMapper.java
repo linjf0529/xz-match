@@ -5,6 +5,7 @@ import com.xz.match.entity.MatchDispatchSetExample;
 import java.util.List;
 import java.util.Map;
 
+import com.xz.match.entity.vo.MatchDispatchPermissionVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -66,4 +67,12 @@ public interface MatchDispatchSetMapper {
     int updateByPrimaryKey(MatchDispatchSet record);
 
     List<MatchDispatchSet> findBy(Map param);
+
+    /**
+     * 配置发放人员的权限
+     *
+     * @param tenantId 承租者id
+     * @return {@link List<MatchDispatchPermissionVO>}
+     */
+    public List<MatchDispatchPermissionVO> selectMatchDispatchPermissionByTenantId(String tenantId);
 }

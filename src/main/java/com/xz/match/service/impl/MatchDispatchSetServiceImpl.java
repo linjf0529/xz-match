@@ -1,8 +1,11 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xz.match.entity.vo.MatchDispatchPermissionVO;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
@@ -20,6 +23,8 @@ import com.xz.match.mapper.MatchDispatchSetMapper;
 import com.xz.match.entity.MatchDispatchSetExample;
 import com.xz.match.service.MatchDispatchSetService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 /**
  *
@@ -91,12 +96,26 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     /**
      * 通过电话查询发放人员配置
      *
-     * @param param 参数
+     * @param param     参数
+     * @param subjectId 对象id
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchDispatchSetByPhone(Map<String, Object> param){
-        return ResponseResult.ok().setData(this.matchDispatchSetMapper.findBy(param).get(0));
+    public ResponseResult findMatchDispatchSetByPhone(String subjectId,Map<String, Object> param){
+        List<MatchDispatchSet> MatchDispatchSetList= this.matchDispatchSetMapper.findBy(param);
+        if(!CollectionUtils.isEmpty(MatchDispatchSetList)){
+            MatchDispatchSet matchDispatchSet = MatchDispatchSetList.get(0);
+            if(matchDispatchSet == null){
+                throw new CommonException("该手机号未配置权限");
+            }
+            if(StringUtils.isNotBlank(matchDispatchSet.getPermission())){
+                if(!matchDispatchSet.getPermission().contains(subjectId)){
+                    throw new CommonException("该手机号无权限");
+                }
+            }
+            return ResponseResult.ok().setData(MatchDispatchSetList.get(0));
+        }
+        return ResponseResult.ok().setData(new MatchDispatchSet());
     }
     /**
      * 找到发放人员配置
@@ -146,4 +165,56 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
         this.deleteByPrimaryKey(id);
         return ResponseResult.ok();
     }
+
+    /**
+     * 修改发放人员配置
+     *
+     * @param matchDispatchSetVO
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult modifyMatchDispatchSet(MatchDispatchSetVO matchDispatchSetVO) {
+        MatchDispatchSet matchDispatchSet =new MatchDispatchSet();
+        BeanUtils.copyProperties(matchDispatchSetVO, matchDispatchSet);
+        this.updateByPrimaryKeySelective(matchDispatchSet);
+        return ResponseResult.ok().setData(matchDispatchSet);
+    }
+
+    /**
+     * 查找发放人员配置的权限
+     *
+     * @param tenantId 承租者id
+     * @return {@link JSONArray}
+     */
+    private JSONArray findMatchDispatchPermissionByTenantId(String tenantId)  {
+        List<MatchDispatchPermissionVO> matchDispatchPermissionVOList = matchDispatchSetMapper.selectMatchDispatchPermissionByTenantId(tenantId);
+        String  matchDispatchPermissionStr = null;
+        if(!CollectionUtils.isEmpty(matchDispatchPermissionVOList)){
+            matchDispatchPermissionStr = JSON.toJSONString(matchDispatchPermissionVOList).replaceAll("childrenId","id").replaceAll("childrenLabel","label");
+        }
+        return JSON.parseArray(matchDispatchPermissionStr);
+    }
+
+    /**
+     * 根据id查找发放人员配置
+     *
+     * @param params 参数个数
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult findMatchDispatchSetById(Map<String, Object> params)  {
+        MatchDispatchSetVO matchDispatchSetVO = new MatchDispatchSetVO();
+        if(params.get("id") != null){
+            MatchDispatchSet matchDispatchSet = matchDispatchSetMapper.selectByPrimaryKey(Long.valueOf(params.get("id").toString()));
+            if(!ObjectUtils.isEmpty(matchDispatchSet)){
+                BeanUtils.copyProperties(matchDispatchSet, matchDispatchSetVO);
+            }
+        }
+        // 权限
+        if(params.get("tenantId") != null){
+            matchDispatchSetVO.setMatchDispatchPermission(this.findMatchDispatchPermissionByTenantId(params.get("tenantId").toString()));
+        }
+        return ResponseResult.ok().setData(matchDispatchSetVO);
+    }
+
 }

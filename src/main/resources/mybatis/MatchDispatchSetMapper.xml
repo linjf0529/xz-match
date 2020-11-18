@@ -382,6 +382,31 @@
     </select>
 
 
+  <!-- 配置发放人员的权限 ,一对多 -->
+  <resultMap type="com.xz.match.entity.vo.MatchDispatchPermissionVO" id="dispatchPermissionMap">
+    <result property="id" column="id"/>
+    <result property="label" column="label"/>
+    <collection property="children" ofType="com.xz.match.entity.vo.MatchDispatchPermissionChildrenVO">
+      <!-- 定义这个集合中元素的封装规则 -->
+      <id column="childrenId" property="childrenId"/>
+      <result column="childrenLabel" property="childrenLabel"/>
+    </collection>
+  </resultMap>
+
+  <!-- 查询列表 -->
+  <select id="selectMatchDispatchPermissionByTenantId" parameterType="String" resultMap="dispatchPermissionMap">
+        SELECT
+            a.id id,
+            a.matchName label,
+            b.id childrenId,
+            b.`subject` as childrenLabel
+        FROM
+            match_info a
+        LEFT JOIN match_subject b ON a.id = b.matchId AND b.type = 0
+        WHERE
+            a.tenantId = #{tenantId}
+    </select>
+
     <sql id="listSQL">
         SELECT * FROM  match_dispatch_set
         <where>

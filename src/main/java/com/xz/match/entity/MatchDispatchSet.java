@@ -4,7 +4,10 @@ package com.xz.match.entity;
  *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
+
+import java.io.Serializable;
+
 /**
     * 发放人员配置表
     */

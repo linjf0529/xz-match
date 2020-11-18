@@ -3,7 +3,9 @@ package com.xz.match.service;
 import java.util.List;
 import com.xz.match.entity.MatchSubjectExample;
 import com.xz.match.entity.MatchSubject;
-    /**
+import com.xz.match.utils.ResponseResult;
+
+/**
  *
  * @author chenwf
  * @date 2020/11/16
@@ -33,4 +35,5 @@ public interface MatchSubjectService{
 
     int updateByPrimaryKey(MatchSubject record);
 
-}
+        ResponseResult findSubjectByMatchId(Long matchId);
+    }

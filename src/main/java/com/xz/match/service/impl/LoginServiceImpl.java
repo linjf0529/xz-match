@@ -65,6 +65,7 @@ public class LoginServiceImpl implements LoginService {
         userJson.put("userId",userInfo.getId());
         userJson.put("phone",userInfo.getPhone());
         userJson.put("certificateNo",userInfo.getCertificateNo());
+        userJson.put("type",userInfo.getType());
         return ResponseResult.ok().setData(userJson);
     }
 

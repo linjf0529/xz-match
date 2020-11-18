@@ -5,6 +5,8 @@ import com.xz.match.utils.RedisClient;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,6 +23,11 @@ import java.io.PrintWriter;
  */
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
+    @Bean
+    public RedisClient getRedisClient() {
+        return redisClient;
+    }
+
     @Resource
     private RedisClient redisClient;
 
@@ -50,8 +57,9 @@ public class AuthInterceptor implements HandlerInterceptor {
             if (StringUtils.isEmpty(accessToken)) {
                 abortWith(response,201);
                 return false;
+            }else {
+                return true;
             }
-            return success;
         }
     }
 

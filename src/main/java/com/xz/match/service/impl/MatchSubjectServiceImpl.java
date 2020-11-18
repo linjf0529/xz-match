@@ -1,5 +1,6 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -76,4 +77,15 @@ public class MatchSubjectServiceImpl implements MatchSubjectService{
         return matchSubjectMapper.updateByPrimaryKey(record);
     }
 
+    /**
+     * 赛事对应科目
+     * @param matchId
+     * @return
+     */
+    @Override
+    public ResponseResult findSubjectByMatchId(Long matchId) {
+        MatchSubjectExample matchSubjectExample = new MatchSubjectExample();
+        matchSubjectExample.createCriteria().andMatchIdEqualTo(matchId);
+        return ResponseResult.ok().setData(this.selectByExample(matchSubjectExample));
+    }
 }

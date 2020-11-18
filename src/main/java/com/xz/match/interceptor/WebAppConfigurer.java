@@ -1,5 +1,6 @@
 package com.xz.match.interceptor;
 
+import com.xz.match.config.GlobalCorsConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;

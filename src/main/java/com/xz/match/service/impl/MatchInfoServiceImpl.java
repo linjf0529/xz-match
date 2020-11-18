@@ -1,6 +1,9 @@
 package com.xz.match.service.impl;
 
 import com.xz.match.entity.MatchInfoExample;
+import com.xz.match.entity.MatchSubject;
+import com.xz.match.entity.MatchSubjectExample;
+import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -93,6 +96,16 @@ public class MatchInfoServiceImpl implements MatchInfoService {
     public int updateByExample(MatchInfo record, MatchInfoExample example) {
         return matchInfoMapper.updateByExample(record, example);
     }
+
+    /**
+     * 找出所有赛事
+     * @return
+     */
+    @Override
+    public ResponseResult allMatch() {
+        return ResponseResult.ok().setData(this.selectByExample(new MatchInfoExample()));
+    }
+
 }
 
 

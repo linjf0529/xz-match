@@ -3,6 +3,7 @@ package com.xz.match.service;
 import java.util.List;
 import com.xz.match.entity.MatchInfo;
 import com.xz.match.entity.MatchInfoExample;
+import com.xz.match.utils.ResponseResult;
 
 /**
  * @author chenwf
@@ -38,6 +39,8 @@ public interface MatchInfoService {
     int updateByExampleSelective(MatchInfo record, MatchInfoExample example);
 
     int updateByExample(MatchInfo record, MatchInfoExample example);
+
+    ResponseResult allMatch();
 }
 
 

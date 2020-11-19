@@ -71,8 +71,7 @@ public interface MatchDispatchSetMapper {
     /**
      * 配置发放人员的权限
      *
-     * @param tenantId 承租者id
      * @return {@link List<MatchDispatchPermissionVO>}
      */
-    public List<MatchDispatchPermissionVO> selectMatchDispatchPermissionByTenantId(String tenantId);
+    List<MatchDispatchPermissionVO> selectMatchDispatchPermission();
 }

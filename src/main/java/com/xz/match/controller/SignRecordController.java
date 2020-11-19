@@ -121,7 +121,7 @@ public class SignRecordController extends BaseController {
 
     /**
      * 删除选手报名记录
-     * @param ids  base64
+     * @param ids
      * @return
      */
     @GetMapping("/deleteRecord")

@@ -2,6 +2,7 @@ package com.xz.match.entity.vo;
 
 
 import com.xz.match.entity.MatchProduct;
+import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.SignRecordFieldTable;
 import com.xz.match.entity.SubjectSignField;
 
@@ -79,9 +80,14 @@ public class MatchProductReceiveSetVO  implements Serializable {
     private List<SubjectSignField> subjectSignFields;
 
     /**
-     * 赛事科目报名信息
+     * 赛事科目报名信息（废弃）
      */
     private List<SignRecordFieldTable> SignRecordFieldTables;
+
+    /**
+     * 选手报名信息
+     */
+    private SignRecord signRecord;
 
     /**
      * 赛事项目物资清单
@@ -230,4 +236,11 @@ public class MatchProductReceiveSetVO  implements Serializable {
         this.tenantId = tenantId;
     }
 
+    public SignRecord getSignRecord() {
+        return signRecord;
+    }
+
+    public void setSignRecord(SignRecord signRecord) {
+        this.signRecord = signRecord;
+    }
 }

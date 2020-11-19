@@ -182,6 +182,7 @@ public class SignRecordServiceImpl implements SignRecordService {
             String teamNum = "1";
             SignRecord signRecord = new SignRecord();
             signRecord.setMatchId(matchSubject.getMatchId());//赛事Id
+            signRecord.setMatchName(matchSubject.getMatchName());//赛事名称
             signRecord.setSubjectId(matchSubject.getId());//科目ID
             signRecord.setSubjectName(matchSubject.getSubjectName());//科目名称
             signRecord.setName(name);                                    // 姓名

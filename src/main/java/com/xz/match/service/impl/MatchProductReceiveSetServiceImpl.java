@@ -180,6 +180,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         if(signRecords.isEmpty()){
             throw new CommonException("未找到该报名选手的信息");
         }
+        SignRecord signRecord = signRecords.get(0);
         Map paramMap = new HashMap();
         paramMap.put("recordId", signRecords.get(0).getId());
         List<SignRecordFieldTable> signRecordFieldTables = signRecordFieldTableService.findBy(paramMap);
@@ -203,6 +204,8 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
                     }
                 }
             }
+            signRecord.setSignRecordInfo(signRecordFieldTableList);
+            matchProductReceiveSetVO.setSignRecord(signRecord);
             matchProductReceiveSetVO.setSignRecordFieldTables(signRecordFieldTableList);
         }
 

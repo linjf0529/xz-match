@@ -124,7 +124,7 @@ public class SignRecordController extends BaseController {
      * @param ids  base64
      * @return
      */
-    @PostMapping("/deleteRecord")
+    @GetMapping("/deleteRecord")
     public ResponseResult deleteRecord(@RequestParam String ids){
         return signRecordService.deleteRecord(ids);
     }

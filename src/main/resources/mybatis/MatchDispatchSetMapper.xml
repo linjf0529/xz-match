@@ -394,17 +394,15 @@
   </resultMap>
 
   <!-- 查询列表 -->
-  <select id="selectMatchDispatchPermissionByTenantId" parameterType="String" resultMap="dispatchPermissionMap">
+  <select id="selectMatchDispatchPermission" parameterType="String" resultMap="dispatchPermissionMap">
         SELECT
             a.id id,
             a.matchName label,
             b.id childrenId,
-            b.`subject` as childrenLabel
+            b.`subjectName` as childrenLabel
         FROM
             match_info a
-        LEFT JOIN match_subject b ON a.id = b.matchId AND b.type = 0
-        WHERE
-            a.tenantId = #{tenantId}
+        LEFT JOIN match_subject b ON a.id = b.matchId
     </select>
 
     <sql id="listSQL">

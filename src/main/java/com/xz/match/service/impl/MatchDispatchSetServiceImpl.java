@@ -183,11 +183,10 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     /**
      * 查找发放人员配置的权限
      *
-     * @param tenantId 承租者id
      * @return {@link JSONArray}
      */
-    private JSONArray findMatchDispatchPermissionByTenantId(String tenantId)  {
-        List<MatchDispatchPermissionVO> matchDispatchPermissionVOList = matchDispatchSetMapper.selectMatchDispatchPermissionByTenantId(tenantId);
+    private JSONArray findMatchDispatchPermissionByTenantId()  {
+        List<MatchDispatchPermissionVO> matchDispatchPermissionVOList = matchDispatchSetMapper.selectMatchDispatchPermission();
         String  matchDispatchPermissionStr = null;
         if(!CollectionUtils.isEmpty(matchDispatchPermissionVOList)){
             matchDispatchPermissionStr = JSON.toJSONString(matchDispatchPermissionVOList).replaceAll("childrenId","id").replaceAll("childrenLabel","label");
@@ -211,9 +210,7 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
             }
         }
         // 权限
-        if(params.get("tenantId") != null){
-            matchDispatchSetVO.setMatchDispatchPermission(this.findMatchDispatchPermissionByTenantId(params.get("tenantId").toString()));
-        }
+        matchDispatchSetVO.setMatchDispatchPermission(this.findMatchDispatchPermissionByTenantId());
         return ResponseResult.ok().setData(matchDispatchSetVO);
     }
 

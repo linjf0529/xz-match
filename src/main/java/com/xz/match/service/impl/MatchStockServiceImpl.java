@@ -166,6 +166,7 @@ public class MatchStockServiceImpl implements MatchStockService{
         MatchProduct matchProduct = matchProductService.selectByPrimaryKey(productId);
         ValidateUtils.notNull(matchProduct, "物资ID不存在");
         BeanUtils.copyProperties(matchProduct, matchStockVO);
+        matchStockVO.setProductId(matchProduct.getId());
 
         // 库存列表
         List<MatchStock> MatchStockes = matchStockMapper.selectMatchStockByProductId(productId);

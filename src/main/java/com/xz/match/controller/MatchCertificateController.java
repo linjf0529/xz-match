@@ -3,8 +3,10 @@ package com.xz.match.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchCertificate;
 import com.xz.match.entity.MatchCertificateSublist;
+import com.xz.match.entity.SignRecord;
 import com.xz.match.service.MatchCertificateService;
 import com.xz.match.service.MatchCertificateSublistService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
@@ -49,6 +51,9 @@ public class MatchCertificateController extends BaseController{
 
     @Resource
     private MatchCertificateSublistService matchCertificateSublistService;
+
+    @Resource
+    private SignRecordService signRecordService;
     /**
      * 根据项目id获取模板详情
      * @param request
@@ -123,10 +128,15 @@ public class MatchCertificateController extends BaseController{
     @AllowAnonymous
     public ResponseResult getFileUrl(HttpServletRequest request, HttpServletResponse response) {
         JSONObject params=getJSONObject(request);
-        ValidateUtils.notNull(params.getString("recordId"),"报名记录不能为空");
+        ValidateUtils.notNull(params.getString("userId"),"UserId不能为空");
         ValidateUtils.notNull(params.getString("subjectId"),"赛事不能为空");
         MatchCertificate matchCertificate=matchCertificateService.getCertificateBySubjectId(params.getLong("subjectId"));
         ValidateUtils.notNull(matchCertificate,"证书模板不存在!");
+        JSONObject signJson=new JSONObject();
+        signJson.put("subjectId",params.getLong("subjectId"));
+        signJson.put("userId",params.getLong("userId"));
+        List<SignRecord> signRecords=signRecordService.findBy(signJson);
+        ValidateUtils.notEmpty(signRecords,0,"找不到报名记录");
         Integer size=40;
         String fontName="微软雅黑";
         if(matchCertificate.getSize()!=null && matchCertificate.getSize()!=0){
@@ -137,7 +147,7 @@ public class MatchCertificateController extends BaseController{
         }
         Map<String,Object> map=new HashMap<>();
         map.put("certificateId",matchCertificate.getId());
-        map.put("recordId",params.getString("recordId"));
+        map.put("recordId",signRecords.get(0).getId());
         List<MatchCertificateSublist> sublists=matchCertificateSublistService.getCertificateSublist(map);
         ByteArrayOutputStream out=null;
         ResponseResult responseResult=null;

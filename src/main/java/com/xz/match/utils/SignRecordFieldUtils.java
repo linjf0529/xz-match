@@ -94,7 +94,13 @@ public class SignRecordFieldUtils {
     }
 
     public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination {
-        System.out.println(convertControlKey("科目ID"));
+        String a = "姓名，手机号，证件类型";
+        for (String s : a.split("，")) {
+            System.out.println(s);
+            System.out.println(convertControlKey(s));
+
+        }
+
 //        String s = toPinYin("aAdfas", "_", Type.FIRSTUPPER, new HanyuPinyinOutputFormat());
 //        String s1 = toPinYin("大小sssdf", "_", Type.FIRSTUPPER, new HanyuPinyinOutputFormat());
 //        String s2 = toPinYin("消息消息", "", Type.FIRSTUPPER, new HanyuPinyinOutputFormat());

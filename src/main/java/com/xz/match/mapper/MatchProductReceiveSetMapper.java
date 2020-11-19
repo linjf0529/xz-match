@@ -2,17 +2,13 @@ package com.xz.match.mapper;
 
 import com.xz.match.entity.MatchProductReceiveSet;
 import com.xz.match.entity.MatchProductReceiveSetExample;
-import java.util.List;
-import java.util.Map;
-
-import com.xz.match.entity.vo.MatchProductDispatchVO;
+import java.util.List;import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/19
+ */
 public interface MatchProductReceiveSetMapper {
     long countByExample(MatchProductReceiveSetExample example);
 
@@ -20,6 +16,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -27,6 +24,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -34,6 +32,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -43,6 +42,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -54,6 +54,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -61,6 +62,7 @@ public interface MatchProductReceiveSetMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
+ * @date 2020/11/19
  */  
 public class MatchProductReceiveSetExample {
     protected String orderByClause;
@@ -696,6 +696,76 @@ public class MatchProductReceiveSetExample {
 
         public Criteria andTipsNotBetween(String value1, String value2) {
             addCriterion("tips not between", value1, value2, "tips");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentIsNull() {
+            addCriterion("signContent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentIsNotNull() {
+            addCriterion("signContent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentEqualTo(String value) {
+            addCriterion("signContent =", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentNotEqualTo(String value) {
+            addCriterion("signContent <>", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentGreaterThan(String value) {
+            addCriterion("signContent >", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentGreaterThanOrEqualTo(String value) {
+            addCriterion("signContent >=", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentLessThan(String value) {
+            addCriterion("signContent <", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentLessThanOrEqualTo(String value) {
+            addCriterion("signContent <=", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentLike(String value) {
+            addCriterion("signContent like", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentNotLike(String value) {
+            addCriterion("signContent not like", value, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentIn(List<String> values) {
+            addCriterion("signContent in", values, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentNotIn(List<String> values) {
+            addCriterion("signContent not in", values, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentBetween(String value1, String value2) {
+            addCriterion("signContent between", value1, value2, "signContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignContentNotBetween(String value1, String value2) {
+            addCriterion("signContent not between", value1, value2, "signContent");
             return (Criteria) this;
         }
 

@@ -89,13 +89,13 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     }
 
     @Override
-    public int updateByExampleSelective(MatchProductReceiveSet record,MatchProductReceiveSetExample example) {
-        return matchProductReceiveSetMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(MatchProductReceiveSet record, MatchProductReceiveSetExample example) {
+        return matchProductReceiveSetMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(MatchProductReceiveSet record,MatchProductReceiveSetExample example) {
-        return matchProductReceiveSetMapper.updateByExample(record,example);
+    public int updateByExample(MatchProductReceiveSet record, MatchProductReceiveSetExample example) {
+        return matchProductReceiveSetMapper.updateByExample(record, example);
     }
 
     @Override
@@ -116,8 +116,8 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param)  {
-        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+    public ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param) {
+        PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
         List<MatchProductReceiveSet> matchProductReceiveSets = matchProductReceiveSetMapper.findBy(param);
         return ResponseResult.ok().setData(new PageInfo<>(matchProductReceiveSets));
     }
@@ -129,7 +129,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
      * @return {@link MatchProductReceiveSetVO}
      */
     @Override
-    public MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param)  {
+    public MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param) {
         MatchProductReceiveSetVO matchProductReceiveSetVO = new MatchProductReceiveSetVO();
         // 展示参数:报名字段
         List<SubjectSignField> dataList = subjectSignFieldService.findBy(param);
@@ -137,11 +137,11 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
 
         // 物资领取配置信息 |——每个赛事项目只有一条配置信息
         MatchProductReceiveSet matchProductReceiveSet = matchProductReceiveSetMapper.selectMatchProductReceiveSetBySubjectId(Long.parseLong(param.get("subjectId").toString()));
-        if(matchProductReceiveSet != null){
+        if (matchProductReceiveSet != null) {
             BeanUtils.copyProperties(matchProductReceiveSet, matchProductReceiveSetVO);
-        }else {
+        } else {
             // 默认姓名和手机号要勾选上
-            matchProductReceiveSetVO.setPageShow("sf734362,sf928984626");
+            matchProductReceiveSetVO.setPageShow("sf734362,sf25022344");
         }
         return matchProductReceiveSetVO;
     }
@@ -153,7 +153,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO)  {
+    public ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO) {
         MatchProductReceiveSet matchProductReceiveSet = new MatchProductReceiveSet();
         BeanUtils.copyProperties(matchProductReceiveSetVO, matchProductReceiveSet);
         // 场景：新增和修改在同一页面
@@ -163,19 +163,19 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     /**
      * 根据报名记录id和科目id查询物资领取信息
      *
-     * @param playerUserId  选手用户id
-     * @param subjectId 对象id
+     * @param playerUserId 选手用户id
+     * @param subjectId    对象id
      * @param phone
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long playerUserId, Long subjectId, String phone)  {
+    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long playerUserId, Long subjectId, String phone) {
         // 赛事报名信息
         JSONObject signParam = new JSONObject();
-        signParam.put("subjectId",subjectId);
-        signParam.put("userId",playerUserId);
+        signParam.put("subjectId", subjectId);
+        signParam.put("userId", playerUserId);
         List<SignRecord> signRecords = signRecordService.findBy(signParam);
-        if(signRecords.isEmpty()){
+        if (signRecords.isEmpty()) {
             throw new CommonException("未找到该报名选手的信息");
         }
         SignRecord signRecord = signRecords.get(0);
@@ -192,11 +192,11 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         BeanUtils.copyProperties(matchProductReceiveSet, matchProductReceiveSetVO);
 
         List<SignRecordFieldTable> signRecordFieldTableList = Lists.newArrayList();
-        if(!StringUtils.isEmpty(matchProductReceiveSet.getPageShow())){
+        if (!StringUtils.isEmpty(matchProductReceiveSet.getPageShow())) {
             String[] matchProductReceiveSetArr = matchProductReceiveSet.getPageShow().split(",");
-            for (String matchProductReceiveSetSrt:matchProductReceiveSetArr){
-                for(SignRecordFieldTable signRecordFieldTable:signRecordFieldTables){
-                    if(matchProductReceiveSetSrt.trim().equals(signRecordFieldTable.getControlKey())){
+            for (String matchProductReceiveSetSrt : matchProductReceiveSetArr) {
+                for (SignRecordFieldTable signRecordFieldTable : signRecordFieldTables) {
+                    if (matchProductReceiveSetSrt.trim().equals(signRecordFieldTable.getControlKey())) {
                         signRecordFieldTableList.add(signRecordFieldTable);
                         continue;
                     }
@@ -206,15 +206,11 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             matchProductReceiveSetVO.setSignRecord(signRecord);
             matchProductReceiveSetVO.setSignRecordFieldTables(signRecordFieldTableList);
         }
-        //判断是否有发放权限
-        List<MatchDispatchSet> matchDispatchSets = matchDispatchSetService.getModes(subjectId,phone);
-        List<MatchProduct> matchProducts = new ArrayList<>();
-        if(!matchDispatchSets.isEmpty()){
-            // 赛事物资清单
-            Map param = new HashMap();
-            param.put("subjectId", subjectId);
-            matchProducts = matchProductService.findBy(param);
-        }
+
+        // 赛事物资清单
+        Map param = new HashMap();
+        param.put("subjectId", subjectId);
+        List<MatchProduct> matchProducts = matchProductService.findBy(param);
         matchProductReceiveSetVO.setMatchProducts(matchProducts);
         return ResponseResult.ok().setData(matchProductReceiveSetVO);
     }
@@ -222,17 +218,17 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     @Override
     public void getBarCode(Long subjectId, Long userId, HttpServletResponse response) {
         JSONObject param = new JSONObject();
-        param.put("userId",userId);
-        param.put("subjectId",subjectId);
+        param.put("userId", userId);
+        param.put("subjectId", subjectId);
         List<SignRecord> signRecords = signRecordService.findBy(param);
-        if(signRecords.isEmpty()){
+        if (signRecords.isEmpty()) {
             throw new CommonException("未找到该选手的报名信息");
         }
         StringBuffer sb = new StringBuffer();
         sb.append(UrlConstants.MATCH_H5_HOST + "/suppliesIssue");
-        sb.append("?subjectId="+subjectId);
-        sb.append("&recordId="+signRecords.get(0).getId());
-        CodeUtils.creatRrCode(sb.toString(),250,250,response);
+        sb.append("?subjectId=" + subjectId);
+        sb.append("&recordId=" + signRecords.get(0).getId());
+        CodeUtils.creatRrCode(sb.toString(), 250, 250, response);
     }
 
     /**
@@ -246,14 +242,15 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     public void downloadBarCode(Long subjectId, Long matchId, HttpServletResponse response) {
         StringBuffer sb = new StringBuffer();
         sb.append(UrlConstants.MATCH_H5_HOST + "/home");
-        sb.append("?subjectId="+subjectId);
-        sb.append("&matchId="+matchId);
+        sb.append("?subjectId=" + subjectId);
+        sb.append("&matchId=" + matchId);
         try {
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;filename=matchCode.png");
-            CodeUtils.creatRrCode(sb.toString(),500,500,response);
+            CodeUtils.creatRrCode(sb.toString(), 500, 500, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+

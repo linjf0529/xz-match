@@ -33,9 +33,9 @@ public interface MatchProductReceiveSetService{
 
     MatchProductReceiveSet selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(MatchProductReceiveSet record,MatchProductReceiveSetExample example);
+    int updateByExampleSelective(MatchProductReceiveSet record, MatchProductReceiveSetExample example);
 
-    int updateByExample(MatchProductReceiveSet record,MatchProductReceiveSetExample example);
+    int updateByExample(MatchProductReceiveSet record, MatchProductReceiveSetExample example);
 
     int updateByPrimaryKeySelective(MatchProductReceiveSet record);
 
@@ -48,7 +48,7 @@ public interface MatchProductReceiveSetService{
      * @param param     参数
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param) ;
+    ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param);
 
 
     /**
@@ -57,7 +57,7 @@ public interface MatchProductReceiveSetService{
      * @param param 参数
      * @return {@link MatchProductReceiveSetVO}
      */
-    MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param) ;
+    MatchProductReceiveSetVO findMatchProductReceiveSetBySubjectId(Map<String, Object> param);
 
 
     /**
@@ -66,17 +66,16 @@ public interface MatchProductReceiveSetService{
      * @param matchProductReceiveSetVO 物资领取配置VO
      * @return {@link ResponseResult}
      */
-    ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO) ;
+    ResponseResult modifyMatchProductReceiveSet(MatchProductReceiveSetVO matchProductReceiveSetVO);
 
     /**
      * 根据报名记录id和科目id查询物资领取信息
      *
      * @param userId  用户id
      * @param subjectId 对象id
-     * @param phone
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId, Long subjectId, String phone) ;
+    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId, Long subjectId,String phone) ;
 
     void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
 

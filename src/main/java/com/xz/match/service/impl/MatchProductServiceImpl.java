@@ -23,13 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
-public class MatchProductServiceImpl implements MatchProductService{
+public class MatchProductServiceImpl implements MatchProductService {
 
     @Resource
     private MatchProductMapper matchProductMapper;
@@ -216,3 +215,4 @@ public class MatchProductServiceImpl implements MatchProductService{
         return matchProductMapper.findBy(param);
     }
 }
+

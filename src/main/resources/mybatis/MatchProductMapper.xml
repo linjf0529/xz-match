@@ -10,7 +10,7 @@
     <result column="subjectId" jdbcType="BIGINT" property="subjectId" />
     <result column="matchName" jdbcType="VARCHAR" property="matchName" />
     <result column="matchId" jdbcType="BIGINT" property="matchId" />
-    <result column="inventoryType" jdbcType="VARCHAR" property="inventoryType" />
+    <result column="inventoryType" jdbcType="INTEGER" property="inventoryType" />
     <result column="productName" jdbcType="VARCHAR" property="productName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="disabled" jdbcType="INTEGER" property="disabled" />
@@ -134,7 +134,7 @@
       createdTime, updaterId, updatedBy
       )
     values (#{tenantId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
-      #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, #{inventoryType,jdbcType=VARCHAR}, 
+      #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, #{inventoryType,jdbcType=INTEGER},
       #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, 
       #{stockNumber,jdbcType=BIGINT}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
       #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
@@ -217,7 +217,7 @@
         #{matchId,jdbcType=BIGINT},
       </if>
       <if test="inventoryType != null">
-        #{inventoryType,jdbcType=VARCHAR},
+        #{inventoryType,jdbcType=INTEGER},
       </if>
       <if test="productName != null">
         #{productName,jdbcType=VARCHAR},
@@ -287,7 +287,7 @@
         matchId = #{record.matchId,jdbcType=BIGINT},
       </if>
       <if test="record.inventoryType != null">
-        inventoryType = #{record.inventoryType,jdbcType=VARCHAR},
+        inventoryType = #{record.inventoryType,jdbcType=INTEGER},
       </if>
       <if test="record.productName != null">
         productName = #{record.productName,jdbcType=VARCHAR},
@@ -339,7 +339,7 @@
       subjectId = #{record.subjectId,jdbcType=BIGINT},
       matchName = #{record.matchName,jdbcType=VARCHAR},
       matchId = #{record.matchId,jdbcType=BIGINT},
-      inventoryType = #{record.inventoryType,jdbcType=VARCHAR},
+      inventoryType = #{record.inventoryType,jdbcType=INTEGER},
       productName = #{record.productName,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       disabled = #{record.disabled,jdbcType=INTEGER},
@@ -376,7 +376,7 @@
         matchId = #{matchId,jdbcType=BIGINT},
       </if>
       <if test="inventoryType != null">
-        inventoryType = #{inventoryType,jdbcType=VARCHAR},
+        inventoryType = #{inventoryType,jdbcType=INTEGER},
       </if>
       <if test="productName != null">
         productName = #{productName,jdbcType=VARCHAR},
@@ -425,7 +425,7 @@
       subjectId = #{subjectId,jdbcType=BIGINT},
       matchName = #{matchName,jdbcType=VARCHAR},
       matchId = #{matchId,jdbcType=BIGINT},
-      inventoryType = #{inventoryType,jdbcType=VARCHAR},
+      inventoryType = #{inventoryType,jdbcType=INTEGER},
       productName = #{productName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       disabled = #{disabled,jdbcType=INTEGER},
@@ -511,6 +511,6 @@
         UPDATE
         match_product set
         stockNumber = stockNumber - #{stockNumber}
-        where id = #{productId} and stockNumber >= #{stockNumber}
+        where id = #{productId} and stockNumber &gt;= #{stockNumber}
    </update>
 </mapper>

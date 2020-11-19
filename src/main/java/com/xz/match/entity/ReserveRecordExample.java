@@ -289,6 +289,76 @@ public class ReserveRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andAppointmentTimeIsNull() {
+            addCriterion("appointmentTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeIsNotNull() {
+            addCriterion("appointmentTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeEqualTo(String value) {
+            addCriterion("appointmentTime =", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeNotEqualTo(String value) {
+            addCriterion("appointmentTime <>", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeGreaterThan(String value) {
+            addCriterion("appointmentTime >", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("appointmentTime >=", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeLessThan(String value) {
+            addCriterion("appointmentTime <", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeLessThanOrEqualTo(String value) {
+            addCriterion("appointmentTime <=", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeLike(String value) {
+            addCriterion("appointmentTime like", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeNotLike(String value) {
+            addCriterion("appointmentTime not like", value, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeIn(List<String> values) {
+            addCriterion("appointmentTime in", values, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeNotIn(List<String> values) {
+            addCriterion("appointmentTime not in", values, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeBetween(String value1, String value2) {
+            addCriterion("appointmentTime between", value1, value2, "appointmentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppointmentTimeNotBetween(String value1, String value2) {
+            addCriterion("appointmentTime not between", value1, value2, "appointmentTime");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedTimeIsNull() {
             addCriterion("createdTime is null");
             return (Criteria) this;

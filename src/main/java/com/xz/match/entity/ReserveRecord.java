@@ -18,6 +18,11 @@ public class ReserveRecord {
     private Long reserveSubId;
 
     /**
+     * 预约时间
+     */
+    private String appointmentTime;
+
+    /**
      * 创建时间
      */
     private Long createdTime;
@@ -44,6 +49,14 @@ public class ReserveRecord {
 
     public void setReserveSubId(Long reserveSubId) {
         this.reserveSubId = reserveSubId;
+    }
+
+    public String getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(String appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 
     public Long getCreatedTime() {

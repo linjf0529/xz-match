@@ -912,7 +912,11 @@
     </select>
 
     <sql id="listSQL">
-        SELECT *
+        SELECT
+          sr.*
+          <if test="appointmentTimeMark != null">
+          ,(select rr.appointmentTime from reserve_record rr where rr.recordId = sr.id limit 1) as appointmentTimeStr
+          </if>
         FROM sign_record sr
         <where>
             <include refid="condition_sql" />

@@ -70,6 +70,7 @@ public class MatchProductDispatchController extends BaseController{
 //        param.put("subjectId", "d275a322f26d11eaaa7cfa163eba29ed");
 //        param.put("isPass", true);
 //        param.put("review", 1);
+        param.put("appointmentTimeMark", 1);//该表示用户判断是否要区预约时间
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<SignRecord> dataList = signRecordService.findBy(param);
         PageInfo<SignRecord> pageInfo = new PageInfo<SignRecord>(dataList);

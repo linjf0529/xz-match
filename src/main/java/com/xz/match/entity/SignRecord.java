@@ -253,6 +253,11 @@ public class SignRecord {
      */
     private String signPic;
 
+    /**
+     * 预约时间段
+     */
+    private String appointmentTimeStr;
+
     private List<SignRecordFieldTable> signRecordInfo;
 
     public List<SignRecordFieldTable> getSignRecordInfo() {
@@ -646,5 +651,13 @@ public class SignRecord {
 
     public void setSignPic(String signPic) {
         this.signPic = signPic;
+    }
+
+    public String getAppointmentTimeStr() {
+        return appointmentTimeStr;
+    }
+
+    public void setAppointmentTimeStr(String appointmentTimeStr) {
+        this.appointmentTimeStr = appointmentTimeStr;
     }
 }

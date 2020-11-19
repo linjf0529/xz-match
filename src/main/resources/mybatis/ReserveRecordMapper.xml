@@ -7,6 +7,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="recordId" jdbcType="BIGINT" property="recordId" />
     <result column="reserveSubId" jdbcType="BIGINT" property="reserveSubId" />
+    <result column="appointmentTime" jdbcType="VARCHAR" property="appointmentTime" />
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, recordId, reserveSubId, createdTime
+    id, recordId, reserveSubId, appointmentTime, createdTime
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.ReserveRecordExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -109,10 +110,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.ReserveRecord" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into reserve_record (recordId, reserveSubId, createdTime
-      )
-    values (#{recordId,jdbcType=BIGINT}, #{reserveSubId,jdbcType=BIGINT}, #{createdTime,jdbcType=BIGINT}
-      )
+    insert into reserve_record (recordId, reserveSubId, appointmentTime, 
+      createdTime)
+    values (#{recordId,jdbcType=BIGINT}, #{reserveSubId,jdbcType=BIGINT}, #{appointmentTime,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.ReserveRecord" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -124,6 +125,9 @@
       <if test="reserveSubId != null">
         reserveSubId,
       </if>
+      <if test="appointmentTime != null">
+        appointmentTime,
+      </if>
       <if test="createdTime != null">
         createdTime,
       </if>
@@ -134,6 +138,9 @@
       </if>
       <if test="reserveSubId != null">
         #{reserveSubId,jdbcType=BIGINT},
+      </if>
+      <if test="appointmentTime != null">
+        #{appointmentTime,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         #{createdTime,jdbcType=BIGINT},
@@ -160,6 +167,9 @@
       <if test="record.reserveSubId != null">
         reserveSubId = #{record.reserveSubId,jdbcType=BIGINT},
       </if>
+      <if test="record.appointmentTime != null">
+        appointmentTime = #{record.appointmentTime,jdbcType=VARCHAR},
+      </if>
       <if test="record.createdTime != null">
         createdTime = #{record.createdTime,jdbcType=BIGINT},
       </if>
@@ -174,6 +184,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       recordId = #{record.recordId,jdbcType=BIGINT},
       reserveSubId = #{record.reserveSubId,jdbcType=BIGINT},
+      appointmentTime = #{record.appointmentTime,jdbcType=VARCHAR},
       createdTime = #{record.createdTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -189,6 +200,9 @@
       <if test="reserveSubId != null">
         reserveSubId = #{reserveSubId,jdbcType=BIGINT},
       </if>
+      <if test="appointmentTime != null">
+        appointmentTime = #{appointmentTime,jdbcType=VARCHAR},
+      </if>
       <if test="createdTime != null">
         createdTime = #{createdTime,jdbcType=BIGINT},
       </if>
@@ -200,6 +214,7 @@
     update reserve_record
     set recordId = #{recordId,jdbcType=BIGINT},
       reserveSubId = #{reserveSubId,jdbcType=BIGINT},
+      appointmentTime = #{appointmentTime,jdbcType=VARCHAR},
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

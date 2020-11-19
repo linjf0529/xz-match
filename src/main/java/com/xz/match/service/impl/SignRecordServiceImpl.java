@@ -282,6 +282,15 @@ public class SignRecordServiceImpl implements SignRecordService {
         }
         return ResponseResult.fail("上传失败");
     }
+
+    @Override
+    public ResponseResult deleteRecord(String ids) {
+        List<Long> idList = Arrays.asList(ids.split(",")).stream().map(s -> Long.parseLong(s.trim())).collect(Collectors.toList());
+        if(!idList.isEmpty()){
+            signRecordMapper.deleteRecord(idList);
+        }
+        return ResponseResult.ok();
+    }
 }
 
 

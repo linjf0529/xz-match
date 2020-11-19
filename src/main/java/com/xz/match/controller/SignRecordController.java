@@ -117,4 +117,15 @@ public class SignRecordController extends BaseController {
     public ResponseResult uploadSignPic(@RequestBody JSONObject json){
         return signRecordService.uploadSignPic(json.getLong("recordId"),json.getString("picData"));
     }
+
+
+    /**
+     * 删除选手报名记录
+     * @param ids  base64
+     * @return
+     */
+    @PostMapping("/deleteRecord")
+    public ResponseResult deleteRecord(@RequestParam String ids){
+        return signRecordService.deleteRecord(ids);
+    }
 }

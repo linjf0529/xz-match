@@ -38,5 +38,12 @@ public interface ReserveInfoService{
 
     int updateByPrimaryKey(ReserveInfo record);
 
-    public ResponseResult findBy(PageParam pageParam, Map<String, Object> param);
+    ResponseResult findBy(PageParam pageParam, Map<String, Object> param);
+
+    /**
+     * 获取导航信息
+     * @param subjectId
+     * @return
+     */
+    ReserveInfo getLocalInfo(Long subjectId);
 }

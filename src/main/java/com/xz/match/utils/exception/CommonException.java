@@ -87,7 +87,7 @@ public class CommonException extends RuntimeException {
      * @param errorMsg  the error msg
      */
     public CommonException(String errorMsg) {
-        this.errorCode = 500;
+        this.errorCode = 200;
         this.errorMsg = errorMsg;
     }
 

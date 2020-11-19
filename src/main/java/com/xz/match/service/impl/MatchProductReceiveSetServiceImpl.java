@@ -1,7 +1,6 @@
 package com.xz.match.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.chinanetcenter.api.util.EncodeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.*;
@@ -22,11 +21,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +49,9 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
 
     @Resource
     private SignRecordService signRecordService;
+
+    @Resource
+    private MatchDispatchSetService matchDispatchSetService;
 
     @Override
     public long countByExample(MatchProductReceiveSetExample example) {
@@ -166,16 +163,17 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     /**
      * 根据报名记录id和科目id查询物资领取信息
      *
-     * @param userId  用户id
+     * @param playerUserId  选手用户id
      * @param subjectId 对象id
+     * @param phone
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId,Long subjectId)  {
+    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long playerUserId, Long subjectId, String phone)  {
         // 赛事报名信息
         JSONObject signParam = new JSONObject();
         signParam.put("subjectId",subjectId);
-        signParam.put("userId",userId);
+        signParam.put("userId",playerUserId);
         List<SignRecord> signRecords = signRecordService.findBy(signParam);
         if(signRecords.isEmpty()){
             throw new CommonException("未找到该报名选手的信息");
@@ -208,12 +206,16 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             matchProductReceiveSetVO.setSignRecord(signRecord);
             matchProductReceiveSetVO.setSignRecordFieldTables(signRecordFieldTableList);
         }
-
-        // 赛事物资清单
-        Map param = new HashMap();
-        param.put("subjectId", subjectId);
-        List<MatchProduct> matchProduct = matchProductService.findBy(param);
-        matchProductReceiveSetVO.setMatchProducts(matchProduct);
+        //判断是否有发放权限
+        List<MatchDispatchSet> matchDispatchSets = matchDispatchSetService.getModes(subjectId,phone);
+        List<MatchProduct> matchProducts = new ArrayList<>();
+        if(!matchDispatchSets.isEmpty()){
+            // 赛事物资清单
+            Map param = new HashMap();
+            param.put("subjectId", subjectId);
+            matchProducts = matchProductService.findBy(param);
+        }
+        matchProductReceiveSetVO.setMatchProducts(matchProducts);
         return ResponseResult.ok().setData(matchProductReceiveSetVO);
     }
 

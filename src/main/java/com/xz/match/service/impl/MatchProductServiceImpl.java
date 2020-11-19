@@ -107,7 +107,7 @@ public class MatchProductServiceImpl implements MatchProductService{
         this.insertSelective(matchProduct);
 
         // 新增物资子项
-        if(!matchProductVO.getMatchProductSubs().isEmpty()){
+        if(matchProductVO.getMatchProductSubs() != null && matchProductVO.getMatchProductSubs().size() > 0){
             for(MatchProductSub matchProductSub:matchProductVO.getMatchProductSubs()){
                 matchProductSub.setProductId(matchProduct.getId());
                 matchProductSubService.insertSelective(matchProductSub);
@@ -178,8 +178,13 @@ public class MatchProductServiceImpl implements MatchProductService{
         // 新增物资子项
         if(!matchProductVO.getMatchProductSubs().isEmpty()){
             for(MatchProductSub matchProductSub:matchProductVO.getMatchProductSubs()){
-                ValidateUtils.notNull(matchProductSub.getId(), "物资子项ID不能为空");
-                matchProductSubService.updateByPrimaryKeySelective(matchProductSub);
+                if(matchProductSub.getId() == null) {
+                    matchProductSub.setProductId(matchProduct.getId());
+                    this.matchProductSubService.insertSelective(matchProductSub);
+                }else {
+                    this.matchProductSubService.updateByPrimaryKeySelective(matchProductSub);
+                }
+
             }
         }
         return ResponseResult.ok().setData(matchProduct);

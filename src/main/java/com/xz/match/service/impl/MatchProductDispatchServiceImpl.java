@@ -176,12 +176,13 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
      * 添加发放信息
      *
      * @param matchProductDispatchVO 物资发放VO
+     * @param currentUserName
      * @return {@link ResponseResult}
      * @ 业务异常
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResponseResult addMatchProductDispatch(MatchProductDispatchVO matchProductDispatchVO)  {
+    public ResponseResult addMatchProductDispatch(MatchProductDispatchVO matchProductDispatchVO, String currentUserName)  {
         MatchProductDispatch matchProductDispatch = new MatchProductDispatch();
         BeanUtils.copyProperties(matchProductDispatchVO, matchProductDispatch);
 
@@ -220,13 +221,10 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
             // 2-部分发放，1-已发放，0-未发放
             SignRecord signRecord = new SignRecord();
             signRecord.setId(matchProductDispatchVO.getRecordId());
-
+            matchProductDispatchCount ++;
             if(MatchProductTotal == matchProductDispatchCount){
                 // 已发放
                 signRecord.setStatus(1);
-            }else if(matchProductDispatchCount == 0) {
-                // 未发放
-                signRecord.setStatus(0);
             }else {
                 // 部分发放
                 signRecord.setStatus(2);
@@ -234,6 +232,8 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
             // 更新报名信息，物资发放的状态
             signRecordService.updateByPrimaryKeySelective(signRecord);
         }
+        matchProductDispatch.setCreatedTime(System.currentTimeMillis());
+        matchProductDispatch.setCreatedBy(currentUserName);
         return ResponseResult.ok().setData(this.insertSelective(matchProductDispatch));
     }
 

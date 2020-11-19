@@ -211,10 +211,15 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
             }
         }
         // 权限
-        if(params.get("tenantId") != null){
-            matchDispatchSetVO.setMatchDispatchPermission(this.findMatchDispatchPermissionByTenantId(params.get("tenantId").toString()));
-        }
+        matchDispatchSetVO.setMatchDispatchPermission(this.findMatchDispatchPermissionByTenantId(params.get("tenantId").toString()));
         return ResponseResult.ok().setData(matchDispatchSetVO);
     }
 
+    @Override
+    public List<MatchDispatchSet> getModes(Long subjectId, String phone) {
+        Map<String,Object> param = new HashMap<>();
+        param.put("subjectId",subjectId);
+        param.put("mobile",phone);
+        return matchDispatchSetMapper.findBy(param);
+    }
 }

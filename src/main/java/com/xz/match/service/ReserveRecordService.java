@@ -3,12 +3,12 @@ package com.xz.match.service;
 import java.util.List;
 import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveRecordExample;
-    /**
- *
+
+/**
  * @author chenwf
  * @date 2020/11/18
- */  
-public interface ReserveRecordService{
+ */
+public interface ReserveRecordService {
 
 
     long countByExample(ReserveRecordExample example);
@@ -25,12 +25,13 @@ public interface ReserveRecordService{
 
     ReserveRecord selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(ReserveRecord record,ReserveRecordExample example);
+    int updateByExampleSelective(ReserveRecord record, ReserveRecordExample example);
 
-    int updateByExample(ReserveRecord record,ReserveRecordExample example);
+    int updateByExample(ReserveRecord record, ReserveRecordExample example);
 
     int updateByPrimaryKeySelective(ReserveRecord record);
 
     int updateByPrimaryKey(ReserveRecord record);
 
 }
+

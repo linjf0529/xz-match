@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table reserve_record-->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="recordId" jdbcType="BIGINT" property="recordId" />
     <result column="reserveSubId" jdbcType="BIGINT" property="reserveSubId" />
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
   </resultMap>
@@ -71,7 +71,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, userId, reserveSubId, createdTime
+    id, recordId, reserveSubId, createdTime
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.ReserveRecordExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -109,17 +109,17 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.ReserveRecord" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into reserve_record (userId, reserveSubId, createdTime
+    insert into reserve_record (recordId, reserveSubId, createdTime
       )
-    values (#{userId,jdbcType=BIGINT}, #{reserveSubId,jdbcType=BIGINT}, #{createdTime,jdbcType=BIGINT}
+    values (#{recordId,jdbcType=BIGINT}, #{reserveSubId,jdbcType=BIGINT}, #{createdTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.ReserveRecord" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into reserve_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        userId,
+      <if test="recordId != null">
+        recordId,
       </if>
       <if test="reserveSubId != null">
         reserveSubId,
@@ -129,8 +129,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
       </if>
       <if test="reserveSubId != null">
         #{reserveSubId,jdbcType=BIGINT},
@@ -154,8 +154,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null">
-        userId = #{record.userId,jdbcType=BIGINT},
+      <if test="record.recordId != null">
+        recordId = #{record.recordId,jdbcType=BIGINT},
       </if>
       <if test="record.reserveSubId != null">
         reserveSubId = #{record.reserveSubId,jdbcType=BIGINT},
@@ -172,7 +172,7 @@
     <!--@mbg.generated-->
     update reserve_record
     set id = #{record.id,jdbcType=BIGINT},
-      userId = #{record.userId,jdbcType=BIGINT},
+      recordId = #{record.recordId,jdbcType=BIGINT},
       reserveSubId = #{record.reserveSubId,jdbcType=BIGINT},
       createdTime = #{record.createdTime,jdbcType=BIGINT}
     <if test="_parameter != null">
@@ -183,8 +183,8 @@
     <!--@mbg.generated-->
     update reserve_record
     <set>
-      <if test="userId != null">
-        userId = #{userId,jdbcType=BIGINT},
+      <if test="recordId != null">
+        recordId = #{recordId,jdbcType=BIGINT},
       </if>
       <if test="reserveSubId != null">
         reserveSubId = #{reserveSubId,jdbcType=BIGINT},
@@ -198,7 +198,7 @@
   <update id="updateByPrimaryKey" parameterType="com.xz.match.entity.ReserveRecord">
     <!--@mbg.generated-->
     update reserve_record
-    set userId = #{userId,jdbcType=BIGINT},
+    set recordId = #{recordId,jdbcType=BIGINT},
       reserveSubId = #{reserveSubId,jdbcType=BIGINT},
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

@@ -10,13 +10,12 @@ import com.xz.match.service.ReserveRecordService;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/18
- */  
+ */
 @Service
 @Transactional
-public class ReserveRecordServiceImpl implements ReserveRecordService{
+public class ReserveRecordServiceImpl implements ReserveRecordService {
 
     @Resource
     private ReserveRecordMapper reserveRecordMapper;
@@ -57,13 +56,13 @@ public class ReserveRecordServiceImpl implements ReserveRecordService{
     }
 
     @Override
-    public int updateByExampleSelective(ReserveRecord record,ReserveRecordExample example) {
-        return reserveRecordMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(ReserveRecord record, ReserveRecordExample example) {
+        return reserveRecordMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(ReserveRecord record,ReserveRecordExample example) {
-        return reserveRecordMapper.updateByExample(record,example);
+    public int updateByExample(ReserveRecord record, ReserveRecordExample example) {
+        return reserveRecordMapper.updateByExample(record, example);
     }
 
     @Override
@@ -77,3 +76,4 @@ public class ReserveRecordServiceImpl implements ReserveRecordService{
     }
 
 }
+

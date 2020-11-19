@@ -6,10 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/18
- */  
+ * @date 2020/11/19
+ */
 public interface ReserveRecordMapper {
     long countByExample(ReserveRecordExample example);
 
@@ -17,6 +16,7 @@ public interface ReserveRecordMapper {
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -24,6 +24,7 @@ public interface ReserveRecordMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -31,6 +32,7 @@ public interface ReserveRecordMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -40,6 +42,7 @@ public interface ReserveRecordMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -51,6 +54,7 @@ public interface ReserveRecordMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -58,6 +62,7 @@ public interface ReserveRecordMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

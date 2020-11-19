@@ -1,26 +1,25 @@
 package com.xz.match.entity;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/18
- */  
+ * @date 2020/11/19
+ */
 public class ReserveRecord {
     private Long id;
 
     /**
-    * 用户id
-    */
-    private Long userId;
+     * 报名记录id
+     */
+    private Long recordId;
 
     /**
-    * 预约时段表id
-    */
+     * 预约时段表id
+     */
     private Long reserveSubId;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Long createdTime;
 
     public Long getId() {
@@ -31,12 +30,12 @@ public class ReserveRecord {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getRecordId() {
+        return recordId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setRecordId(Long recordId) {
+        this.recordId = recordId;
     }
 
     public Long getReserveSubId() {

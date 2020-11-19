@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/18
+ * @date 2020/11/19
  */  
 public class ReserveRecordExample {
     protected String orderByClause;
@@ -169,63 +169,63 @@ public class ReserveRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("userId is null");
+        public Criteria andRecordIdIsNull() {
+            addCriterion("recordId is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("userId is not null");
+        public Criteria andRecordIdIsNotNull() {
+            addCriterion("recordId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Long value) {
-            addCriterion("userId =", value, "userId");
+        public Criteria andRecordIdEqualTo(Long value) {
+            addCriterion("recordId =", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Long value) {
-            addCriterion("userId <>", value, "userId");
+        public Criteria andRecordIdNotEqualTo(Long value) {
+            addCriterion("recordId <>", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Long value) {
-            addCriterion("userId >", value, "userId");
+        public Criteria andRecordIdGreaterThan(Long value) {
+            addCriterion("recordId >", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("userId >=", value, "userId");
+        public Criteria andRecordIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("recordId >=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Long value) {
-            addCriterion("userId <", value, "userId");
+        public Criteria andRecordIdLessThan(Long value) {
+            addCriterion("recordId <", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
-            addCriterion("userId <=", value, "userId");
+        public Criteria andRecordIdLessThanOrEqualTo(Long value) {
+            addCriterion("recordId <=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Long> values) {
-            addCriterion("userId in", values, "userId");
+        public Criteria andRecordIdIn(List<Long> values) {
+            addCriterion("recordId in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Long> values) {
-            addCriterion("userId not in", values, "userId");
+        public Criteria andRecordIdNotIn(List<Long> values) {
+            addCriterion("recordId not in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Long value1, Long value2) {
-            addCriterion("userId between", value1, value2, "userId");
+        public Criteria andRecordIdBetween(Long value1, Long value2) {
+            addCriterion("recordId between", value1, value2, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
-            addCriterion("userId not between", value1, value2, "userId");
+        public Criteria andRecordIdNotBetween(Long value1, Long value2) {
+            addCriterion("recordId not between", value1, value2, "recordId");
             return (Criteria) this;
         }
 

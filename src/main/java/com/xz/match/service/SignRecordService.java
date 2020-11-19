@@ -62,6 +62,8 @@ public interface SignRecordService {
      * @return
      */
     ResponseResult getRecordInfos(PageParam pageParam, JSONObject param);
+
+    ResponseResult deleteRecord(String ids);
 }
 
 

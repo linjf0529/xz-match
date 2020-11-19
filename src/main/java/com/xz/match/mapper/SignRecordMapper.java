@@ -71,4 +71,6 @@ public interface SignRecordMapper {
     List<Map<String, Object>> countSignRecordDispatchInfo(Map<String, Object> param);
 
     List<SignRecord> findBy(JSONObject param);
+
+    void deleteRecord(List<Long> idList);
 }

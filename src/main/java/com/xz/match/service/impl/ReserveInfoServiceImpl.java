@@ -1,9 +1,9 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.vo.ReserveInfoVO;
-import com.xz.match.entity.vo.SignRecordScoreVO;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
@@ -91,4 +91,20 @@ public class ReserveInfoServiceImpl implements ReserveInfoService{
         return ResponseResult.ok().setData(new PageInfo<>(reserveInfoVOS));
     }
 
+    /**
+     * 获取导航信息
+     *
+     * @param subjectId
+     * @return
+     */
+    @Override
+    public ReserveInfo getLocalInfo(Long subjectId) {
+        ReserveInfoExample reserveInfoExample = new ReserveInfoExample();
+        reserveInfoExample.createCriteria().andSubjectIdEqualTo(subjectId);
+        List<ReserveInfo> reserveInfos = this.selectByExample(reserveInfoExample);
+        if(!reserveInfos.isEmpty()){
+            return reserveInfos.get(0);
+        }
+        return null;
+    }
 }

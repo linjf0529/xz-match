@@ -3,7 +3,7 @@ package com.xz.match.entity;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
+ * @date 2020/11/19
  */
 
 /**
@@ -13,7 +13,7 @@ public class MatchInfo {
     /**
      * 主键
      */
-    private String id;
+    private Long id;
 
     /**
      * 赛事名称
@@ -24,11 +24,11 @@ public class MatchInfo {
 
     private Long createdTime;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -182,6 +182,7 @@ public class SignRecordServiceImpl implements SignRecordService {
             String teamNum = "1";
             SignRecord signRecord = new SignRecord();
             signRecord.setMatchId(matchSubject.getMatchId());//赛事Id
+            signRecord.setMatchName(matchSubject.getMatchName());//赛事名称
             signRecord.setSubjectId(matchSubject.getId());//科目ID
             signRecord.setSubjectName(matchSubject.getSubjectName());//科目名称
             signRecord.setName(name);                                    // 姓名
@@ -225,7 +226,9 @@ public class SignRecordServiceImpl implements SignRecordService {
 
     private void checkDuplicate(MatchSubject matchSubject, SignRecord signRecord, Object o) {
         JSONObject param = new JSONObject();
-        param.put("certificateNo", signRecord.getCertificateNo());
+        param.put("certificateNoStr", signRecord.getCertificateNo());
+        param.put("phoneStr", signRecord.getPhone());
+        param.put("certificateNoAndPhone", 1);
         param.put("subjectId", signRecord.getSubjectId());
         List<SignRecord> signRecords = findBy(param);
         if (!signRecords.isEmpty()) {
@@ -278,6 +281,15 @@ public class SignRecordServiceImpl implements SignRecordService {
             }
         }
         return ResponseResult.fail("上传失败");
+    }
+
+    @Override
+    public ResponseResult deleteRecord(String ids) {
+        List<Long> idList = Arrays.asList(ids.split(",")).stream().map(s -> Long.parseLong(s.trim())).collect(Collectors.toList());
+        if(!idList.isEmpty()){
+            signRecordMapper.deleteRecord(idList);
+        }
+        return ResponseResult.ok();
     }
 }
 

@@ -8,7 +8,6 @@ import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveSublist;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.vo.ReserveInfoSaveVO;
-import com.xz.match.entity.vo.ReserveInfoVO;
 import com.xz.match.entity.vo.ReserveRecordVO;
 import com.xz.match.entity.vo.ReserveSublistVO;
 import com.xz.match.service.ReserveInfoService;
@@ -19,18 +18,10 @@ import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -272,5 +263,17 @@ public class ReserveInfoController extends BaseController{
         PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
         List<ReserveRecordVO> reserveRecordVOList= reserveRecordService.findBy(param);
         return ResponseResult.ok().setData(new PageInfo<>(reserveRecordVOList));
+    }
+
+    /**
+     * 获取导航信息
+     * @param request
+     * @return
+     */
+    @AllowAnonymous
+    @GetMapping("/getLocalInfo")
+    public ResponseResult getLocalInfo(@RequestParam Long subjectId, HttpServletRequest request){
+        ReserveInfo reserveInfo = reserveInfoService.getLocalInfo(subjectId);
+        return ResponseResult.ok().setData(reserveInfo);
     }
 }

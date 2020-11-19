@@ -1,12 +1,15 @@
 package com.xz.match.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.service.MatchDispatchSetService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.RedisClient;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.exception.CommonException;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +28,8 @@ import java.util.Map;
 public class MatchDispatchSetController extends BaseController{
     @Resource
     private MatchDispatchSetService matchDispatchSetService;
+    @Resource
+    private SignRecordService signRecordService;
 
     /**
      * 创建发放人员配置
@@ -84,16 +89,22 @@ public class MatchDispatchSetController extends BaseController{
     /**
      * 通过电话查询发放人员
      *
-     * @param request 请求
-     * @param mobile  移动
+     * @param request  请求
+     * @param recordId 记录id
      * @return {@link ResponseResult}
      */
     @GetMapping
-    public ResponseResult queryMatchDispatchSetByPhone(@RequestParam("mobile") String mobile, @RequestParam("subjectId") String subjectId,HttpServletRequest request){
+    public ResponseResult queryMatchDispatchSetByPhone(@RequestParam("recordId") Long recordId,HttpServletRequest request){
+        SignRecord signRecord = signRecordService.selectByPrimaryKey(recordId);
         Map param = new HashMap();
-        param.put("mobile", mobile);
-        param.put("disabled",0);
-        return matchDispatchSetService.findMatchDispatchSetByPhone(subjectId,param);
+        if(!ObjectUtils.isEmpty(signRecord)){
+            if(signRecord.getPhone() == null){
+                throw new CommonException("报名信息未填写手机号");
+            }
+            param.put("mobile", signRecord.getPhone());
+            param.put("disabled",0);
+        }
+        return matchDispatchSetService.findMatchDispatchSetByPhone(signRecord.getSubjectId().toString(),param);
     }
     /**
      * 获取发放人员权限

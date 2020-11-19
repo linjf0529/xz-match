@@ -25,11 +25,6 @@ public class MatchInfoServiceImpl implements MatchInfoService {
     private MatchInfoMapper matchInfoMapper;
 
     @Override
-    public int deleteByPrimaryKey(String id) {
-        return matchInfoMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
     public int insert(MatchInfo record) {
         return matchInfoMapper.insert(record);
     }
@@ -40,7 +35,7 @@ public class MatchInfoServiceImpl implements MatchInfoService {
     }
 
     @Override
-    public MatchInfo selectByPrimaryKey(String id) {
+    public MatchInfo selectByPrimaryKey(Long id) {
         return matchInfoMapper.selectByPrimaryKey(id);
     }
 
@@ -99,6 +94,7 @@ public class MatchInfoServiceImpl implements MatchInfoService {
 
     /**
      * 找出所有赛事
+     *
      * @return
      */
     @Override
@@ -106,7 +102,13 @@ public class MatchInfoServiceImpl implements MatchInfoService {
         return ResponseResult.ok().setData(this.selectByExample(new MatchInfoExample()));
     }
 
+    @Override
+    public int deleteByPrimaryKey(Long id) {
+        return matchInfoMapper.deleteByPrimaryKey(id);
+    }
 }
+
+
 
 
 

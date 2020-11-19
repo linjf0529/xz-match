@@ -12,13 +12,13 @@ import com.xz.match.utils.ResponseResult;
 public interface MatchInfoService {
 
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(MatchInfo record);
 
     int insertSelective(MatchInfo record);
 
-    MatchInfo selectByPrimaryKey(String id);
+    MatchInfo selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(MatchInfo record);
 
@@ -42,6 +42,8 @@ public interface MatchInfoService {
 
     ResponseResult allMatch();
 }
+
+
 
 
 

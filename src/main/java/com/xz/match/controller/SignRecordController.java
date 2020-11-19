@@ -96,7 +96,7 @@ public class SignRecordController extends BaseController {
 
         Tuple<List<JSONObject>, List<String>> result = ExcelUtils.resolveExcelMatch(file.getFile("file"), -1, relation,true);
         if (result.value.size() > 0) {
-            throw new CommonException("数据为空");
+            throw new CommonException(JSONObject.toJSONString(result.value));
         }
         String imSubectId = result.key.get(0).getString(SignRecordFieldUtils.subjectIdControlKey);
         if(subjectId != Integer.parseInt(imSubectId)){
@@ -116,5 +116,16 @@ public class SignRecordController extends BaseController {
     @PostMapping("/uploadSignPic")
     public ResponseResult uploadSignPic(@RequestBody JSONObject json){
         return signRecordService.uploadSignPic(json.getLong("recordId"),json.getString("picData"));
+    }
+
+
+    /**
+     * 删除选手报名记录
+     * @param ids  base64
+     * @return
+     */
+    @PostMapping("/deleteRecord")
+    public ResponseResult deleteRecord(@RequestParam String ids){
+        return signRecordService.deleteRecord(ids);
     }
 }

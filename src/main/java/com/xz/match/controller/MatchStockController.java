@@ -30,11 +30,9 @@ public class MatchStockController {
      * @param request      请求
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @PostMapping
     public ResponseResult createMatchStock(@RequestBody MatchStockVO matchStockVO, HttpServletRequest request) {
         ValidateUtils.notNull(matchStockVO, "请求参数出错");
-
         return matchStockService.addMatchStock(matchStockVO);
     }
 

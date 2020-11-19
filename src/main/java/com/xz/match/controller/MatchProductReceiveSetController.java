@@ -35,9 +35,6 @@ public class MatchProductReceiveSetController extends BaseController{
     public ResponseResult querySingleMatchSubject(HttpServletRequest request)  {
 
         Map<String, Object> param = getParameterMap(request);
-
-        // 个人项目
-        param.put("type",'0');
         return matchProductReceiveSetService.findMatchProductReceiveSet(getPageParam(request),param);
     }
 

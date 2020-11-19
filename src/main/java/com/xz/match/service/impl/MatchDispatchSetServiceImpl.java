@@ -214,4 +214,11 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
         return ResponseResult.ok().setData(matchDispatchSetVO);
     }
 
+    @Override
+    public List<MatchDispatchSet> getModes(Long subjectId, String phone) {
+        Map<String,Object> param = new HashMap<>();
+        param.put("subjectId",subjectId);
+        param.put("mobile",phone);
+        return matchDispatchSetMapper.findBy(param);
+    }
 }

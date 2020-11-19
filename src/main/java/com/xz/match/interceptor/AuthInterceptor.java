@@ -1,6 +1,8 @@
 package com.xz.match.interceptor;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.xz.match.entity.UserInfo;
 import com.xz.match.utils.RedisClient;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
@@ -51,11 +53,16 @@ public class AuthInterceptor implements HandlerInterceptor {
                 abortWith(response,201);
                 return false;
             }
-            String accessToken = redisClient.get(authorization);
-            if (StringUtils.isEmpty(accessToken)) {
+            String userInfo = redisClient.get(authorization);
+            if (StringUtils.isEmpty(userInfo)) {
                 abortWith(response,201);
                 return false;
             }else {
+                JSONObject json = JSONObject.parseObject(userInfo);
+                request.setAttribute("userId",json.getLong("id"));
+                request.setAttribute("phone",json.getString("phone"));
+                request.setAttribute("certificateNo",json.getString("certificateNo"));
+                request.setAttribute("userName",json.getString("userName"));
                 return true;
             }
         }

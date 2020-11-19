@@ -1,5 +1,6 @@
 package com.xz.match.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.utils.ResponseResult;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -103,5 +104,6 @@ public class MatchScoreConfigServiceImpl implements MatchScoreConfigService{
         }
         return ResponseResult.ok().setData(cuont);
     }
+
 
 }

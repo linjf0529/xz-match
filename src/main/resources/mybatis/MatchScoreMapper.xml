@@ -568,4 +568,7 @@
       </if>
     </trim>
   </sql>
+  <delete id="deleteScore" parameterType="java.lang.Long">
+      delete from match_score where recordId=#{recordId}
+  </delete>
 </mapper>

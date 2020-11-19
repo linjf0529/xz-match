@@ -79,7 +79,8 @@ public class MatchProductReceiveSetController extends BaseController{
      */
     @GetMapping("/info")
     public ResponseResult queryMatchProductReceiveSet(@RequestParam Long userId, @RequestParam Long subjectId, HttpServletRequest request)  {
-        return matchProductReceiveSetService.findMatchProductReceiveSetByRecordIdAndSubjectId(userId,subjectId);
+        String phone = getCurrentPhone(request);
+        return matchProductReceiveSetService.findMatchProductReceiveSetByRecordIdAndSubjectId(userId,subjectId,phone);
     }
 
     /**

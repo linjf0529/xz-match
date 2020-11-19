@@ -53,7 +53,8 @@ public class MatchProductDispatchController extends BaseController{
     public ResponseResult createMatchProductDispatch(@RequestBody MatchProductDispatchVO matchProductDispatchVO, HttpServletRequest request)  {
         ValidateUtils.notNull(matchProductDispatchVO, "请求参数出错");
         ValidateUtils.notNull(matchProductDispatchVO.getProductId(), "物资ID为空");
-        return matchProductDispatchService.addMatchProductDispatch(matchProductDispatchVO);
+        String currentUserName = getCurrentUserName(request);
+        return matchProductDispatchService.addMatchProductDispatch(matchProductDispatchVO,currentUserName);
     }
 
     /**

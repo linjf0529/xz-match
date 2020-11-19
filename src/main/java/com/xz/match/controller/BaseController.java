@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xz.match.utils.NumberUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.StringUtils;
+import com.xz.match.utils.exception.CommonException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
@@ -80,5 +81,30 @@ public class BaseController {
         }
 
         return params;
+    }
+
+
+    public Long getCurrentUserId(HttpServletRequest request) {
+        Object userId = request.getAttribute("userId");
+        if(userId == null){
+            throw new CommonException("请登录");
+        }
+        return Long.parseLong(userId.toString());
+    }
+
+    public String getCurrentPhone(HttpServletRequest request) {
+        Object phone = (String)request.getAttribute("phone");
+        if(phone == null){
+            throw new CommonException("请登录");
+        }
+        return phone.toString();
+    }
+
+    public String getCurrentUserName(HttpServletRequest request) {
+        Object userName = (String)request.getAttribute("userName");
+        if(userName == null){
+            throw new CommonException("请登录");
+        }
+        return userName.toString();
     }
 }

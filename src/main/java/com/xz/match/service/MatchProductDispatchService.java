@@ -51,10 +51,11 @@ public interface MatchProductDispatchService{
      * 添加发放信息
      *
      * @param matchProductDispatchVO 物资发放VO
+     * @param currentUserName
      * @return {@link ResponseResult}
      * * @ 业务异常
      */
-    ResponseResult addMatchProductDispatch(MatchProductDispatchVO matchProductDispatchVO) ;
+    ResponseResult addMatchProductDispatch(MatchProductDispatchVO matchProductDispatchVO, String currentUserName) ;
 
 
     /**

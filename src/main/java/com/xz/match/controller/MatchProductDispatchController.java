@@ -104,8 +104,8 @@ public class MatchProductDispatchController extends BaseController{
     @GetMapping("/dispatch/statistics")
     public ResponseResult findSignRecordDispatchInfo(HttpServletRequest request) {
         JSONObject param = getJSONObject(request);
-        param.put("isPass", true);
-        param.put("review", "1");
+//        param.put("isPass", true);
+//        param.put("review", "1");
         return matchProductDispatchService.findSignRecordDispatchInfo(param);
     }
 }

@@ -3,10 +3,13 @@ package com.xz.match.service.impl;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.*;
 import com.xz.match.service.SignRecordFieldTableService;
 import com.xz.match.service.UserInfoService;
 import com.xz.match.service.WsossService;
+import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.SignRecordFieldUtils;
 import com.xz.match.utils.StringUtils;
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import com.xz.match.mapper.SignRecordMapper;
 import com.xz.match.service.SignRecordService;
@@ -106,6 +110,32 @@ public class SignRecordServiceImpl implements SignRecordService {
     @Override
     public List<SignRecord> findBy(JSONObject param) {
         return signRecordMapper.findBy(param);
+    }
+
+    /**
+     * 参赛人员列表
+     *
+     * @param pageParam
+     * @param param
+     * @return
+     */
+    @Override
+    public ResponseResult getRecordInfos(PageParam pageParam, JSONObject param) {
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<SignRecord> signRecords = this.findBy(param);
+        PageInfo<SignRecord> pageInfo = new PageInfo<>(signRecords);
+        List<SignRecord> list = pageInfo.getList();
+        if(!list.isEmpty()){
+            List<Long> recordIds = list.stream().map(s -> s.getId()).collect(Collectors.toList());
+            JSONObject fileParam = new JSONObject();
+            fileParam.put("recordIds",recordIds);
+            List<SignRecordFieldTable> signRecordFieldTables = signRecordFieldTableService.findBy(fileParam);
+            Map<Long,List<SignRecordFieldTable>> map = signRecordFieldTables.stream().collect(Collectors.groupingBy(SignRecordFieldTable::getRecordId));
+            for (SignRecord signRecord : pageInfo.getList()) {
+                signRecord.setSignRecordInfo(map.get(signRecord.getId()));
+            }
+        }
+        return ResponseResult.ok().setData(pageInfo);
     }
 
     @Override

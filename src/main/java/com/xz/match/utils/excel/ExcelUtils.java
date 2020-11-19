@@ -351,7 +351,7 @@ public class ExcelUtils {
                     }
                 }
             }
-            if(!jsonObject.containsKey(SignRecordFieldUtils.subjectIdControlKey) || StringUtils.isEmpty(jsonObject.getString(SignRecordFieldUtils.subjectIdControlKey))){
+            if(jsonObject.containsKey(SignRecordFieldUtils.subjectIdControlKey) && StringUtils.isEmpty(jsonObject.getString(SignRecordFieldUtils.subjectIdControlKey))){
                 errorList.clear();
                 break;
             }

@@ -80,4 +80,6 @@ public interface MatchScoreMapper {
      * @return
      */
     List<SignRecordScoreVO> findSignRecordScore(Map<String,Object> map);
+
+    void deleteScore(Long recordId);
 }

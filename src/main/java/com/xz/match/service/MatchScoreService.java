@@ -3,7 +3,9 @@ package com.xz.match.service;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchScore;
+import com.xz.match.entity.MatchScoreConfig;
 import com.xz.match.entity.MatchScoreExample;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
@@ -41,4 +43,6 @@ public interface MatchScoreService{
     List<MatchScore> getMatchScoreList(Map<String,Object> map);
 
     ResponseResult findSignRecordScore(PageParam pageParam, Map<String, Object> param) ;
+
+    void importScore(List<JSONObject> list, List<MatchScoreConfig> configs);
 }

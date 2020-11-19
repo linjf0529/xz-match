@@ -10,11 +10,10 @@ import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
-public interface MatchProductService{
+ */
+public interface MatchProductService {
 
 
     long countByExample(MatchProductExample example);
@@ -31,9 +30,9 @@ public interface MatchProductService{
 
     MatchProduct selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(MatchProduct record,MatchProductExample example);
+    int updateByExampleSelective(MatchProduct record, MatchProductExample example);
 
-    int updateByExample(MatchProduct record,MatchProductExample example);
+    int updateByExample(MatchProduct record, MatchProductExample example);
 
     int updateByPrimaryKeySelective(MatchProduct record);
 
@@ -82,4 +81,5 @@ public interface MatchProductService{
 
     List<MatchProduct> findBy(Map param);
 }
+
 

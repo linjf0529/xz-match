@@ -3,6 +3,8 @@ package com.xz.match.mapper;
 import com.xz.match.entity.MatchProductReceiveSet;
 import com.xz.match.entity.MatchProductReceiveSetExample;
 import java.util.List;import java.util.Map;
+
+import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -70,5 +72,5 @@ public interface MatchProductReceiveSetMapper {
 
     MatchProductReceiveSet selectMatchProductReceiveSetBySubjectId(Long subjectId);
 
-    List<MatchProductReceiveSet> findBy(Map<String, Object> param);
+    List<MatchProductReceiveSetVO> findBy(Map<String, Object> param);
 }

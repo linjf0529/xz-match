@@ -3,105 +3,106 @@ package com.xz.match.entity;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/19
+ */
+
 /**
-    * 物资明细表
-    */
+ * 物资明细表
+ */
 public class MatchProduct {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 租户ID
-    */
+     * 租户ID
+     */
     private Long tenantId;
 
     /**
-    * 科目名称
-    */
+     * 科目名称
+     */
     private String subjectName;
 
     /**
-    * 科目id
-    */
+     * 科目id
+     */
     private Long subjectId;
 
     /**
-    * 赛事名称
-    */
+     * 赛事名称
+     */
     private String matchName;
 
     /**
-    * 赛事id
-    */
+     * 赛事id
+     */
     private Long matchId;
 
     /**
-    * 物资类型(2-参赛人员物资,1-操作人员物资)
-    */
-    private String inventoryType;
+     * 物资类型(2-参赛人员物资,1-操作人员物资)
+     */
+    private Integer inventoryType;
 
     /**
-    * 物资名称
-    */
+     * 物资名称
+     */
     private String productName;
 
     /**
-    * 物资详细描述
-    */
+     * 物资详细描述
+     */
     private String description;
 
     /**
-    * 是否禁用
-    */
+     * 是否禁用
+     */
     private Integer disabled;
 
     /**
-    * 物资库存
-    */
+     * 物资库存
+     */
     private Long stockNumber;
 
     /**
-    * 是否锁定(0.未锁定,1.已锁定)
-    */
+     * 是否锁定(0.未锁定,1.已锁定)
+     */
     private Boolean locked;
 
     /**
-    * 版本号
-    */
+     * 版本号
+     */
     private Integer version;
 
     /**
-    * 最后更新时间
-    */
+     * 最后更新时间
+     */
     private Long lastAccess;
 
     /**
-    * 创建人ID
-    */
+     * 创建人ID
+     */
     private String creatorId;
 
     /**
-    * 创建人名称
-    */
+     * 创建人名称
+     */
     private String createdBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Long createdTime;
 
     /**
-    * 修改人ID
-    */
+     * 修改人ID
+     */
     private String updaterId;
 
     /**
-    * 修改人名称
-    */
+     * 修改人名称
+     */
     private String updatedBy;
 
     public Long getId() {
@@ -152,11 +153,11 @@ public class MatchProduct {
         this.matchId = matchId;
     }
 
-    public String getInventoryType() {
+    public Integer getInventoryType() {
         return inventoryType;
     }
 
-    public void setInventoryType(String inventoryType) {
+    public void setInventoryType(Integer inventoryType) {
         this.inventoryType = inventoryType;
     }
 

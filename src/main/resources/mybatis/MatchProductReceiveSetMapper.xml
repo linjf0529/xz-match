@@ -474,6 +474,7 @@
   <select id="selectMatchProductReceiveSetBySubjectId" parameterType="long" resultType="com.xz.match.entity.MatchProductReceiveSet">
         SELECT * FROM match_product_receive_set
         WHERE subjectId = #{subjectId}
+        limit 1
     </select>
 
      <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductReceiveSetVO">
@@ -483,9 +484,12 @@
     <sql id="listSQL">
         SELECT
         a.*,
-        IFNULL(b.`status`, 0) `status`,
+        b.`status`,
         b.pageShow,
         b.pageShowComment,
+        b.tips,
+        b.subjectId,
+        b.signContent,
         b.tips
         FROM match_subject a
         LEFT JOIN match_product_receive_set b

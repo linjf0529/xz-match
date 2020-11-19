@@ -118,8 +118,16 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     @Override
     public ResponseResult findMatchProductReceiveSet(PageParam pageParam, Map<String, Object> param) {
         PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
-        List<MatchProductReceiveSet> matchProductReceiveSets = matchProductReceiveSetMapper.findBy(param);
-        return ResponseResult.ok().setData(new PageInfo<>(matchProductReceiveSets));
+        List<MatchProductReceiveSetVO> matchProductReceiveSets = matchProductReceiveSetMapper.findBy(param);
+        PageInfo<MatchProductReceiveSetVO> pageInfo = new PageInfo<>(matchProductReceiveSets);
+        for (MatchProductReceiveSetVO matchProductReceiveSet : pageInfo.getList()) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(UrlConstants.MATCH_H5_HOST + "/home");
+            sb.append("?subjectId=" + matchProductReceiveSet.getSubjectId());
+            sb.append("&matchId=" + matchProductReceiveSet.getMatchId());
+            matchProductReceiveSet.setRecordUrl(sb.toString());
+        }
+        return ResponseResult.ok().setData(pageInfo);
     }
 
     /**
@@ -157,7 +165,12 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         MatchProductReceiveSet matchProductReceiveSet = new MatchProductReceiveSet();
         BeanUtils.copyProperties(matchProductReceiveSetVO, matchProductReceiveSet);
         // 场景：新增和修改在同一页面
-        return ResponseResult.ok().setData(this.insertSelective(matchProductReceiveSet));
+        if(matchProductReceiveSet.getId() == null){
+            this.insertSelective(matchProductReceiveSet);
+        }else{
+            this.updateByPrimaryKeySelective(matchProductReceiveSet);
+        }
+        return ResponseResult.ok().setData(matchProductReceiveSet);
     }
 
     /**

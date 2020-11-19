@@ -134,7 +134,7 @@
       createdTime, updaterId, updatedBy
       )
     values (#{tenantId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
-      #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, #{inventoryType,jdbcType=INTEGER},
+      #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, #{inventoryType,jdbcType=INTEGER}, 
       #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, 
       #{stockNumber,jdbcType=BIGINT}, #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, 
       #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 

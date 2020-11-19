@@ -1100,6 +1100,14 @@
             <if test="status != null">
                 AND sr.`status` = #{status}
             </if>
+           <choose>
+                <when test="signPic != null and signPic != '' and signPic == 0">
+                    AND signPic = ''
+                </when>
+                <when test="signPic != null and signPic != '' and signPic == 1">
+                    AND signPic != ''
+                </when>
+           </choose>
         </trim>
     </sql>
 </mapper>

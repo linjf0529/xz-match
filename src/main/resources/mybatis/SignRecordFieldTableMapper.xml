@@ -387,6 +387,12 @@
 			<if test="recordId != null">
 				AND a.recordId = #{recordId}
 			</if>
+			<if test="recordIds != null">
+				AND a.recordId in
+				<foreach collection="recordIds" item="recordId"  open="(" separator="," close=")">
+                    #{recordId}
+                </foreach>
+			</if>
 			<if test="playersId != null">
 				AND a.playersId = #{playersId}
 			</if>

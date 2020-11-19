@@ -14,10 +14,7 @@ import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.excel.ExcelUtils;
 import com.xz.match.utils.excel.Tuple;
 import com.xz.match.utils.exception.CommonException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
@@ -43,6 +40,17 @@ public class SignRecordController extends BaseController {
     private SubjectSignFieldService subjectSignFieldService;
     @Resource
     private SignRecordService signRecordService;
+
+
+    /**
+     * 参赛人员列表
+     * @return
+     */
+    @GetMapping
+    public ResponseResult getRecordInfos(HttpServletRequest request){
+        JSONObject param = getJSONObject(request);
+        return signRecordService.getRecordInfos(getPageParam(request),param);
+    }
 
     /**
      * 导入赛事科目模板

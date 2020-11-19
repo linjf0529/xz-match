@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchSubject;
 import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
+import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.excel.Tuple;
 
@@ -53,6 +54,14 @@ public interface SignRecordService {
      * @param picData
      */
     ResponseResult uploadSignPic(Long recordId, String picData);
+
+    /**
+     * 参赛人员列表
+     * @param pageParam
+     * @param param
+     * @return
+     */
+    ResponseResult getRecordInfos(PageParam pageParam, JSONObject param);
 }
 
 

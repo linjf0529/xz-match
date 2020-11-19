@@ -14,6 +14,10 @@ public class ReserveInfoVO extends ReserveInfo {
      */
     private String subListId;
     /**
+     * 预约日期
+     */
+    private String reserveDate;
+    /**
      * 预约时间
      */
     private String reserveDateTime;
@@ -41,6 +45,14 @@ public class ReserveInfoVO extends ReserveInfo {
 
     public void setReserveDateTime(String reserveDateTime) {
         this.reserveDateTime = reserveDateTime;
+    }
+
+    public String getReserveDate() {
+        return reserveDate;
+    }
+
+    public void setReserveDate(String reserveDate) {
+        this.reserveDate = reserveDate;
     }
 
     public Integer getReserveLimit() {

@@ -1,13 +1,24 @@
 package com.xz.match.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.ReserveInfo;
+import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveSublist;
+import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.vo.ReserveInfoSaveVO;
+import com.xz.match.entity.vo.ReserveInfoVO;
+import com.xz.match.entity.vo.ReserveRecordVO;
+import com.xz.match.entity.vo.ReserveSublistVO;
 import com.xz.match.service.ReserveInfoService;
+import com.xz.match.service.ReserveRecordService;
 import com.xz.match.service.ReserveSublistService;
+import com.xz.match.service.SignRecordService;
+import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,37 +53,34 @@ public class ReserveInfoController extends BaseController{
     @Resource
     private ReserveSublistService reserveSublistService;
 
+    @Resource
+    private SignRecordService signRecordService;
+
+    @Resource
+    private ReserveRecordService reserveRecordService;
+
     /**
      * 预约管理列表
      * @param request
      * @return
      */
+    @AllowAnonymous
     @GetMapping
     public ResponseResult findReserveInfo(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
-        return ResponseResult.ok().setData(reserveInfoService.findBy(getPageParam(request),param));
+        return reserveInfoService.findBy(getPageParam(request),param);
     }
-
+    @AllowAnonymous
     @GetMapping("/details")
     public ResponseResult getReserveInfo(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
         Long id=param.getLong("id");
         ValidateUtils.notNull(id,"id不能为空");
-        ReserveInfoSaveVO vo=new ReserveInfoSaveVO();
+        Long subListId=param.getLong("subListId");
+        ValidateUtils.notNull(subListId,"subListId不能为空");
         ReserveInfo reserveInfo=reserveInfoService.selectByPrimaryKey(id);
-        vo.setId(reserveInfo.getId());
-        vo.setMatchId(reserveInfo.getMatchId());
-        vo.setMatchName(reserveInfo.getMatchName());
-        vo.setSubjectId(reserveInfo.getSubjectId());
-        vo.setSubjectName(reserveInfo.getSubjectName());
-        vo.setLatitude(reserveInfo.getLatitude());
-        vo.setLongitude(reserveInfo.getLongitude());
-        vo.setAddress(reserveInfo.getAddress());
-        vo.setReserveDate(reserveInfo.getReserveDate());
-        Map<String,Object> map=new HashMap<>();
-        map.put("reserveId",id);
-        vo.setSublists(reserveSublistService.findBy(map));
-        return ResponseResult.ok().setData(reserveInfoService.findBy(getPageParam(request),param));
+        reserveInfo.setSublist(reserveSublistService.selectByPrimaryKey(subListId));
+        return ResponseResult.ok().setData(reserveInfo);
     }
 
     /**
@@ -76,11 +88,12 @@ public class ReserveInfoController extends BaseController{
      * @param reserveInfoSaveVO
      * @return
      */
+    @AllowAnonymous
     @PostMapping
     public ResponseResult saveReserveInfo(@RequestBody ReserveInfoSaveVO reserveInfoSaveVO){
         ValidateUtils.notNull(reserveInfoSaveVO,"参数异常");
         ValidateUtils.notNull(reserveInfoSaveVO.getReserveDates(),"预约日期不能为空");
-        ValidateUtils.notNull(reserveInfoSaveVO.getSublist(),"预约时间段不能为空");
+        ValidateUtils.notNull(reserveInfoSaveVO.getSublists(),"预约时间段不能为空");
         ReserveInfo reserveInfo=new ReserveInfo();
         reserveInfo.setMatchId(reserveInfoSaveVO.getMatchId());
         reserveInfo.setMatchName(reserveInfoSaveVO.getMatchName());
@@ -89,17 +102,16 @@ public class ReserveInfoController extends BaseController{
         reserveInfo.setAddress(reserveInfoSaveVO.getAddress());
         reserveInfo.setLatitude(reserveInfoSaveVO.getLatitude());
         reserveInfo.setLongitude(reserveInfoSaveVO.getLongitude());
+        reserveInfo.setCreatedTime(new Date().getTime());
+        reserveInfoService.insert(reserveInfo);
         for (String reserveDate:reserveInfoSaveVO.getReserveDates()){
-            reserveInfo.setReserveDate(reserveDate);
             reserveInfo.setCreatedTime(new Date().getTime());
-            reserveInfoService.insert(reserveInfo);
             for(ReserveSublist reserveSublist:reserveInfoSaveVO.getSublists()){
                 reserveSublist.setReserveId(reserveInfo.getId());
                 reserveSublist.setReserveDate(reserveDate);
                 reserveSublist.setCreatedTime(new Date().getTime());
                 reserveSublistService.insert(reserveSublist);
             }
-            reserveInfo.setId(null);
         }
         return ResponseResult.ok();
     }
@@ -109,6 +121,7 @@ public class ReserveInfoController extends BaseController{
      * @param reserveInfo
      * @return
      */
+    @AllowAnonymous
     @PutMapping
     public ResponseResult updateReserveInfo(@RequestBody ReserveInfo reserveInfo){
         ValidateUtils.notNull(reserveInfo,"参数异常");
@@ -124,12 +137,140 @@ public class ReserveInfoController extends BaseController{
      * @param request
      * @return
      */
+    @AllowAnonymous
     @DeleteMapping("/{id:\\w+}")
     public ResponseResult deleteReserveInfo(@PathVariable("id") Long id, HttpServletRequest request){
         ReserveSublist reserveSublist=reserveSublistService.selectByPrimaryKey(id);
         reserveSublistService.deleteByPrimaryKey(id);
         Map<String,Object> map=new HashMap<>();
         map.put("reserveId",reserveSublist.getReserveId());
+        List<ReserveSublist> reserveSublistList=reserveSublistService.findBy(map);
+        if(reserveSublistList==null || reserveSublistList.size()<1){
+            reserveInfoService.deleteByPrimaryKey(reserveSublist.getReserveId());
+        }
         return ResponseResult.ok();
+    }
+    /**
+     * 预约管理列表
+     * @param request
+     * @return
+     */
+    @AllowAnonymous
+    @GetMapping("/date")
+    public ResponseResult findReserveSubListDate(HttpServletRequest request) throws ParseException {
+        JSONObject param = getJSONObject(request);
+        PageParam pageParam=getPageParam(request);
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        Long subjectId=param.getLong("subjectId");
+        ValidateUtils.notNull(subjectId,"项目id不能为空");
+        List<ReserveSublistVO> dateSublist=reserveSublistService.getReserveDate(subjectId);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate=sdf.parse(sdf.format(new Date()));
+        Date endDate;
+        if(dateSublist!=null){
+            Map<String,Object> map=new HashMap<>();
+            for(int i=0;i<dateSublist.size();i++){
+                dateSublist.get(i).setState(1);
+                endDate=sdf.parse(dateSublist.get(i).getReserveDate());
+                if (endDate.before(newDate)){
+                    dateSublist.get(i).setState(2);
+                    continue;
+                }
+                map.put("reserveId",dateSublist.get(i).getReserveId());
+                map.put("reserveDate",dateSublist.get(i).getReserveDate());
+                List<ReserveSublistVO> timeSublist=reserveSublistService.getReserveTime(map);
+                for(ReserveSublistVO timeVo:timeSublist){
+                    if(timeVo.getState()==0){
+                        dateSublist.get(i).setState(0);
+                    }
+                }
+            }
+        }
+        return ResponseResult.ok().setData(new PageInfo<>(dateSublist));
+    }
+
+    @AllowAnonymous
+    @GetMapping("/time")
+    public ResponseResult findReserveSubListTime(HttpServletRequest request) throws ParseException {
+        JSONObject param = getJSONObject(request);
+        PageParam pageParam=getPageParam(request);
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<ReserveSublistVO> timeSublist=reserveSublistService.getReserveTime(param);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date newDate=sdf.parse(sdf.format(new Date()));
+        Date endDate;
+        for(int i=1;i<timeSublist.size();i++){
+            endDate=sdf.parse(timeSublist.get(i).getReserveDate()+" "+timeSublist.get(i).getEndTime());
+            if(endDate.before(newDate)){
+                timeSublist.get(i).setState(2);
+            }
+        }
+        return ResponseResult.ok().setData(new PageInfo<>(timeSublist));
+    }
+
+    /**
+     * 预约
+     * @param reserveRecordVO
+     * @return
+     */
+    @AllowAnonymous
+    @PostMapping("/record")
+    public ResponseResult saveReserveRecord(@RequestBody ReserveRecordVO reserveRecordVO){
+        ValidateUtils.notNull(reserveRecordVO,"参数异常");
+        ValidateUtils.notNull(reserveRecordVO.getUserId(),"用户id不能为空");
+        ValidateUtils.notNull(reserveRecordVO.getSubjectId(),"项目id不能为空");
+        ValidateUtils.notNull(reserveRecordVO.getReserveSubId(),"预约时间段id不能为空");
+        JSONObject object=new JSONObject();
+        object.put("userId",reserveRecordVO.getUserId());
+        object.put("subjectId",reserveRecordVO.getSubjectId());
+        List<SignRecord> signRecords=signRecordService.findBy(object);
+        ValidateUtils.notNull(signRecords,"未找到用户在该项目的报名记录,无法预约!");
+        Long recordId=signRecords.get(0).getId();
+        Map<String,Object> map=new HashMap<>();
+        map.put("recordId",recordId);
+        List<ReserveRecordVO> reserveRecordList=reserveRecordService.findBy(map);
+        ReserveRecord reserveRecord=new ReserveRecord();
+        Long reserveSubId=reserveRecordVO.getReserveSubId();
+        ReserveSublist reserveSublist=reserveSublistService.selectByPrimaryKey(reserveSubId);
+        ValidateUtils.notNull(reserveSublist,"找不到该预约时间段");
+        if(reserveRecordList==null || reserveRecordList.size()==0){
+            reserveRecord.setRecordId(recordId);
+            reserveRecord.setReserveSubId(reserveSubId);
+            reserveRecord.setCreatedTime(new Date().getTime());
+            reserveRecord.setAppointmentTime(reserveSublist.getReserveDate()+" "+reserveSublist.getStartTime()+"-"+reserveSublist.getEndTime());
+            reserveRecordService.insert(reserveRecord);
+        }else {
+            reserveRecord=reserveRecordList.get(0);
+            ReserveSublist oldReserveSublist=reserveSublistService.selectByPrimaryKey(reserveRecord.getReserveSubId());
+            reserveRecord.setReserveSubId(reserveSubId);
+            reserveRecord.setCreatedTime(new Date().getTime());
+            reserveRecord.setAppointmentTime(reserveSublist.getReserveDate()+" "+reserveSublist.getStartTime()+"-"+reserveSublist.getEndTime());
+            reserveRecordService.updateByPrimaryKey(reserveRecord);
+            if(oldReserveSublist!=null){
+                oldReserveSublist.setReserveNumber(oldReserveSublist.getReserveNumber()-1);
+            }
+            reserveSublistService.updateByPrimaryKeySelective(oldReserveSublist);
+        }
+        if (reserveSublist.getReserveLimit()!=null){
+            reserveSublist.setReserveNumber(reserveSublist.getReserveLimit()+1);
+        }else {
+            reserveSublist.setReserveNumber(1);
+        }
+        reserveSublistService.updateByPrimaryKeySelective(reserveSublist);
+        return ResponseResult.ok();
+    }
+    /**
+     * 预约人员列表
+     * @param request
+     * @return
+     */
+    @AllowAnonymous
+    @GetMapping("/record")
+    public ResponseResult getReserveRecord(HttpServletRequest request){
+        PageParam pageParam=getPageParam(request);
+        JSONObject param=getJSONObject(request);
+        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        List<ReserveRecordVO> reserveRecordVOList= reserveRecordService.findBy(param);
+        return ResponseResult.ok().setData(new PageInfo<>(reserveRecordVOList));
     }
 }

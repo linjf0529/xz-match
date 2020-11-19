@@ -12,7 +12,6 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="longitude" jdbcType="VARCHAR" property="longitude" />
     <result column="latitude" jdbcType="VARCHAR" property="latitude" />
-    <result column="reserveDate" jdbcType="VARCHAR" property="reserveDate" />
     <result column="createdTime" jdbcType="BIGINT" property="createdTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -77,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, matchId, matchName, subjectId, subjectName, address, longitude, latitude, reserveDate, 
+    id, matchId, matchName, subjectId, subjectName, address, longitude, latitude,
     createdTime
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.ReserveInfoExample" resultMap="BaseResultMap">
@@ -118,11 +117,11 @@
     <!--@mbg.generated-->
     insert into reserve_info (matchId, matchName, subjectId, 
       subjectName, address, longitude, 
-      latitude, reserveDate, createdTime
+      latitude,  createdTime
       )
     values (#{matchId,jdbcType=BIGINT}, #{matchName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
       #{subjectName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
-      #{latitude,jdbcType=VARCHAR}, #{reserveDate,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}
+      #{latitude,jdbcType=VARCHAR},  #{createdTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.ReserveInfo" useGeneratedKeys="true">
@@ -150,9 +149,6 @@
       <if test="latitude != null">
         latitude,
       </if>
-      <if test="reserveDate != null">
-        reserveDate,
-      </if>
       <if test="createdTime != null">
         createdTime,
       </if>
@@ -178,9 +174,6 @@
       </if>
       <if test="latitude != null">
         #{latitude,jdbcType=VARCHAR},
-      </if>
-      <if test="reserveDate != null">
-        #{reserveDate,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         #{createdTime,jdbcType=BIGINT},
@@ -222,9 +215,6 @@
       <if test="record.latitude != null">
         latitude = #{record.latitude,jdbcType=VARCHAR},
       </if>
-      <if test="record.reserveDate != null">
-        reserveDate = #{record.reserveDate,jdbcType=VARCHAR},
-      </if>
       <if test="record.createdTime != null">
         createdTime = #{record.createdTime,jdbcType=BIGINT},
       </if>
@@ -244,7 +234,6 @@
       address = #{record.address,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=VARCHAR},
       latitude = #{record.latitude,jdbcType=VARCHAR},
-      reserveDate = #{record.reserveDate,jdbcType=VARCHAR},
       createdTime = #{record.createdTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -275,9 +264,6 @@
       <if test="latitude != null">
         latitude = #{latitude,jdbcType=VARCHAR},
       </if>
-      <if test="reserveDate != null">
-        reserveDate = #{reserveDate,jdbcType=VARCHAR},
-      </if>
       <if test="createdTime != null">
         createdTime = #{createdTime,jdbcType=BIGINT},
       </if>
@@ -294,7 +280,6 @@
       address = #{address,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=VARCHAR},
-      reserveDate = #{reserveDate,jdbcType=VARCHAR},
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -304,22 +289,23 @@
         s.id AS subListId,
         s.reserveLimit,
         s.reserveNumber,
-        concat( i.reserveDate, ' ', s.startTime, '-', s.endTime ) AS reserveDateTime
+        s.reserveDate,
+        concat( s.reserveDate,' ',s.startTime,'-',s.endTime ) AS reserveDateTime
     FROM
         reserve_info i
         INNER JOIN reserve_sublist s ON i.id = s.reserveId
     <where>
       <include refid="condition_sql" />
     </where>
-    order i.createdTime desc
+    order by i.createdTime desc
   </select>
 
   <sql id="condition_sql">
     <trim prefixOverrides="AND | OR">
-      <if test="matchId != null">
+      <if test="matchId != null and matchId !=''">
         AND i.matchId = #{matchId}
       </if>
-      <if test="subjectId != null">
+      <if test="subjectId != null and subjectId !=''">
         AND i.subjectId = #{subjectId}
       </if>
     </trim>

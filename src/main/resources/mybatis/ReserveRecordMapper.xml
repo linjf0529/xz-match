@@ -218,4 +218,28 @@
       createdTime = #{createdTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.ReserveRecordVO">
+    SELECT
+      r.*,
+      s.`name`,
+      s.certificateNo,
+      s.matchNo
+    FROM
+      reserve_record r
+      LEFT JOIN sign_record s ON r.recordId = s.id
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    order by createdTime desc
+  </select>
+  <sql id="condition_sql">
+    <trim prefixOverrides="AND | OR">
+      <if test="recordId != null and recordId !=''">
+        AND r.recordId = #{recordId}
+      </if>
+      <if test="reserveSubId != null and reserveSubId !=''">
+        AND r.reserveSubId = #{reserveSubId}
+      </if>
+    </trim>
+  </sql>
 </mapper>

@@ -44,11 +44,6 @@ public class ReserveInfo {
     private String latitude;
 
     /**
-    * 预约日期
-    */
-    private String reserveDate;
-
-    /**
     * 创建时间
     */
     private Long createdTime;
@@ -121,13 +116,6 @@ public class ReserveInfo {
         this.latitude = latitude;
     }
 
-    public String getReserveDate() {
-        return reserveDate;
-    }
-
-    public void setReserveDate(String reserveDate) {
-        this.reserveDate = reserveDate;
-    }
 
     public Long getCreatedTime() {
         return createdTime;

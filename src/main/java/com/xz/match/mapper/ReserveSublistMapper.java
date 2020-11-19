@@ -5,6 +5,7 @@ import com.xz.match.entity.ReserveSublistExample;
 import java.util.List;
 import java.util.Map;
 
+import com.xz.match.entity.vo.ReserveSublistVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -71,4 +72,18 @@ public interface ReserveSublistMapper {
      * @return
      */
     List<ReserveSublist> findBy(Map<String,Object> map);
+
+    /**
+     * 根据项目id获取预约日期
+     * @param subjectId
+     * @return
+     */
+    List<ReserveSublistVO> getReserveDate(@Param("subjectId") Long subjectId);
+
+    /**
+     * 预约时间
+     * @param map
+     * @return
+     */
+    List<ReserveSublistVO> getReserveTime(Map<String,Object> map);
 }

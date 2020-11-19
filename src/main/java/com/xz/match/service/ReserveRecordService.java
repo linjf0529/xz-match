@@ -1,8 +1,11 @@
 package com.xz.match.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveRecordExample;
+import com.xz.match.entity.vo.ReserveRecordVO;
 
 /**
  * @author chenwf
@@ -32,6 +35,10 @@ public interface ReserveRecordService {
     int updateByPrimaryKeySelective(ReserveRecord record);
 
     int updateByPrimaryKey(ReserveRecord record);
+
+    List<ReserveRecordVO> findBy(Map<String,Object> map);
+
+
 
 }
 

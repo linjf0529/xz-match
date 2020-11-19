@@ -8,6 +8,7 @@ import com.xz.match.service.MatchCertificateSublistService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,6 +55,7 @@ public class MatchCertificateController extends BaseController{
      * @return
      * @throws
      */
+    @AllowAnonymous
     @GetMapping("/details")
     public ResponseResult getDetails(HttpServletRequest request) {
         JSONObject params=getJSONObject(request);
@@ -74,6 +76,7 @@ public class MatchCertificateController extends BaseController{
      * @param matchCertificate
      * @return
      */
+    @AllowAnonymous
     @PostMapping
     public ResponseResult save(@RequestBody MatchCertificate matchCertificate) {
         List<MatchCertificateSublist> sublists=matchCertificate.getSublist();
@@ -117,6 +120,7 @@ public class MatchCertificateController extends BaseController{
      * @return
      */
     @GetMapping("/fileUrl")
+    @AllowAnonymous
     public ResponseResult getFileUrl(HttpServletRequest request, HttpServletResponse response) {
         JSONObject params=getJSONObject(request);
         ValidateUtils.notNull(params.getString("recordId"),"报名记录不能为空");

@@ -3,6 +3,9 @@ package com.xz.match.mapper;
 import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveRecordExample;
 import java.util.List;
+import java.util.Map;
+
+import com.xz.match.entity.vo.ReserveRecordVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -67,4 +70,6 @@ public interface ReserveRecordMapper {
      * @return update count
      */
     int updateByPrimaryKey(ReserveRecord record);
+
+    List<ReserveRecordVO> findBy(Map<String,Object> map);
 }

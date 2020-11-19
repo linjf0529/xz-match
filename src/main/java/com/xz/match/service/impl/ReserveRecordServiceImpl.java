@@ -1,8 +1,11 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.entity.vo.ReserveRecordVO;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 import com.xz.match.entity.ReserveRecord;
 import com.xz.match.entity.ReserveRecordExample;
 import com.xz.match.mapper.ReserveRecordMapper;
@@ -73,6 +76,11 @@ public class ReserveRecordServiceImpl implements ReserveRecordService {
     @Override
     public int updateByPrimaryKey(ReserveRecord record) {
         return reserveRecordMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<ReserveRecordVO> findBy(Map<String, Object> map) {
+        return reserveRecordMapper.findBy(map);
     }
 
 }

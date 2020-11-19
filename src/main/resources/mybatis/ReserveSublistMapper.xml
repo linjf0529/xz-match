@@ -271,7 +271,7 @@
         <where>
           <include refid="condition_sql" />
         </where>
-        order createdTime desc
+        order by createdTime desc
   </select>
 
     <sql id="condition_sql">
@@ -281,4 +281,33 @@
         </if>
       </trim>
     </sql>
+
+  <select id="getReserveDate" parameterType="java.lang.Long" resultType="com.xz.match.entity.vo.ReserveSublistVO">
+      SELECT
+          r.id as reserveId,
+          s.reserveDate
+      FROM
+          reserve_sublist s
+          LEFT JOIN reserve_info r ON r.id = s.reserveId
+      WHERE
+          r.subjectId = #{subjectId}
+      GROUP BY
+          s.reserveDate,
+          r.id
+      ORDER BY s.reserveDate desc
+  </select>
+  <select id="getReserveTime" parameterType="map" resultType="com.xz.match.entity.vo.ReserveSublistVO">
+    SELECT
+        *,
+        concat( startTime, '-', endTime ) AS reserveTime,
+    CASE
+        WHEN reserveNumber >= reserveLimit THEN 1
+        ELSE 0
+        END AS state
+    FROM
+        reserve_sublist
+    WHERE
+        reserveId = #{reserveId}
+        AND reserveDate = #{reserveDate}
+  </select>
 </mapper>

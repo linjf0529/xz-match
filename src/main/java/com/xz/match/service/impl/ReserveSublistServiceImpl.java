@@ -1,5 +1,6 @@
 package com.xz.match.service.impl;
 
+import com.xz.match.entity.vo.ReserveSublistVO;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.xz.match.entity.ReserveSublistExample;
@@ -81,6 +82,16 @@ public class ReserveSublistServiceImpl implements ReserveSublistService{
     @Override
     public List<ReserveSublist> findBy(Map<String, Object> map) {
         return reserveSublistMapper.findBy(map);
+    }
+
+    @Override
+    public List<ReserveSublistVO> getReserveDate(Long subjectId) {
+        return reserveSublistMapper.getReserveDate(subjectId);
+    }
+
+    @Override
+    public List<ReserveSublistVO> getReserveTime(Map<String, Object> map) {
+        return reserveSublistMapper.getReserveTime(map);
     }
 
 }

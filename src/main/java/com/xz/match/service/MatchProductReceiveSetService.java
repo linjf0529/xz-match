@@ -71,11 +71,11 @@ public interface MatchProductReceiveSetService{
     /**
      * 根据报名记录id和科目id查询物资领取信息
      *
-     * @param recordId  记录id
+     * @param userId  用户id
      * @param subjectId 对象id
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId) ;
+    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId, Long subjectId) ;
 
     void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
 

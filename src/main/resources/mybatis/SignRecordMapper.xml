@@ -1108,6 +1108,9 @@
                     AND signPic != ''
                 </when>
            </choose>
+           <if test="certificateNoAndPhone != null">
+                AND (sr.phone = #{phoneStr} or sr.certificateNo = #{certificateNoStr})
+            </if>
         </trim>
     </sql>
 </mapper>

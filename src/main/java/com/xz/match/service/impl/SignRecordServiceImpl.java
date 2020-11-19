@@ -225,7 +225,9 @@ public class SignRecordServiceImpl implements SignRecordService {
 
     private void checkDuplicate(MatchSubject matchSubject, SignRecord signRecord, Object o) {
         JSONObject param = new JSONObject();
-        param.put("certificateNo", signRecord.getCertificateNo());
+        param.put("certificateNoStr", signRecord.getCertificateNo());
+        param.put("phoneStr", signRecord.getPhone());
+        param.put("certificateNoAndPhone", 1);
         param.put("subjectId", signRecord.getSubjectId());
         List<SignRecord> signRecords = findBy(param);
         if (!signRecords.isEmpty()) {

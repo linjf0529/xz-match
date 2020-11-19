@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,15 +166,22 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     /**
      * 根据报名记录id和科目id查询物资领取信息
      *
-     * @param recordId  记录id
+     * @param userId  用户id
      * @param subjectId 对象id
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long recordId, Long subjectId)  {
+    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId,Long subjectId)  {
         // 赛事报名信息
+        JSONObject signParam = new JSONObject();
+        signParam.put("subjectId",subjectId);
+        signParam.put("userId",userId);
+        List<SignRecord> signRecords = signRecordService.findBy(signParam);
+        if(signRecords.isEmpty()){
+            throw new CommonException("未找到该报名选手的信息");
+        }
         Map paramMap = new HashMap();
-        paramMap.put("recordId", recordId);
+        paramMap.put("recordId", signRecords.get(0).getId());
         List<SignRecordFieldTable> signRecordFieldTables = signRecordFieldTableService.findBy(paramMap);
 
         // 物资领取信息

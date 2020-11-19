@@ -1,6 +1,7 @@
 package com.xz.match.utils.excel;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xz.match.utils.SignRecordFieldUtils;
 import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.enums.ExcelType;
@@ -333,7 +334,7 @@ public class ExcelUtils {
             if (row1 == null) continue;
 
             JSONObject jsonObject = new JSONObject();
-
+            List<String> keys = new ArrayList<>();
             for (Map.Entry<Tuple<String, Integer>, Boolean> entry : indexMap.entrySet()) {
 
                 String key = entry.getKey().key;
@@ -349,6 +350,10 @@ public class ExcelUtils {
                         jsonObject.put(key, cellFormatValue);
                     }
                 }
+            }
+            if(!jsonObject.containsKey(SignRecordFieldUtils.subjectIdControlKey) || StringUtils.isEmpty(jsonObject.getString(SignRecordFieldUtils.subjectIdControlKey))){
+                errorList.clear();
+                break;
             }
             resolvingData.add(jsonObject);
         }

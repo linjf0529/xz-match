@@ -261,14 +261,11 @@ public class MatchScoreController extends BaseController{
             }
         });
 
-        Tuple<List<JSONObject>, List<String>> result = ExcelUtils.resolveExcelMatch(file.getFile("file"), -1, relation,true);
+        Tuple<List<JSONObject>, List<String>> result = ExcelUtils.resolveExcelMatch(file.getFile("file"), -1, relation,true,2);
         if (result.value.size() > 0) {
-            return ResponseResult.getResponse(0);
+            return ResponseResult.fail(0,"读取到的文件数据缺失!");
         }
         matchScoreService.importScore(result.key,matchScoreConfigList);
-
-//        signRecordService.importMacthSignRecord(matchSubject, result,relation,param);
-
         return ResponseResult.ok();
     }
 }

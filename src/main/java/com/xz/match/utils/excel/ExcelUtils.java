@@ -258,10 +258,11 @@ public class ExcelUtils {
      * @param limitRowCount
      * @param relation      ("name", "姓名"); Integer表示状态，(0-不显示,1-显示,2-显示且必填)
      * @param isAnnotation      第一行是否有注释 true 有 false 没有
+     * @param i
      * @return
      * @throws Exception
      */
-    public static Tuple<List<JSONObject>, List<String>> resolveExcelMatch(MultipartFile file, int limitRowCount, Map<Tuple<String, String>, Integer> relation, boolean isAnnotation) throws Exception {
+    public static Tuple<List<JSONObject>, List<String>> resolveExcelMatch(MultipartFile file, int limitRowCount, Map<Tuple<String, String>, Integer> relation, boolean isAnnotation, int type) throws Exception {
         ExcelType excelType;
         if (file.getOriginalFilename().endsWith(".xls")) {
             excelType = ExcelType.EXCEL_XLS;
@@ -271,7 +272,7 @@ public class ExcelUtils {
             throw new CommonException("导入模板格式出错");
         }
         InputStream fileIn = file.getInputStream();
-        return resolveExcelMatch(fileIn, limitRowCount, relation, excelType,isAnnotation);
+        return resolveExcelMatch(fileIn, limitRowCount, relation, excelType,isAnnotation,type);
     }
 
     /**
@@ -282,10 +283,11 @@ public class ExcelUtils {
      * @param relation      ("name", "姓名"); Integer表示是否必须，2为必填，(0-不显示,1-显示,2-显示且必填)  @com.tjcloud.match.base.entity.SubjectSignField
      * @param excelType     excel类型 EXCEL_XLS or EXCEL_XLSX
      * @param isAnnotation      第一行是否有注释 true 有 false 没有
+     * @param type
      * @return
      * @throws Exception
      */
-    public static Tuple<List<JSONObject>, List<String>> resolveExcelMatch(InputStream fileIn, int limitRowCount, Map<Tuple<String, String>, Integer> relation, ExcelType excelType, boolean isAnnotation) throws Exception {
+    public static Tuple<List<JSONObject>, List<String>> resolveExcelMatch(InputStream fileIn, int limitRowCount, Map<Tuple<String, String>, Integer> relation, ExcelType excelType, boolean isAnnotation, int type) throws Exception {
 
         // 根据指定的文件输入流导入Excel从而产生Workbook对象
         Workbook workbook;
@@ -351,7 +353,7 @@ public class ExcelUtils {
                     }
                 }
             }
-            if(jsonObject.containsKey(SignRecordFieldUtils.subjectIdControlKey) && StringUtils.isEmpty(jsonObject.getString(SignRecordFieldUtils.subjectIdControlKey))){
+            if(type == 1 && (!jsonObject.containsKey(SignRecordFieldUtils.subjectIdControlKey) || StringUtils.isEmpty(jsonObject.getString(SignRecordFieldUtils.subjectIdControlKey)))){
                 errorList.clear();
                 break;
             }

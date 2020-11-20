@@ -109,7 +109,11 @@ public class MatchProductServiceImpl implements MatchProductService {
         if (matchProductVO.getMatchProductSubs() != null && matchProductVO.getMatchProductSubs().size() > 0) {
             for (MatchProductSub matchProductSub : matchProductVO.getMatchProductSubs()) {
                 matchProductSub.setProductId(matchProduct.getId());
-                matchProductSubService.insertSelective(matchProductSub);
+                if(matchProductSub.getId() == null) {
+                    matchProductSubService.insertSelective(matchProductSub);
+                }else{
+                    matchProductSubService.updateByPrimaryKeySelective(matchProductSub);
+                }
             }
         }
         return ResponseResult.ok().setData(matchProduct);

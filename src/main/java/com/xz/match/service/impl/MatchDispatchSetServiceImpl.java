@@ -2,11 +2,11 @@ package com.xz.match.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.vo.MatchDispatchPermissionVO;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
+import com.xz.match.service.UserInfoService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.exception.CommonException;
@@ -37,6 +37,8 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
 
     @Resource
     private MatchDispatchSetMapper matchDispatchSetMapper;
+    @Resource
+    private UserInfoService userInfoService;
 
     @Override
     public long countByExample(MatchDispatchSetExample example) {
@@ -150,6 +152,7 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
                 throw new CommonException("手机号已存在");
             }
         }
+        userInfoService.saveUser(matchDispatchSetVO.getMobile(),null,matchDispatchSetVO.getName(), 1);
         return ResponseResult.ok().setData(this.insertSelective(matchDispatchSet));
     }
 
@@ -176,7 +179,10 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     public ResponseResult modifyMatchDispatchSet(MatchDispatchSetVO matchDispatchSetVO) {
         MatchDispatchSet matchDispatchSet =new MatchDispatchSet();
         BeanUtils.copyProperties(matchDispatchSetVO, matchDispatchSet);
-        this.updateByPrimaryKeySelective(matchDispatchSet);
+        int count = this.updateByPrimaryKeySelective(matchDispatchSet);
+        if(count > 0){
+            userInfoService.saveUser(matchDispatchSetVO.getMobile(),null,matchDispatchSetVO.getName(), 1);
+        }
         return ResponseResult.ok().setData(matchDispatchSet);
     }
 

@@ -92,14 +92,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfo saveUser(String phone, String certificateNo, String name) {
-        UserInfo userInfo = findByMobile(phone,2,"");
+    public UserInfo saveUser(String phone, String certificateNo, String name, int type) {
+        UserInfo userInfo = findByMobile(phone,type,"");
         if(userInfo == null){
             userInfo = new UserInfo();
             userInfo.setCertificateNo(certificateNo);
             userInfo.setPhone(phone);
-            userInfo.setType(2);
+            userInfo.setType(type);
             userInfo.setUserName(name);
+            if(type == 1){
+                userInfo.setPassWord(phone);
+            }
             this.insertSelective(userInfo);
         }
         return userInfo;

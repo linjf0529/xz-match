@@ -35,6 +35,6 @@ public interface UserInfoService {
 
     UserInfo findByMobile(String phone, Integer type, String certificateNo);
 
-    UserInfo saveUser(String phone, String certificateNo, String name);
+    UserInfo saveUser(String phone, String certificateNo, String name, int type);
 }
 

@@ -95,14 +95,15 @@ public class ReserveInfoController extends BaseController{
         reserveInfo.setLatitude(reserveInfoSaveVO.getLatitude());
         reserveInfo.setLongitude(reserveInfoSaveVO.getLongitude());
         reserveInfo.setCreatedTime(new Date().getTime());
-        reserveInfoService.insert(reserveInfo);
+        reserveInfoService.insertSelective(reserveInfo);
         for (String reserveDate:reserveInfoSaveVO.getReserveDates()){
             reserveInfo.setCreatedTime(new Date().getTime());
             for(ReserveSublist reserveSublist:reserveInfoSaveVO.getSublists()){
                 reserveSublist.setReserveId(reserveInfo.getId());
                 reserveSublist.setReserveDate(reserveDate);
                 reserveSublist.setCreatedTime(new Date().getTime());
-                reserveSublistService.insert(reserveSublist);
+                reserveSublist.setReserveNumber(0);
+                reserveSublistService.insertSelective(reserveSublist);
             }
         }
         return ResponseResult.ok();
@@ -233,7 +234,7 @@ public class ReserveInfoController extends BaseController{
             reserveRecord.setReserveSubId(reserveSubId);
             reserveRecord.setCreatedTime(new Date().getTime());
             reserveRecord.setAppointmentTime(reserveSublist.getReserveDate()+" "+reserveSublist.getStartTime()+"-"+reserveSublist.getEndTime());
-            reserveRecordService.insert(reserveRecord);
+            reserveRecordService.insertSelective(reserveRecord);
         }else {
             reserveRecord=reserveRecordList.get(0);
             ReserveSublist oldReserveSublist=reserveSublistService.selectByPrimaryKey(reserveRecord.getReserveSubId());

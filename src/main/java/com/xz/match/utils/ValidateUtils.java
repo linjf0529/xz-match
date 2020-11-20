@@ -41,7 +41,7 @@ public class ValidateUtils {
 
     public static void notNull(Object object, String message) {
         if (object == null) {
-            throw new IllegalArgumentException(message);
+            throw new CommonException(message);
         }
     }
 

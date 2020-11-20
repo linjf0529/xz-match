@@ -953,7 +953,7 @@
                 AND sr.subjectName like CONCAT('%',#{subjectNameLike},'%')
             </if>
             <if test="userId != null">
-                AND (sr.userId = #{userId} OR sr.joinUserId = #{userId})
+                AND sr.userId = #{userId}
             </if>
             <if test="joinUserId != null">
                 AND sr.joinUserId = #{joinUserId}

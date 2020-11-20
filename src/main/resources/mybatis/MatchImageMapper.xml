@@ -291,7 +291,7 @@
       <if test="subjectId != null">
         AND subjectId = #{subjectId}
       </if>
-      <if test="matchNo!=null">
+      <if test="matchNo!=null and matchNo!=''">
         AND matchNo like CONCAT('%',#{matchNo},'%')
       </if>
     </trim>

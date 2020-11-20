@@ -3,110 +3,116 @@ package com.xz.match.entity;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/19
+ */
+
 /**
-    * 物资领取配置表
-    */
+ * 物资领取配置表
+ */
 public class MatchProductReceiveSet {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 租户ID
-    */
+     * 租户ID
+     */
     private Long tenantId;
 
     /**
-    * 赛事名称
-    */
+     * 赛事名称
+     */
     private String matchName;
 
     /**
-    * 赛事id
-    */
+     * 赛事id
+     */
     private Long matchId;
 
     /**
-    * 科目名称
-    */
+     * 科目名称
+     */
     private String subjectName;
 
     /**
-    * 科目id
-    */
+     * 科目id
+     */
     private Long subjectId;
 
     /**
-    * 页面展示ID
-    */
+     * 页面展示ID
+     */
     private String pageShow;
 
     /**
-    * 页面展示参数名
-    */
+     * 页面展示参数名
+     */
     private String pageShowComment;
 
     /**
-    * 温馨提示内容
-    */
+     * 温馨提示内容
+     */
     private String tips;
 
     /**
-    * 领取状态：1-开启，0-关闭
-    */
+     * 电子签署内容
+     */
+    private String signContent;
+
+    /**
+     * 领取状态：1-开启，0-关闭
+     */
     private Integer status;
 
     /**
-    * 备注
-    */
+     * 备注
+     */
     private String remark;
 
     /**
-    * 是否禁用
-    */
+     * 是否禁用
+     */
     private Integer disabled;
 
     /**
-    * 是否锁定(0.未锁定,1.已锁定)
-    */
+     * 是否锁定(0.未锁定,1.已锁定)
+     */
     private Boolean locked;
 
     /**
-    * 版本号
-    */
+     * 版本号
+     */
     private Integer version;
 
     /**
-    * 最后更新时间
-    */
+     * 最后更新时间
+     */
     private Long lastAccess;
 
     /**
-    * 创建人ID
-    */
+     * 创建人ID
+     */
     private String creatorId;
 
     /**
-    * 创建人名称
-    */
+     * 创建人名称
+     */
     private String createdBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Long createdTime;
 
     /**
-    * 修改人ID
-    */
+     * 修改人ID
+     */
     private String updaterId;
 
     /**
-    * 修改人名称
-    */
+     * 修改人名称
+     */
     private String updatedBy;
 
     public Long getId() {
@@ -179,6 +185,14 @@ public class MatchProductReceiveSet {
 
     public void setTips(String tips) {
         this.tips = tips;
+    }
+
+    public String getSignContent() {
+        return signContent;
+    }
+
+    public void setSignContent(String signContent) {
+        this.signContent = signContent;
     }
 
     public Integer getStatus() {

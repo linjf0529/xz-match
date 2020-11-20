@@ -37,7 +37,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param request 请求
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @PostMapping
     public ResponseResult createMatchDispatchSet(@RequestBody MatchDispatchSetVO matchDispatchSetVO, HttpServletRequest request){
         if(matchDispatchSetVO == null){
@@ -54,7 +53,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param request 请求
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @DeleteMapping("/{id:\\w+}")
     public ResponseResult deleteMatchDispatchSet(@PathVariable("id") Long id, HttpServletRequest request){
         return matchDispatchSetService.removeMatchDispatchSet(id);
@@ -67,7 +65,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param matchDispatchSetVO 匹配调度组签证官
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @PutMapping
     public ResponseResult editMatchDispatchSet(@RequestBody MatchDispatchSetVO matchDispatchSetVO, HttpServletRequest request){
         if(matchDispatchSetVO == null){
@@ -82,7 +79,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param request 请求
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @GetMapping("/info")
     public ResponseResult queryMatchDispatchSet(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
@@ -97,7 +93,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param recordId 记录id
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @GetMapping
     public ResponseResult queryMatchDispatchSetByPhone(@RequestParam("recordId") Long recordId,HttpServletRequest request){
         SignRecord signRecord = signRecordService.selectByPrimaryKey(recordId);
@@ -117,7 +112,6 @@ public class MatchDispatchSetController extends BaseController{
      * @param request 请求
      * @return {@link ResponseResult}
      */
-    @AllowAnonymous
     @GetMapping("/permission")
     public ResponseResult fetchMatchDispatchPermissionById(HttpServletRequest request){
         JSONObject param = getJSONObject(request);

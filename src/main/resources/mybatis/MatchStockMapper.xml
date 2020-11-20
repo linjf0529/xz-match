@@ -424,7 +424,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMatchStockByProductId" parameterType="string" resultType="com.xz.match.entity.MatchStock">
+  <select id="selectMatchStockByProductId" parameterType="Long" resultType="com.xz.match.entity.MatchStock">
         SELECT * FROM match_stock
         WHERE disabled = 0 AND productId = #{productId}
     </select>

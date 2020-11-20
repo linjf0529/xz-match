@@ -9,10 +9,7 @@ import com.xz.match.mapper.MatchProductDispatchMapper;
 import com.xz.match.mapper.MatchProductMapper;
 import com.xz.match.mapper.MatchProductReceiveSetMapper;
 import com.xz.match.mapper.MatchProductSubMapper;
-import com.xz.match.service.MatchProductDispatchService;
-import com.xz.match.service.MatchProductSubService;
-import com.xz.match.service.SignRecordFieldTableService;
-import com.xz.match.service.SignRecordService;
+import com.xz.match.service.*;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.exception.CommonException;
@@ -52,6 +49,8 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
     private MatchProductMapper matchProductMapper;
     @Resource
     private SignRecordService signRecordService;
+    @Resource
+    private MatchDispatchSetService matchDispatchSetService;
 
     @Override
     public long countByExample(MatchProductDispatchExample example) {
@@ -112,11 +111,12 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
      *
      * @param recordId  记录id
      * @param subjectId 对象id
+     * @param phone
      * @return {@link ResponseResult}
      * @ 业务异常
      */
     @Override
-    public ResponseResult findMatchProductDispatch(Long recordId, Long subjectId)  {
+    public ResponseResult findMatchProductDispatch(Long recordId, Long subjectId, String phone)  {
         // 赛事报名信息
         SignRecord signRecord = signRecordService.selectByPrimaryKey(recordId);
         Map paramMap = new HashMap();
@@ -147,28 +147,32 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
             // 1、物资发放信息
             matchProductDispatchInfoVO.setSignRecordInfo(matchProductReceiveSetVO);
         }
-        // 物资发放信息
-        Map param= new HashMap();
-        param.put("recordId", recordId);
-        param.put("subjectId", subjectId);
-        List<MatchProductDispatchVO> MatchProductDispatchVOList = matchProductDispatchMapper.selectMatchProductDispatchByRecordIdAndSubjectId(param);
-        for(MatchProductDispatchVO matchProductDispatchVO : MatchProductDispatchVOList){
-            if(matchProductDispatchVO.getProductId() != null){
-                List<MatchProductSub> MatchProductSubs= matchProductSubService.findMatchProductSubByProductId(matchProductDispatchVO.getProductId());
-                if(!CollectionUtils.isEmpty(MatchProductSubs)){
-                    matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
+        //判断是否有发放权限
+        List<MatchDispatchSet> matchDispatchSets = matchDispatchSetService.getModes(subjectId,phone);
+        if(!matchDispatchSets.isEmpty()) {
+            // 物资发放信息
+            Map param = new HashMap();
+            param.put("recordId", recordId);
+            param.put("subjectId", subjectId);
+            List<MatchProductDispatchVO> MatchProductDispatchVOList = matchProductDispatchMapper.selectMatchProductDispatchByRecordIdAndSubjectId(param);
+            for (MatchProductDispatchVO matchProductDispatchVO : MatchProductDispatchVOList) {
+                if (matchProductDispatchVO.getProductId() != null) {
+                    List<MatchProductSub> MatchProductSubs = matchProductSubService.findMatchProductSubByProductId(matchProductDispatchVO.getProductId());
+                    if (!CollectionUtils.isEmpty(MatchProductSubs)) {
+                        matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
+                    }
                 }
-            }
-            Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
-            if(matchProductDispatchVO.getId() == null){
-                grantButton = 1;
-                if(Integer.parseInt(matchProductDispatchVO.getStockNumber()) == 0){
-                    grantButton = 2;
+                Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
+                if (matchProductDispatchVO.getId() == null) {
+                    grantButton = 1;
+                    if (Integer.parseInt(matchProductDispatchVO.getStockNumber()) == 0) {
+                        grantButton = 2;
+                    }
                 }
+                matchProductDispatchVO.setGrantButton(grantButton);
             }
-            matchProductDispatchVO.setGrantButton(grantButton);
+            matchProductDispatchInfoVO.setMatchProductList(MatchProductDispatchVOList);
         }
-        matchProductDispatchInfoVO.setMatchProductList(MatchProductDispatchVOList);
         return ResponseResult.ok().setData(matchProductDispatchInfoVO);
     }
 

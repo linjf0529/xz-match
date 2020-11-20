@@ -13,6 +13,7 @@
     <result column="pageShow" jdbcType="VARCHAR" property="pageShow" />
     <result column="pageShowComment" jdbcType="VARCHAR" property="pageShowComment" />
     <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="signContent" jdbcType="VARCHAR" property="signContent" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="disabled" jdbcType="INTEGER" property="disabled" />
@@ -88,8 +89,8 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, tenantId, matchName, matchId, subjectName, subjectId, pageShow, pageShowComment, 
-    tips, `status`, remark, disabled, locked, version, lastAccess, creatorId, createdBy, 
-    createdTime, updaterId, updatedBy
+    tips, signContent, `status`, remark, disabled, locked, version, lastAccess, creatorId, 
+    createdBy, createdTime, updaterId, updatedBy
   </sql>
   <select id="selectByExample" parameterType="com.xz.match.entity.MatchProductReceiveSetExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -129,18 +130,18 @@
     <!--@mbg.generated-->
     insert into match_product_receive_set (tenantId, matchName, matchId, 
       subjectName, subjectId, pageShow, 
-      pageShowComment, tips, `status`, 
-      remark, disabled, locked, 
-      version, lastAccess, creatorId, 
-      createdBy, createdTime, updaterId, 
-      updatedBy)
+      pageShowComment, tips, signContent, 
+      `status`, remark, disabled, 
+      locked, version, lastAccess, 
+      creatorId, createdBy, createdTime, 
+      updaterId, updatedBy)
     values (#{tenantId,jdbcType=BIGINT}, #{matchName,jdbcType=VARCHAR}, #{matchId,jdbcType=BIGINT}, 
       #{subjectName,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, #{pageShow,jdbcType=VARCHAR}, 
-      #{pageShowComment,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, #{locked,jdbcType=BOOLEAN}, 
-      #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, #{creatorId,jdbcType=VARCHAR}, 
-      #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, #{updaterId,jdbcType=VARCHAR}, 
-      #{updatedBy,jdbcType=VARCHAR})
+      #{pageShowComment,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, #{signContent,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}, 
+      #{locked,jdbcType=BOOLEAN}, #{version,jdbcType=INTEGER}, #{lastAccess,jdbcType=BIGINT}, 
+      #{creatorId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, 
+      #{updaterId,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xz.match.entity.MatchProductReceiveSet" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -169,6 +170,9 @@
       </if>
       <if test="tips != null">
         tips,
+      </if>
+      <if test="signContent != null">
+        signContent,
       </if>
       <if test="status != null">
         `status`,
@@ -228,6 +232,9 @@
       </if>
       <if test="tips != null">
         #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="signContent != null">
+        #{signContent,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -302,6 +309,9 @@
       <if test="record.tips != null">
         tips = #{record.tips,jdbcType=VARCHAR},
       </if>
+      <if test="record.signContent != null">
+        signContent = #{record.signContent,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=INTEGER},
       </if>
@@ -352,6 +362,7 @@
       pageShow = #{record.pageShow,jdbcType=VARCHAR},
       pageShowComment = #{record.pageShowComment,jdbcType=VARCHAR},
       tips = #{record.tips,jdbcType=VARCHAR},
+      signContent = #{record.signContent,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
       disabled = #{record.disabled,jdbcType=INTEGER},
@@ -394,6 +405,9 @@
       </if>
       <if test="tips != null">
         tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="signContent != null">
+        signContent = #{signContent,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
@@ -442,6 +456,7 @@
       pageShow = #{pageShow,jdbcType=VARCHAR},
       pageShowComment = #{pageShowComment,jdbcType=VARCHAR},
       tips = #{tips,jdbcType=VARCHAR},
+      signContent = #{signContent,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       disabled = #{disabled,jdbcType=INTEGER},
@@ -459,24 +474,28 @@
   <select id="selectMatchProductReceiveSetBySubjectId" parameterType="long" resultType="com.xz.match.entity.MatchProductReceiveSet">
         SELECT * FROM match_product_receive_set
         WHERE subjectId = #{subjectId}
+        limit 1
     </select>
 
      <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductReceiveSetVO">
-        <include refid="listSQL"/>
+        <include refid="listSQL" />
     </select>
 
     <sql id="listSQL">
         SELECT
         a.*,
-        IFNULL(b.`status`, 0) `status`,
+        b.`status`,
         b.pageShow,
         b.pageShowComment,
+        b.tips,
+        b.subjectId,
+        b.signContent,
         b.tips
         FROM match_subject a
         LEFT JOIN match_product_receive_set b
         ON a.id = b.subjectId
         <where>
-            <include refid="condition_sql"/>
+            <include refid="condition_sql" />
         </where>
     </sql>
 

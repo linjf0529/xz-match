@@ -111,7 +111,7 @@ public class MatchStockServiceImpl implements MatchStockService{
         MatchStock matchStock =new MatchStock();
         BeanUtils.copyProperties(matchStockVO, matchStock);
 
-        if(!matchStockVO.getMatchProductSubs().isEmpty()){
+        if(matchStockVO.getMatchProductSubs().isEmpty()){
             // 场景：未存在子项库存的情况
             // 添加库存记录
             this.insertSelective(matchStock);
@@ -166,6 +166,7 @@ public class MatchStockServiceImpl implements MatchStockService{
         MatchProduct matchProduct = matchProductService.selectByPrimaryKey(productId);
         ValidateUtils.notNull(matchProduct, "物资ID不存在");
         BeanUtils.copyProperties(matchProduct, matchStockVO);
+        matchStockVO.setProductId(matchProduct.getId());
 
         // 库存列表
         List<MatchStock> MatchStockes = matchStockMapper.selectMatchStockByProductId(productId);

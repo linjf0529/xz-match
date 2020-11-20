@@ -2,17 +2,13 @@ package com.xz.match.mapper;
 
 import com.xz.match.entity.MatchProduct;
 import com.xz.match.entity.MatchProductExample;
-import java.util.List;
-import java.util.Map;
-
-import com.xz.match.entity.vo.MatchStockVO;
-import org.apache.ibatis.annotations.Param;
+import java.util.List;import java.util.Map;
+import com.xz.match.entity.vo.MatchStockVO;import org.apache.ibatis.annotations.Param;
 
 /**
- *
  * @author chenwf
- * @date 2020/11/16
- */  
+ * @date 2020/11/19
+ */
 public interface MatchProductMapper {
     long countByExample(MatchProductExample example);
 
@@ -20,6 +16,7 @@ public interface MatchProductMapper {
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -27,6 +24,7 @@ public interface MatchProductMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -34,6 +32,7 @@ public interface MatchProductMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -43,6 +42,7 @@ public interface MatchProductMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -54,6 +54,7 @@ public interface MatchProductMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -61,6 +62,7 @@ public interface MatchProductMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

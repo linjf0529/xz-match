@@ -4,6 +4,7 @@ import com.xz.match.entity.vo.MatchStockVO;
 import com.xz.match.service.MatchStockService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,7 +33,6 @@ public class MatchStockController {
     @PostMapping
     public ResponseResult createMatchStock(@RequestBody MatchStockVO matchStockVO, HttpServletRequest request) {
         ValidateUtils.notNull(matchStockVO, "请求参数出错");
-
         return matchStockService.addMatchStock(matchStockVO);
     }
 

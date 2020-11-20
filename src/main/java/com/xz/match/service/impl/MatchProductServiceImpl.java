@@ -23,13 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author chenwf
  * @date 2020/11/16
- */  
+ */
 @Service
 @Transactional
-public class MatchProductServiceImpl implements MatchProductService{
+public class MatchProductServiceImpl implements MatchProductService {
 
     @Resource
     private MatchProductMapper matchProductMapper;
@@ -70,13 +69,13 @@ public class MatchProductServiceImpl implements MatchProductService{
     }
 
     @Override
-    public int updateByExampleSelective(MatchProduct record,MatchProductExample example) {
-        return matchProductMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(MatchProduct record, MatchProductExample example) {
+        return matchProductMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(MatchProduct record,MatchProductExample example) {
-        return matchProductMapper.updateByExample(record,example);
+    public int updateByExample(MatchProduct record, MatchProductExample example) {
+        return matchProductMapper.updateByExample(record, example);
     }
 
     @Override
@@ -107,8 +106,8 @@ public class MatchProductServiceImpl implements MatchProductService{
         this.insertSelective(matchProduct);
 
         // 新增物资子项
-        if(matchProductVO.getMatchProductSubs() != null && matchProductVO.getMatchProductSubs().size() > 0){
-            for(MatchProductSub matchProductSub:matchProductVO.getMatchProductSubs()){
+        if (matchProductVO.getMatchProductSubs() != null && matchProductVO.getMatchProductSubs().size() > 0) {
+            for (MatchProductSub matchProductSub : matchProductVO.getMatchProductSubs()) {
                 matchProductSub.setProductId(matchProduct.getId());
                 matchProductSubService.insertSelective(matchProductSub);
             }
@@ -125,7 +124,7 @@ public class MatchProductServiceImpl implements MatchProductService{
      */
     @Override
     public ResponseResult findMatchProducts(PageParam pageParam, Map<String, Object> params) {
-        PageHelper.startPage(pageParam.getPageNo(),pageParam.getPageSize());
+        PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
         List<MatchProduct> matchProducts = matchProductMapper.findBy(params);
         return ResponseResult.ok().setData(new PageInfo<>(matchProducts));
     }
@@ -141,24 +140,24 @@ public class MatchProductServiceImpl implements MatchProductService{
         // 查找物资
         MatchProduct matchProduct = this.selectByPrimaryKey(id);
         MatchProductVO matchProductVO = null;
-        if(matchProduct != null){
+        if (matchProduct != null) {
             matchProductVO = new MatchProductVO();
             ValidateUtils.notNull(matchProduct, "请求参数错误");
             BeanUtils.copyProperties(matchProduct, matchProductVO);
 
             // 查询是否有物资子项
             List<MatchProductSub> matchProductSubList = matchProductSubService.findMatchProductSubByProductId(id);
-            if(!matchProductSubList.isEmpty()){
+            if (!matchProductSubList.isEmpty()) {
                 List<MatchProductSub> matchProductSubs = new ArrayList<>();
-                for (MatchProductSub matchProductSub:matchProductSubList){
+                for (MatchProductSub matchProductSub : matchProductSubList) {
                     matchProductSubs.add(matchProductSub);
                 }
                 matchProductVO.setMatchProductSubs(matchProductSubs);
-            }else {
+            } else {
                 matchProductVO.setMatchProductSubs(new ArrayList<>());
             }
             return ResponseResult.ok().setData(matchProductVO);
-        }else {
+        } else {
             return ResponseResult.ok().setData(new MatchProductVO());
         }
     }
@@ -176,12 +175,12 @@ public class MatchProductServiceImpl implements MatchProductService{
         // 修改物资
         this.updateByPrimaryKeySelective(matchProduct);
         // 新增物资子项
-        if(!matchProductVO.getMatchProductSubs().isEmpty()){
-            for(MatchProductSub matchProductSub:matchProductVO.getMatchProductSubs()){
-                if(matchProductSub.getId() == null) {
+        if (!matchProductVO.getMatchProductSubs().isEmpty()) {
+            for (MatchProductSub matchProductSub : matchProductVO.getMatchProductSubs()) {
+                if (matchProductSub.getId() == null) {
                     matchProductSub.setProductId(matchProduct.getId());
                     this.matchProductSubService.insertSelective(matchProductSub);
-                }else {
+                } else {
                     this.matchProductSubService.updateByPrimaryKeySelective(matchProductSub);
                 }
 
@@ -203,8 +202,8 @@ public class MatchProductServiceImpl implements MatchProductService{
         this.deleteByPrimaryKey(id);
         // 同时删除物资子项
         List<MatchProductSub> matchProductSubList = matchProductSubService.findMatchProductSubByProductId(id);
-        if(!matchProductSubList.isEmpty()){
-            for (MatchProductSub matchProductSub:matchProductSubList){
+        if (!matchProductSubList.isEmpty()) {
+            for (MatchProductSub matchProductSub : matchProductSubList) {
                 matchProductSubService.removeMatchProductSub(matchProductSub.getId());
             }
         }
@@ -216,3 +215,5 @@ public class MatchProductServiceImpl implements MatchProductService{
         return matchProductMapper.findBy(param);
     }
 }
+
+

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author chenwf
- * @date 2020/11/16
+ * @date 2020/11/19
  */  
 public class MatchProductExample {
     protected String orderByClause;
@@ -499,62 +499,52 @@ public class MatchProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeEqualTo(String value) {
+        public Criteria andInventoryTypeEqualTo(Integer value) {
             addCriterion("inventoryType =", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeNotEqualTo(String value) {
+        public Criteria andInventoryTypeNotEqualTo(Integer value) {
             addCriterion("inventoryType <>", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeGreaterThan(String value) {
+        public Criteria andInventoryTypeGreaterThan(Integer value) {
             addCriterion("inventoryType >", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeGreaterThanOrEqualTo(String value) {
+        public Criteria andInventoryTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("inventoryType >=", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeLessThan(String value) {
+        public Criteria andInventoryTypeLessThan(Integer value) {
             addCriterion("inventoryType <", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeLessThanOrEqualTo(String value) {
+        public Criteria andInventoryTypeLessThanOrEqualTo(Integer value) {
             addCriterion("inventoryType <=", value, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeLike(String value) {
-            addCriterion("inventoryType like", value, "inventoryType");
-            return (Criteria) this;
-        }
-
-        public Criteria andInventoryTypeNotLike(String value) {
-            addCriterion("inventoryType not like", value, "inventoryType");
-            return (Criteria) this;
-        }
-
-        public Criteria andInventoryTypeIn(List<String> values) {
+        public Criteria andInventoryTypeIn(List<Integer> values) {
             addCriterion("inventoryType in", values, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeNotIn(List<String> values) {
+        public Criteria andInventoryTypeNotIn(List<Integer> values) {
             addCriterion("inventoryType not in", values, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeBetween(String value1, String value2) {
+        public Criteria andInventoryTypeBetween(Integer value1, Integer value2) {
             addCriterion("inventoryType between", value1, value2, "inventoryType");
             return (Criteria) this;
         }
 
-        public Criteria andInventoryTypeNotBetween(String value1, String value2) {
+        public Criteria andInventoryTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("inventoryType not between", value1, value2, "inventoryType");
             return (Criteria) this;
         }

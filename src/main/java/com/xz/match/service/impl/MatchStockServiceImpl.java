@@ -2,26 +2,26 @@ package com.xz.match.service.impl;
 
 import com.xz.match.entity.MatchProduct;
 import com.xz.match.entity.MatchProductSub;
+import com.xz.match.entity.MatchStock;
+import com.xz.match.entity.MatchStockExample;
 import com.xz.match.entity.vo.MatchStockVO;
 import com.xz.match.mapper.MatchProductMapper;
 import com.xz.match.mapper.MatchProductSubMapper;
+import com.xz.match.mapper.MatchStockMapper;
 import com.xz.match.service.MatchProductService;
 import com.xz.match.service.MatchProductSubService;
+import com.xz.match.service.MatchStockService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.enums.StockOperation;
 import com.xz.match.utils.exception.CommonException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import com.xz.match.entity.MatchStockExample;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import com.xz.match.entity.MatchStock;
-import com.xz.match.mapper.MatchStockMapper;
-import com.xz.match.service.MatchStockService;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -135,6 +135,7 @@ public class MatchStockServiceImpl implements MatchStockService{
             matchStock.setProductSubId(matchProductSub.getId());
             matchStock.setProductSubName(matchProductSub.getProductSubName());
             matchStock.setStockNumber(matchProductSub.getStockNumber());
+            matchStock.setCreatedTime(System.currentTimeMillis());
             // 添加库存记录
             this.insertSelective(matchStock);
             // 加子库存

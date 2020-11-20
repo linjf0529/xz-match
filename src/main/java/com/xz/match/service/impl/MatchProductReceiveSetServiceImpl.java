@@ -140,7 +140,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         for (MatchProductReceiveSetVO matchProductReceiveSet : pageInfo.getList()) {
             StringBuffer sb = new StringBuffer();
             sb.append(MATCH_H5_HOST + "/home");
-            sb.append("?subjectId=" + matchProductReceiveSet.getSubjectId());
+            sb.append("?subjectId=" + matchProductReceiveSet.getId());
             sb.append("&matchId=" + matchProductReceiveSet.getMatchId());
             matchProductReceiveSet.setRecordUrl(sb.toString());
         }

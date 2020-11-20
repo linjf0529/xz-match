@@ -110,6 +110,7 @@ public class MatchStockServiceImpl implements MatchStockService{
         //  添加库存
         MatchStock matchStock =new MatchStock();
         BeanUtils.copyProperties(matchStockVO, matchStock);
+        matchStock.setCreatedTime(System.currentTimeMillis());
 
         if(matchStockVO.getMatchProductSubs() == null || matchStockVO.getMatchProductSubs().isEmpty()){
             // 场景：未存在子项库存的情况
@@ -135,7 +136,6 @@ public class MatchStockServiceImpl implements MatchStockService{
             matchStock.setProductSubId(matchProductSub.getId());
             matchStock.setProductSubName(matchProductSub.getProductSubName());
             matchStock.setStockNumber(matchProductSub.getStockNumber());
-            matchStock.setCreatedTime(System.currentTimeMillis());
             // 添加库存记录
             this.insertSelective(matchStock);
             // 加子库存

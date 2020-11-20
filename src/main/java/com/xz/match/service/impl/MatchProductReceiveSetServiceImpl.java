@@ -48,6 +48,9 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     private MatchProductService matchProductService;
 
     @Resource
+    private MatchSubjectService matchSubjectService;
+
+    @Resource
     private SignRecordService signRecordService;
 
     @Resource
@@ -148,6 +151,11 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         if (matchProductReceiveSet != null) {
             BeanUtils.copyProperties(matchProductReceiveSet, matchProductReceiveSetVO);
         } else {
+            MatchSubject matchSubject  = matchSubjectService.selectByPrimaryKey(Long.parseLong(param.get("subjectId").toString()));
+            if(matchSubject != null){
+                BeanUtils.copyProperties(matchSubject, matchProductReceiveSetVO);
+                matchProductReceiveSetVO.setSubjectId(matchSubject.getId());
+            }
             // 默认姓名和手机号要勾选上
             matchProductReceiveSetVO.setPageShow("sf734362,sf25022344");
         }

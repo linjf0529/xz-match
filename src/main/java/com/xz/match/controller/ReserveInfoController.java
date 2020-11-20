@@ -287,6 +287,7 @@ public class ReserveInfoController extends BaseController{
     public ResponseResult getReserveDate(HttpServletRequest request){
         Map<String,String> map=new HashMap<>();
         map.put("reserveDate","");
+        map.put("reserveTime","");
         JSONObject param=getJSONObject(request);
         List<SignRecord> signRecords=signRecordService.findBy(param);
         if(signRecords!=null && signRecords.size()>0){
@@ -294,7 +295,10 @@ public class ReserveInfoController extends BaseController{
             List<ReserveRecordVO> reserveRecordVOList= reserveRecordService.findBy(param);
             for(ReserveRecordVO reserveRecordVO:reserveRecordVOList){
                 if(StringUtils.isNotEmpty(reserveRecordVO.getAppointmentTime())){
-                    map.put("reserveDate",reserveRecordVO.getAppointmentTime());
+                    reserveRecordVO.getAppointmentTime();
+                    String[] str = reserveRecordVO.getAppointmentTime().split(" ");
+                    map.put("reserveDate",str[0]);
+                    map.put("reserveTime",str[1]);
                 }
             }
         }

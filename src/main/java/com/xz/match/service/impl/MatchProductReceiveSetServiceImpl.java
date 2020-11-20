@@ -3,10 +3,22 @@ package com.xz.match.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xz.match.entity.*;
+import com.xz.match.entity.MatchProduct;
+import com.xz.match.entity.MatchProductReceiveSet;
+import com.xz.match.entity.MatchProductReceiveSetExample;
+import com.xz.match.entity.MatchSubject;
+import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.SignRecordFieldTable;
+import com.xz.match.entity.SubjectSignField;
 import com.xz.match.entity.vo.MatchProductReceiveSetVO;
 import com.xz.match.mapper.MatchProductReceiveSetMapper;
-import com.xz.match.service.*;
+import com.xz.match.service.MatchDispatchSetService;
+import com.xz.match.service.MatchProductReceiveSetService;
+import com.xz.match.service.MatchProductService;
+import com.xz.match.service.MatchSubjectService;
+import com.xz.match.service.SignRecordFieldTableService;
+import com.xz.match.service.SignRecordService;
+import com.xz.match.service.SubjectSignFieldService;
 import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
@@ -155,8 +167,10 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         } else {
             MatchSubject matchSubject  = matchSubjectService.selectByPrimaryKey(Long.parseLong(param.get("subjectId").toString()));
             if(matchSubject != null){
-                BeanUtils.copyProperties(matchSubject, matchProductReceiveSetVO);
                 matchProductReceiveSetVO.setSubjectId(matchSubject.getId());
+                matchProductReceiveSetVO.setSubjectName(matchSubject.getSubjectName());
+                matchProductReceiveSetVO.setMatchId(matchSubject.getMatchId());
+                matchProductReceiveSetVO.setMatchName(matchSubject.getMatchName());
             }
             // 默认姓名和手机号要勾选上
             matchProductReceiveSetVO.setPageShow("sf734362,sf25022344");

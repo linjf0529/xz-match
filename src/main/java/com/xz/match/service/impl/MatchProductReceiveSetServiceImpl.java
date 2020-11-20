@@ -202,11 +202,10 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
      *
      * @param playerUserId 选手用户id
      * @param subjectId    对象id
-     * @param phone
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long playerUserId, Long subjectId, String phone) {
+    public ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long playerUserId, Long subjectId) {
         // 赛事报名信息
         JSONObject signParam = new JSONObject();
         signParam.put("subjectId", subjectId);

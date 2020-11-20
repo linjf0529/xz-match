@@ -75,7 +75,7 @@ public interface MatchProductReceiveSetService{
      * @param subjectId 对象id
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId, Long subjectId,String phone) ;
+    ResponseResult findMatchProductReceiveSetByRecordIdAndSubjectId(Long userId, Long subjectId) ;
 
     void getBarCode(Long subjectId, Long userId, HttpServletResponse response);
 

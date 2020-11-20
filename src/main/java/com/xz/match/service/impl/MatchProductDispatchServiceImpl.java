@@ -168,9 +168,14 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
             List<MatchProductDispatchVO> MatchProductDispatchVOList = matchProductDispatchMapper.selectMatchProductDispatchByRecordIdAndSubjectId(param);
             for (MatchProductDispatchVO matchProductDispatchVO : MatchProductDispatchVOList) {
                 if (matchProductDispatchVO.getProductId() != null) {
+                    int stockNum = 0;
                     List<MatchProductSub> MatchProductSubs = matchProductSubService.findMatchProductSubByProductId(matchProductDispatchVO.getProductId());
                     if (!CollectionUtils.isEmpty(MatchProductSubs)) {
                         matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
+                        for (MatchProductSub matchProductSub : MatchProductSubs) {
+                            stockNum = stockNum + (matchProductSub.getStockNumber() == null ? 0 : matchProductSub.getStockNumber().intValue());
+                        }
+                        matchProductDispatchVO.setStockNumber(stockNum+"");
                     }
                 }
                 Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮

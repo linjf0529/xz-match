@@ -247,7 +247,7 @@ public class ReserveInfoController extends BaseController{
             reserveSublistService.updateByPrimaryKeySelective(oldReserveSublist);
         }
         if (reserveSublist.getReserveLimit()!=null){
-            reserveSublist.setReserveNumber(reserveSublist.getReserveLimit()+1);
+            reserveSublist.setReserveNumber(reserveSublist.getReserveNumber()+1);
         }else {
             reserveSublist.setReserveNumber(1);
         }

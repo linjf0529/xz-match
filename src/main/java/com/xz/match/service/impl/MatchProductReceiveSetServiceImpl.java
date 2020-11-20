@@ -11,17 +11,16 @@ import com.xz.match.utils.CodeUtils;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
-import com.xz.match.utils.constants.UrlConstants;
 import com.xz.match.utils.exception.CommonException;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +54,9 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
 
     @Resource
     private MatchDispatchSetService matchDispatchSetService;
+
+    @Value("${match.h5.url}")
+    public String MATCH_H5_HOST;
 
     @Override
     public long countByExample(MatchProductReceiveSetExample example) {
@@ -125,7 +127,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         PageInfo<MatchProductReceiveSetVO> pageInfo = new PageInfo<>(matchProductReceiveSets);
         for (MatchProductReceiveSetVO matchProductReceiveSet : pageInfo.getList()) {
             StringBuffer sb = new StringBuffer();
-            sb.append(UrlConstants.MATCH_H5_HOST + "/home");
+            sb.append(MATCH_H5_HOST + "/home");
             sb.append("?subjectId=" + matchProductReceiveSet.getSubjectId());
             sb.append("&matchId=" + matchProductReceiveSet.getMatchId());
             matchProductReceiveSet.setRecordUrl(sb.toString());
@@ -246,7 +248,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             throw new CommonException("未找到该选手的报名信息");
         }
         StringBuffer sb = new StringBuffer();
-        sb.append(UrlConstants.MATCH_H5_HOST + "/suppliesIssue");
+        sb.append(MATCH_H5_HOST + "/suppliesIssue");
         sb.append("?subjectId=" + subjectId);
         sb.append("&recordId=" + signRecords.get(0).getId());
         CodeUtils.creatRrCode(sb.toString(), 250, 250, response);
@@ -262,7 +264,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
     @Override
     public void downloadBarCode(Long subjectId, Long matchId, HttpServletResponse response) {
         StringBuffer sb = new StringBuffer();
-        sb.append(UrlConstants.MATCH_H5_HOST + "/home");
+        sb.append(MATCH_H5_HOST + "/home");
         sb.append("?subjectId=" + subjectId);
         sb.append("&matchId=" + matchId);
         try {

@@ -16,6 +16,7 @@ import com.xz.match.service.ReserveSublistService;
 import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
+import com.xz.match.utils.StringUtils;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.web.bind.annotation.*;
@@ -276,4 +277,28 @@ public class ReserveInfoController extends BaseController{
         ReserveInfo reserveInfo = reserveInfoService.getLocalInfo(subjectId);
         return ResponseResult.ok().setData(reserveInfo);
     }
+    /**
+     * 获取导航信息
+     * @param request
+     * @return
+     */
+    @AllowAnonymous
+    @GetMapping("/getReserveDate")
+    public ResponseResult getReserveDate(HttpServletRequest request){
+        Map<String,String> map=new HashMap<>();
+        map.put("reserveDate","");
+        JSONObject param=getJSONObject(request);
+        List<SignRecord> signRecords=signRecordService.findBy(param);
+        if(signRecords!=null && signRecords.size()>0){
+            param.put("recordId",signRecords.get(0).getId());
+            List<ReserveRecordVO> reserveRecordVOList= reserveRecordService.findBy(param);
+            for(ReserveRecordVO reserveRecordVO:reserveRecordVOList){
+                if(StringUtils.isNotEmpty(reserveRecordVO.getAppointmentTime())){
+                    map.put("reserveDate",reserveRecordVO.getAppointmentTime());
+                }
+            }
+        }
+        return ResponseResult.ok().setData(map);
+    }
+
 }

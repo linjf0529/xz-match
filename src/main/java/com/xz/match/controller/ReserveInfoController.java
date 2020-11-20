@@ -225,6 +225,9 @@ public class ReserveInfoController extends BaseController{
         Long reserveSubId=reserveRecordVO.getReserveSubId();
         ReserveSublist reserveSublist=reserveSublistService.selectByPrimaryKey(reserveSubId);
         ValidateUtils.notNull(reserveSublist,"找不到该预约时间段");
+        if(reserveSublist.getReserveLimit()!=null){
+            ValidateUtils.isTrue(reserveSublist.getReserveNumber()>=reserveSublist.getReserveLimit(),0,"该时间段预约已满");
+        }
         if(reserveRecordList==null || reserveRecordList.size()==0){
             reserveRecord.setRecordId(recordId);
             reserveRecord.setReserveSubId(reserveSubId);

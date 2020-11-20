@@ -94,7 +94,7 @@ public class SignRecordController extends BaseController {
             }
         });
 
-        Tuple<List<JSONObject>, List<String>> result = ExcelUtils.resolveExcelMatch(file.getFile("file"), -1, relation,true);
+        Tuple<List<JSONObject>, List<String>> result = ExcelUtils.resolveExcelMatch(file.getFile("file"), -1, relation,true,1);
         if (result.value.size() > 0) {
             throw new CommonException(JSONObject.toJSONString(result.value));
         }

@@ -33,7 +33,7 @@ public class LoginController {
         return loginService.login(loginVo);
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ResponseResult logout(HttpServletRequest request){
         String authorization = request.getHeader("Authorization");
         redisClient.delete(authorization);

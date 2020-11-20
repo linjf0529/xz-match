@@ -1,6 +1,12 @@
 package com.xz.match.service.impl;
 
-import com.xz.match.entity.*;
+import com.xz.match.entity.MatchDispatchSet;
+import com.xz.match.entity.MatchProductDispatch;
+import com.xz.match.entity.MatchProductDispatchExample;
+import com.xz.match.entity.MatchProductReceiveSet;
+import com.xz.match.entity.MatchProductSub;
+import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.SignRecordFieldTable;
 import com.xz.match.entity.vo.MatchProductDispatchInfoVO;
 import com.xz.match.entity.vo.MatchProductDispatchVO;
 import com.xz.match.entity.vo.MatchProductReceiveSetVO;
@@ -9,7 +15,11 @@ import com.xz.match.mapper.MatchProductDispatchMapper;
 import com.xz.match.mapper.MatchProductMapper;
 import com.xz.match.mapper.MatchProductReceiveSetMapper;
 import com.xz.match.mapper.MatchProductSubMapper;
-import com.xz.match.service.*;
+import com.xz.match.service.MatchDispatchSetService;
+import com.xz.match.service.MatchProductDispatchService;
+import com.xz.match.service.MatchProductSubService;
+import com.xz.match.service.SignRecordFieldTableService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
 import com.xz.match.utils.exception.CommonException;
@@ -21,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -250,6 +261,29 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
      */
     @Override
     public ResponseResult findSignRecordDispatchInfo(Map<String, Object> param)  {
-        return ResponseResult.ok().setData(signRecordService.countSignRecordDispatchInfo(param));
+        List<Map<String, Object>>  maps = signRecordService.countSignRecordDispatchInfo(param);
+
+        // 设定三个初始值，以便前端能显示物资发放状态
+        List<Map<String, Object>>  originMaps = new ArrayList<>();
+        for (int i = 0; i <3 ; i++) {
+            Map<String, Object> originMap = new HashMap<>();
+            originMap.put("status",i);
+            originMap.put("dispatchCount",0);
+            originMaps.add(originMap);
+        }
+
+        if(!CollectionUtils.isEmpty(maps)){
+            for(Map<String, Object> map:maps){
+                for (Map<String, Object> originMap:originMaps){
+                    if(map.get("status").equals(originMap.get("status"))){
+                        originMap.put("dispatchCount",map.get("dispatchCount"));
+                        break;
+                    }
+                }
+            }
+        }
+
+        return ResponseResult.ok().setData(originMaps);
+
     }
 }

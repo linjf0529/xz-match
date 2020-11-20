@@ -195,7 +195,7 @@ public class SignRecordServiceImpl implements SignRecordService {
             signRecord.setReview(0);                                     //
             signRecord.setAvailable(1);                                  // 是否可用
             signRecord.setExpenses(0L);
-            user = userInfoService.saveUser(signRecord.getPhone(), signRecord.getCertificateNo(), signRecord.getName());
+            user = userInfoService.saveUser(signRecord.getPhone(), signRecord.getCertificateNo(), signRecord.getName(),2);
             signRecord.setMemberType(0);
             signRecord.setOrderId(autoOrderId());
             signRecord.setOrderNo(signRecord.getOrderId());

@@ -13,6 +13,7 @@ import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
+import com.xz.match.utils.aop.AllowAnonymous;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 

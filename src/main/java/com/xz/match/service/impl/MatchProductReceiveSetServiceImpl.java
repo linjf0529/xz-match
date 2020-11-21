@@ -142,6 +142,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
             sb.append(MATCH_H5_HOST + "/home");
             sb.append("?subjectId=" + matchProductReceiveSet.getId());
             sb.append("&matchId=" + matchProductReceiveSet.getMatchId());
+            sb.append("&type=2");
             matchProductReceiveSet.setRecordUrl(sb.toString());
         }
         return ResponseResult.ok().setData(pageInfo);
@@ -280,6 +281,7 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         sb.append(MATCH_H5_HOST + "/home");
         sb.append("?subjectId=" + subjectId);
         sb.append("&matchId=" + matchId);
+        sb.append("&type=2");
         try {
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;filename=matchCode.png");

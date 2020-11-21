@@ -424,6 +424,7 @@
             <if test="name != null">
                 AND `name` = #{name}
             </if>
+
             <if test="mobile != null">
                 AND mobile = #{mobile}
             </if>
@@ -435,6 +436,9 @@
             </if>
             <if test="disabled != null">
                 AND disabled = #{disabled}
+            </if>
+            <if test="permissionId !=null and permissionId !=''">
+                AND find_in_set(#{permissionId},permission)
             </if>
         </trim>
     </sql>

@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
         }
         UserInfo userInfo = userInfoService.findByMobile(phone,type,certificateNo);
         if(userInfo == null){
-            throw new CommonException("该手机号码未被注册");
+            throw new CommonException("证件号码或手机号错误");
         }
         if(type == 1){
             checkSms(phone,verifiyCode);

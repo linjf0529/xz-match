@@ -179,6 +179,18 @@ public class ReserveInfoController extends BaseController{
                 }
             }
         }
+
+        for(int i=0;i<dateSublist.size()-1;i++) {
+            for(int j=0;j<dateSublist.size()-1-i;j++)
+            {
+                if(dateSublist.get(j).getState()>dateSublist.get(j+1).getState())
+                {
+                    ReserveSublistVO vo=dateSublist.get(j);
+                    dateSublist.add(j,dateSublist.get(j+1));
+                    dateSublist.add(j+1,vo);
+                }
+            }
+        }
         return ResponseResult.ok().setData(new PageInfo<>(dateSublist));
     }
 

@@ -309,5 +309,6 @@
     WHERE
         reserveId = #{reserveId}
         AND reserveDate = #{reserveDate}
+        order by startTime
   </select>
 </mapper>

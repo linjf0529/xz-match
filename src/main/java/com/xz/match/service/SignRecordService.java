@@ -1,15 +1,15 @@
 package com.xz.match.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSONObject;
 import com.xz.match.entity.MatchSubject;
-import com.xz.match.entity.SignRecordExample;
 import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.SignRecordExample;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.excel.Tuple;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenwf
@@ -64,6 +64,15 @@ public interface SignRecordService {
     ResponseResult getRecordInfos(PageParam pageParam, JSONObject param);
 
     ResponseResult deleteRecord(String ids);
+
+
+    /**
+     * 批量更新参赛人员的发放情况状态
+     *
+     * @param param 参数
+     * @return int
+     */
+    int modifyMacthSignRecordByMatchIdAndSubjectId(Map<String, Object> param);
 }
 
 

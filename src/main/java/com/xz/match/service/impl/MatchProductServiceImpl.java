@@ -9,6 +9,7 @@ import com.xz.match.entity.vo.MatchProductVO;
 import com.xz.match.mapper.MatchProductMapper;
 import com.xz.match.service.MatchProductService;
 import com.xz.match.service.MatchProductSubService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,9 @@ public class MatchProductServiceImpl implements MatchProductService {
 
     @Resource
     private MatchProductMapper matchProductMapper;
+
+    @Resource
+    private SignRecordService signRecordService;
 
     @Override
     public long countByExample(MatchProductExample example) {
@@ -104,6 +109,15 @@ public class MatchProductServiceImpl implements MatchProductService {
         BeanUtils.copyProperties(matchProductVO, matchProduct);
         // 添加物资
         this.insertSelective(matchProduct);
+
+        // 添加新物资时需要更新参赛人员的发放情况状态，即：把全部发放改为部分发放
+        ValidateUtils.notNull(matchProductVO.getMatchId(), "matchId不能为空");
+        ValidateUtils.notNull(matchProductVO.getSubjectId(), "subjectId不能为空");
+        Map param = new HashMap<String, Object>();
+        param.put("matchId", matchProductVO.getMatchId());
+        param.put("subjectId", matchProductVO.getSubjectId());
+        param.put("status", 1);// 2-部分发放，1-已发放，0-未发放
+        signRecordService.modifyMacthSignRecordByMatchIdAndSubjectId(param);// 更新报名信息，物资发放的状态
 
         // 新增物资子项
         if (matchProductVO.getMatchProductSubs() != null && matchProductVO.getMatchProductSubs().size() > 0) {

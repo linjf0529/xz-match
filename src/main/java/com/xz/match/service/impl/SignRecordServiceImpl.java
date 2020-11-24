@@ -5,8 +5,14 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xz.match.entity.*;
+import com.xz.match.entity.MatchSubject;
+import com.xz.match.entity.SignRecord;
+import com.xz.match.entity.SignRecordExample;
+import com.xz.match.entity.SignRecordFieldTable;
+import com.xz.match.entity.UserInfo;
+import com.xz.match.mapper.SignRecordMapper;
 import com.xz.match.service.SignRecordFieldTableService;
+import com.xz.match.service.SignRecordService;
 import com.xz.match.service.UserInfoService;
 import com.xz.match.service.WsossService;
 import com.xz.match.utils.PageParam;
@@ -20,15 +26,18 @@ import com.xz.match.utils.exception.CommonException;
 import com.xz.match.utils.file.FSConstants;
 import com.xz.match.utils.file.Image;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
-
-import com.xz.match.mapper.SignRecordMapper;
-import com.xz.match.service.SignRecordService;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 /**
  * @author chenwf
@@ -290,6 +299,17 @@ public class SignRecordServiceImpl implements SignRecordService {
             signRecordMapper.deleteRecord(idList);
         }
         return ResponseResult.ok();
+    }
+
+    /**
+     * 批量更新参赛人员的发放情况状态
+     *
+     * @param param 参数
+     * @return int
+     */
+    @Override
+    public int modifyMacthSignRecordByMatchIdAndSubjectId(Map<String, Object> param) {
+        return signRecordMapper.updateMacthSignRecordByMatchIdAndSubjectId(param);
     }
 }
 

@@ -1120,4 +1120,9 @@
       </foreach>
 
    </delete>
+
+  <update id="updateMacthSignRecordByMatchIdAndSubjectId" parameterType="map">
+        update sign_record set `status` = 2 where  matchId = #{matchId} and subjectId = #{subjectId} and `status` = #{status}
+  </update>
+
 </mapper>

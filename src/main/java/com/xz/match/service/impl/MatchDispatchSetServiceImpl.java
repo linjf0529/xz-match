@@ -179,11 +179,14 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     public ResponseResult modifyMatchDispatchSet(MatchDispatchSetVO matchDispatchSetVO) {
         MatchDispatchSet matchDispatchSet =new MatchDispatchSet();
         BeanUtils.copyProperties(matchDispatchSetVO, matchDispatchSet);
-        Map param = new HashMap();
-        param.put("mobile", matchDispatchSetVO.getMobile());
-        List<MatchDispatchSet> matchDispatchSetes= matchDispatchSetMapper.findBy(param);
-        if(!matchDispatchSetes.isEmpty()){
-            throw new CommonException("手机号已存在");
+        MatchDispatchSet model = this.selectByPrimaryKey(matchDispatchSet.getId());
+        if(!model.getMobile().equals(matchDispatchSetVO.getMobile())) {
+            Map param = new HashMap();
+            param.put("mobile", matchDispatchSetVO.getMobile());
+            List<MatchDispatchSet> matchDispatchSetes = matchDispatchSetMapper.findBy(param);
+            if (!matchDispatchSetes.isEmpty()) {
+                throw new CommonException("手机号已存在");
+            }
         }
         int count = this.updateByPrimaryKeySelective(matchDispatchSet);
         if(count > 0){

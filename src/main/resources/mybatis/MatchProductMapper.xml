@@ -441,8 +441,32 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+
   <select id="findBy" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductVO">
-        <include refid="listSQL" />
+    <include refid="listSQL" />
+  </select>
+
+  <!--统计发放信息-->
+  <select id="selectMatchProductsReport" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductVO">
+        SELECT
+        a.*,
+        (select GROUP_CONCAT( b.productSubName SEPARATOR '、' ) from  match_product_sub b where a.id = b.productId) as productSubName,
+        CASE
+            IFNULL((select GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId),'')
+        WHEN '' THEN
+            a.stockNumber ELSE (select GROUP_CONCAT( concat_ws( ':', b.productSubName, b.stockNumber ) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId)
+        END stockNumberSub,
+        CASE
+            IFNULL((select GROUP_CONCAT( concat_ws( ':', b.productSubName, (select count(1) from match_product_dispatch  c where c.productSubId  = b.id)) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId),'')
+        WHEN '' THEN (select count(1) from match_product_dispatch  c where c.productId  = a.id)
+        ELSE (select GROUP_CONCAT( concat_ws( ':', b.productSubName, (select count(1) from match_product_dispatch  c where c.productSubId  = b.id)) SEPARATOR '/' ) from  match_product_sub b where a.id = b.productId)
+        END dispatchNumberSub
+        FROM
+        match_product a
+        <where>
+          <include refid="condition_sql" />
+        </where>
+        ORDER BY a.lastAccess DESC
     </select>
 
 
@@ -497,6 +521,12 @@
             </if>
             <if test="disabled != null">
                 AND a.disabled = #{disabled}
+            </if>
+            <if test="createdTimeStart != null">
+              <![CDATA[AND FROM_UNIXTIME(a.createdTime / 1000,'%Y-%m-%d') >= #{createdTimeStart}]]>
+            </if>
+            <if test="createdTimeEnd != null">
+              <![CDATA[AND FROM_UNIXTIME(a.createdTime / 1000,'%Y-%m-%d') <= #{createdTimeEnd}]]>
             </if>
         </trim>
     </sql>

@@ -30,6 +30,11 @@ public class MatchProductVO extends MatchProduct {
      */
     private String stockNumberSub;
 
+    /**
+     * 库存发放
+     */
+    private String dispatchNumberSub;
+
     public List<MatchProductSub> getMatchProductSubs() {
         return matchProductSubs;
     }
@@ -54,10 +59,21 @@ public class MatchProductVO extends MatchProduct {
         this.stockNumberSub = stockNumberSub;
     }
 
+    public String getDispatchNumberSub() {
+        return dispatchNumberSub;
+    }
+
+    public void setDispatchNumberSub(String dispatchNumberSub) {
+        this.dispatchNumberSub = dispatchNumberSub;
+    }
+
     @Override
     public String toString() {
         return "MatchProductVO{" +
                 "matchProductSubs=" + matchProductSubs +
+                ", productSubName='" + productSubName + '\'' +
+                ", stockNumberSub='" + stockNumberSub + '\'' +
+                ", dispatchNumberSub='" + dispatchNumberSub + '\'' +
                 '}';
     }
 }

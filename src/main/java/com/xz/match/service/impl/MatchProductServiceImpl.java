@@ -107,6 +107,7 @@ public class MatchProductServiceImpl implements MatchProductService {
     public ResponseResult addMatchProduct(MatchProductVO matchProductVO) {
         MatchProduct matchProduct = new MatchProduct();
         BeanUtils.copyProperties(matchProductVO, matchProduct);
+        matchProduct.setCreatedTime(System.currentTimeMillis());
         // 添加物资
         this.insertSelective(matchProduct);
 
@@ -134,19 +135,43 @@ public class MatchProductServiceImpl implements MatchProductService {
     }
 
     /**
-     * 查找物资
+     * 分页查找物资
      *
      * @param params    参数个数
      * @param pageParam 页面参数
      * @return {@link ResponseResult}
      */
     @Override
-    public ResponseResult findMatchProducts(PageParam pageParam, Map<String, Object> params) {
+    public ResponseResult findMatchProductsByPage(PageParam pageParam, Map<String, Object> params) {
         PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
         List<MatchProduct> matchProducts = matchProductMapper.findBy(params);
         return ResponseResult.ok().setData(new PageInfo<>(matchProducts));
     }
 
+    /**
+     * 查找物资
+     *
+     * @param params    参数个数
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult findMatchProducts(Map<String, Object> params) {
+        return ResponseResult.ok().setData(matchProductMapper.findBy(params));
+    }
+
+    /**
+     * 查找物资报表信息
+     *
+     * @param pageParam 页面参数
+     * @param params    参数个数
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult findMatchProductsReport(PageParam pageParam, Map<String, Object> params) {
+        PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
+        List<MatchProductVO> matchProducts = matchProductMapper.selectMatchProductsReport(params);
+        return ResponseResult.ok().setData(new PageInfo<>(matchProducts));
+    }
     /**
      * 根据id查询物资id
      *

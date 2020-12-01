@@ -1,13 +1,13 @@
 package com.xz.match.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.xz.match.entity.MatchProduct;
 import com.xz.match.entity.MatchProductExample;
 import com.xz.match.entity.vo.MatchProductVO;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenwf
@@ -47,13 +47,30 @@ public interface MatchProductService {
     ResponseResult addMatchProduct(MatchProductVO matchProductVO);
 
     /**
-     * 查找物资
+     * 分页查找物资
      *
      * @param params    参数个数
      * @param pageParam 页面参数
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProducts(PageParam pageParam, Map<String, Object> params);
+    ResponseResult findMatchProductsByPage(PageParam pageParam, Map<String, Object> params);
+
+
+    /**
+     * 查找物资
+     *
+     * @param params    参数个数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchProducts(Map<String, Object> params);
+    /**
+     * 查找物资报表信息
+     *
+     * @param pageParam 页面参数
+     * @param params    参数个数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchProductsReport(PageParam pageParam, Map<String, Object> params);
 
     /**
      * 根据id查询物资id

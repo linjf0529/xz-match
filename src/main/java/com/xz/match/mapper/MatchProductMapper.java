@@ -2,8 +2,12 @@ package com.xz.match.mapper;
 
 import com.xz.match.entity.MatchProduct;
 import com.xz.match.entity.MatchProductExample;
-import java.util.List;import java.util.Map;
-import com.xz.match.entity.vo.MatchStockVO;import org.apache.ibatis.annotations.Param;
+import com.xz.match.entity.vo.MatchProductVO;
+import com.xz.match.entity.vo.MatchStockVO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenwf
@@ -73,4 +77,13 @@ public interface MatchProductMapper {
     void updateToAddMatchStockByProductId(MatchStockVO matchStockVO);
 
     int updateToMinusMatchStockByProductId(MatchStockVO matchStockVO);
+
+    /**
+     * 查询物资发放信息
+     *
+     * @param params 参数个数
+     * @return {@link List<MatchProductVO>}
+     */
+    List<MatchProductVO> selectMatchProductsReport(Map<String, Object> params);
+
 }

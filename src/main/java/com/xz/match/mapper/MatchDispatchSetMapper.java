@@ -2,11 +2,12 @@ package com.xz.match.mapper;
 
 import com.xz.match.entity.MatchDispatchSet;
 import com.xz.match.entity.MatchDispatchSetExample;
-import java.util.List;
-import java.util.Map;
-
+import com.xz.match.entity.vo.MatchDispatchPermissionChildrenVO;
 import com.xz.match.entity.vo.MatchDispatchPermissionVO;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -74,4 +75,14 @@ public interface MatchDispatchSetMapper {
      * @return {@link List<MatchDispatchPermissionVO>}
      */
     List<MatchDispatchPermissionVO> selectMatchDispatchPermission();
+
+    /**
+     * 权限控制的粒度到物资
+     *
+     * @param subjectId 对象id
+     * @return {@link List<MatchDispatchPermissionChildrenVO>}
+     */
+    List<MatchDispatchPermissionChildrenVO> selectMatchProductDispatchPermission(String subjectId);
+
+    int updateMatchDispatchSetById(Map param);
 }

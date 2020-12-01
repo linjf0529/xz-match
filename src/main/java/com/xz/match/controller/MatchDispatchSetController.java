@@ -5,12 +5,18 @@ import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.service.MatchDispatchSetService;
 import com.xz.match.service.SignRecordService;
-import com.xz.match.utils.RedisClient;
 import com.xz.match.utils.ResponseResult;
-import com.xz.match.utils.aop.AllowAnonymous;
 import com.xz.match.utils.exception.CommonException;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +65,17 @@ public class MatchDispatchSetController extends BaseController{
     }
 
     /**
+     * 禁用发放人员配置
+     *
+     * @param id      id
+     * @param request 请求
+     * @return {@link ResponseResult}
+     */
+    @PutMapping("/{id:\\w+}/{disabled:\\w+}")
+    public ResponseResult dropMatchDispatchSet(@PathVariable("id") Long id,@PathVariable("disabled") Long disabled,HttpServletRequest request){
+        return matchDispatchSetService.forbidMatchDispatchSet(id,disabled);
+    }
+    /**
      * 编辑发放人员配置
      *
      * @param request            请求
@@ -82,7 +99,7 @@ public class MatchDispatchSetController extends BaseController{
     @GetMapping("/info")
     public ResponseResult queryMatchDispatchSet(HttpServletRequest request){
         JSONObject param = getJSONObject(request);
-        param.put("disabled",0);
+//        param.put("disabled",0);
         return matchDispatchSetService.findMatchDispatchSet(getPageParam(request),param);
     }
 

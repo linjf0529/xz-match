@@ -1,6 +1,5 @@
 package com.xz.match.entity.vo;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public class MatchDispatchPermissionVO {
 
     private Long id;
     private String label;
-    private List<MatchDispatchPermissionVO> children;
+    private List<MatchDispatchPermissionChildrenVO> children;
 
     public MatchDispatchPermissionVO() {
     }
@@ -34,18 +33,18 @@ public class MatchDispatchPermissionVO {
         this.label = label;
     }
 
-    public List<MatchDispatchPermissionVO> getChildren() {
+    public List<MatchDispatchPermissionChildrenVO> getChildren() {
         return children;
     }
 
-    public void setChildren(List<MatchDispatchPermissionVO> children) {
+    public void setChildren(List<MatchDispatchPermissionChildrenVO> children) {
         this.children = children;
     }
 
     @Override
     public String toString() {
         return "MatchDispatchPermissionVO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", label='" + label + '\'' +
                 ", children=" + children +
                 '}';

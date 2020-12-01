@@ -1,13 +1,13 @@
 package com.xz.match.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.xz.match.entity.MatchDispatchSet;
 import com.xz.match.entity.MatchDispatchSetExample;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -70,6 +70,15 @@ public interface MatchDispatchSetService{
      * @return {@link ResponseResult}
      */
     ResponseResult removeMatchDispatchSet(Long id);
+
+    /**
+     * 禁止发放人员配置
+     *
+     * @param id       id
+     * @param disabled 禁用
+     * @return {@link ResponseResult}
+     */
+    ResponseResult forbidMatchDispatchSet(Long id,Long disabled);
 
     /**
      * 修改发放人员配置

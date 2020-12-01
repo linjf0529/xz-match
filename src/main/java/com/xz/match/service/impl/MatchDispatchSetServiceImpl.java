@@ -4,8 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xz.match.entity.MatchDispatchSet;
+import com.xz.match.entity.MatchDispatchSetExample;
+import com.xz.match.entity.vo.MatchDispatchPermissionChildrenVO;
 import com.xz.match.entity.vo.MatchDispatchPermissionVO;
 import com.xz.match.entity.vo.MatchDispatchSetVO;
+import com.xz.match.mapper.MatchDispatchSetMapper;
+import com.xz.match.service.MatchDispatchSetService;
 import com.xz.match.service.UserInfoService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
@@ -13,18 +18,14 @@ import com.xz.match.utils.exception.CommonException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.xz.match.entity.MatchDispatchSet;
-import com.xz.match.mapper.MatchDispatchSetMapper;
-import com.xz.match.entity.MatchDispatchSetExample;
-import com.xz.match.service.MatchDispatchSetService;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 
 /**
  *
@@ -170,6 +171,20 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     }
 
     /**
+     * 禁止发放人员配置
+     *
+     * @param id id
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult forbidMatchDispatchSet(Long id,Long disabled){
+        Map param = new HashMap();
+        param.put("id", id);
+        param.put("disabled", disabled);
+        matchDispatchSetMapper.updateMatchDispatchSetById(param);
+        return ResponseResult.ok();
+    }
+    /**
      * 修改发放人员配置
      *
      * @param matchDispatchSetVO
@@ -204,6 +219,15 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
         List<MatchDispatchPermissionVO> matchDispatchPermissionVOList = matchDispatchSetMapper.selectMatchDispatchPermission();
         String  matchDispatchPermissionStr = null;
         if(!CollectionUtils.isEmpty(matchDispatchPermissionVOList)){
+            for(MatchDispatchPermissionVO matchDispatchPermissionVO:matchDispatchPermissionVOList){
+                // 权限粒度：赛事物资
+                for(MatchDispatchPermissionChildrenVO matchDispatchPermissionChildrenVO : matchDispatchPermissionVO.getChildren()){
+                    List<MatchDispatchPermissionChildrenVO> matchDispatchPermissionChildrens = matchDispatchSetMapper.selectMatchProductDispatchPermission(matchDispatchPermissionChildrenVO.getChildrenId());
+                    if(!CollectionUtils.isEmpty(matchDispatchPermissionChildrens)){
+                        matchDispatchPermissionChildrenVO.setChildren(matchDispatchPermissionChildrens);
+                    }
+                }
+            }
             matchDispatchPermissionStr = JSON.toJSONString(matchDispatchPermissionVOList).replaceAll("childrenId","id").replaceAll("childrenLabel","label");
         }
         return JSON.parseArray(matchDispatchPermissionStr);
@@ -234,6 +258,7 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
         Map<String,Object> param = new HashMap<>();
         param.put("permissionId",subjectId);
         param.put("mobile",phone);
+        param.put("disabled",0);// 非禁用的
         return matchDispatchSetMapper.findBy(param);
     }
 }

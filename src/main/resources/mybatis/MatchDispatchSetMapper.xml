@@ -112,6 +112,12 @@
     delete from match_dispatch_set
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <update id="updateMatchDispatchSetById" parameterType="map">
+    update  match_dispatch_set set disabled = #{disabled}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
   <delete id="deleteByExample" parameterType="com.xz.match.entity.MatchDispatchSetExample">
     <!--@mbg.generated-->
     delete from match_dispatch_set
@@ -404,6 +410,11 @@
             match_info a
         LEFT JOIN match_subject b ON a.id = b.matchId
     </select>
+
+  <!-- 权限控制的粒度到物资 -->
+  <select id="selectMatchProductDispatchPermission" parameterType="String" resultType="com.xz.match.entity.vo.MatchDispatchPermissionChildrenVO">
+        select a.id as childrenId ,a.productName as childrenLabel  from  match_product a where a.subjectId = #{subjectId}
+   </select>
 
     <sql id="listSQL">
         SELECT * FROM  match_dispatch_set

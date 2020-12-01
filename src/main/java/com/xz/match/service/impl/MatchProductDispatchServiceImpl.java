@@ -121,15 +121,18 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
      * 查找发放信息
      *
      * @param recordId  记录id
-     * @param subjectId 对象id
      * @param phone
      * @return {@link ResponseResult}
      * @ 业务异常
      */
     @Override
-    public ResponseResult findMatchProductDispatch(Long recordId, Long subjectId, String phone)  {
+    public ResponseResult findMatchProductDispatch(Long recordId, String phone)  {
         // 赛事报名信息
         SignRecord signRecord = signRecordService.selectByPrimaryKey(recordId);
+        if(signRecord == null){
+            throw new CommonException("选手不存在");
+        }
+        Long subjectId = signRecord.getSubjectId();
         Map paramMap = new HashMap();
         paramMap.put("recordId", recordId);
         List<SignRecordFieldTable> signRecordFieldTables = signRecordFieldTableService.findBy(paramMap);

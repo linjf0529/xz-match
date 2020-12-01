@@ -94,9 +94,9 @@ public class MatchProductDispatchController extends BaseController{
      * @return {@link ResponseResult}
      */
     @GetMapping("/dispatch/info")
-    public ResponseResult queryMatchProductDispatch(@RequestParam Long recordId, @RequestParam Long subjectId, HttpServletRequest request)  {
+    public ResponseResult queryMatchProductDispatch(@RequestParam Long recordId, HttpServletRequest request)  {
         String phone = getCurrentPhone(request);
-        return matchProductDispatchService.findMatchProductDispatch(recordId,subjectId,phone);
+        return matchProductDispatchService.findMatchProductDispatch(recordId,phone);
     }
 
     /**

@@ -261,11 +261,12 @@ public class MatchProductReceiveSetServiceImpl implements MatchProductReceiveSet
         if (signRecords.isEmpty()) {
             throw new CommonException("未找到该选手的报名信息");
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append(MATCH_H5_HOST + "/suppliesIssue");
-        sb.append("?subjectId=" + subjectId);
-        sb.append("&recordId=" + signRecords.get(0).getId());
-        CodeUtils.creatRrCode(sb.toString(), 250, 250, response);
+//        StringBuffer sb = new StringBuffer();
+//        sb.append(MATCH_H5_HOST + "/suppliesIssue");
+//        sb.append("?subjectId=" + subjectId);
+//        sb.append("&recordId=" + signRecords.get(0).getId());
+//        CodeUtils.creatRrCode(sb.toString(), 250, 250, response);
+        CodeUtils.getBarCode(signRecords.get(0).getId().toString(),response);
     }
 
     /**

@@ -42,11 +42,10 @@ public interface MatchProductDispatchService{
      * 查找发放信息
      *
      * @param recordId  记录id
-     * @param subjectId 对象id
      * @param phone
      * @return {@link ResponseResult}
      */
-    ResponseResult findMatchProductDispatch(Long recordId, Long subjectId, String phone) ;
+    ResponseResult findMatchProductDispatch(Long recordId, String phone) ;
 
     /**
      * 添加发放信息

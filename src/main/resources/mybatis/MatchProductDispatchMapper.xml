@@ -406,4 +406,34 @@
         WHERE
             a.subjectId = #{subjectId}
     </select>
+  <select id="selectMatchProductDispatchInfoByProductId" parameterType="map" resultType="com.xz.match.entity.vo.MatchProductDispatchVO">
+        SELECT
+            a.*,
+            b.matchNo,
+            b.`name`,
+            b.certificateNo
+        FROM
+	        match_product_dispatch a
+	    LEFT JOIN sign_record b ON a.recordId = b.id
+
+        <where>
+          <trim prefixOverrides="AND | OR">
+            <if test="productId != null">
+              AND a.productId = #{productId}
+            </if>
+            <if test="name != null">
+              AND b.name = #{name}
+            </if>
+            <if test="certificateNo != null">
+              AND b.certificateNo = #{certificateNo}
+            </if>
+            <if test="matchNo != null">
+              AND b.matchNo = #{matchNo}
+            </if>
+          </trim>
+        </where>
+
+    </select>
+
+
 </mapper>

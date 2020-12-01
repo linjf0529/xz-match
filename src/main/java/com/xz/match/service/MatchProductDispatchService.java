@@ -1,12 +1,12 @@
 package com.xz.match.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.xz.match.entity.MatchProductDispatch;
 import com.xz.match.entity.MatchProductDispatchExample;
 import com.xz.match.entity.vo.MatchProductDispatchVO;
 import com.xz.match.utils.ResponseResult;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -66,4 +66,12 @@ public interface MatchProductDispatchService{
      * @return {@link ResponseResult}
      */
     ResponseResult findSignRecordDispatchInfo(Map<String, Object> param) ;
+
+    /**
+     * 根据productId查询发放详情
+     *
+     * @param param 参数
+     * @return {@link ResponseResult}
+     */
+    ResponseResult findMatchProductDispatchInfoByProductId(Map<String, Object> param) ;
 }

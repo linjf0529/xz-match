@@ -268,7 +268,7 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
     public ResponseResult findSignRecordDispatchInfo(Map<String, Object> param)  {
         List<Map<String, Object>>  maps = signRecordService.countSignRecordDispatchInfo(param);
 
-        // 设定三个初始值，以便前端能显示物资发放状态
+        // 设定三个初始值，以便前端能显示物资发放状态情况
         List<Map<String, Object>>  originMaps = new ArrayList<>();
         for (int i = 0; i <3 ; i++) {
             Map<String, Object> originMap = new HashMap<>();
@@ -290,5 +290,16 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
 
         return ResponseResult.ok().setData(originMaps);
 
+    }
+
+    /**
+     * 根据productId查询发放详情
+     *
+     * @param param 参数
+     * @return {@link ResponseResult}
+     */
+    @Override
+    public ResponseResult findMatchProductDispatchInfoByProductId(Map<String, Object> param) {
+        return ResponseResult.ok().setData(matchProductDispatchMapper.selectMatchProductDispatchInfoByProductId(param));
     }
 }

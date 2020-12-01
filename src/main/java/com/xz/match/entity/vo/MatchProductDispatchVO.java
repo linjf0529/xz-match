@@ -30,6 +30,21 @@ public class MatchProductDispatchVO extends MatchProductDispatch {
      */
     private Integer grantButton;
 
+    /**
+     * 姓名
+     */
+    private String name;
+
+    /**
+     * 证件号
+     */
+    private String certificateNo;
+
+    /**
+     * 参赛号码
+     */
+    private String matchNo;
+
 
     private List<MatchProductSub> MatchProductSubList;
 
@@ -63,5 +78,42 @@ public class MatchProductDispatchVO extends MatchProductDispatch {
 
     public void setGrantButton(Integer grantButton) {
         this.grantButton = grantButton;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCertificateNo() {
+        return certificateNo;
+    }
+
+    public void setCertificateNo(String certificateNo) {
+        this.certificateNo = certificateNo;
+    }
+
+    public String getMatchNo() {
+        return matchNo;
+    }
+
+    public void setMatchNo(String matchNo) {
+        this.matchNo = matchNo;
+    }
+
+    @Override
+    public String toString() {
+        return "MatchProductDispatchVO{" +
+                "subjectId=" + subjectId +
+                ", stockNumber='" + stockNumber + '\'' +
+                ", grantButton=" + grantButton +
+                ", name='" + name + '\'' +
+                ", certificateNo='" + certificateNo + '\'' +
+                ", matchNo='" + matchNo + '\'' +
+                ", MatchProductSubList=" + MatchProductSubList +
+                '}';
     }
 }

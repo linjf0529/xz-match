@@ -6,20 +6,21 @@ import com.github.pagehelper.PageInfo;
 import com.xz.match.entity.SignRecord;
 import com.xz.match.entity.SignRecordFieldTable;
 import com.xz.match.entity.vo.MatchProductDispatchVO;
-import com.xz.match.entity.vo.MatchSignRecordVO;
 import com.xz.match.service.MatchProductDispatchService;
 import com.xz.match.service.SignRecordFieldTableService;
 import com.xz.match.service.SignRecordService;
 import com.xz.match.utils.PageParam;
 import com.xz.match.utils.ResponseResult;
 import com.xz.match.utils.ValidateUtils;
-import com.xz.match.utils.aop.AllowAnonymous;
-import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,5 +111,19 @@ public class MatchProductDispatchController extends BaseController{
 //        param.put("isPass", true);
 //        param.put("review", "1");
         return matchProductDispatchService.findSignRecordDispatchInfo(param);
+    }
+
+    /**
+     * 根据productId查看物资发放详情
+     *
+     * @param productId 产品id
+     * @param request   请求
+     * @return {@link ResponseResult}
+     */
+    @GetMapping("/report/info")
+    public ResponseResult queryMatchProductDispatchInfoByProductId(@RequestParam("productId") Long productId,HttpServletRequest request) {
+        JSONObject param = getJSONObject(request);
+        param.put("productId", productId);
+        return matchProductDispatchService.findMatchProductDispatchInfoByProductId(param);
     }
 }

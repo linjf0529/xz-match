@@ -96,5 +96,5 @@ public interface MatchDispatchSetService{
      */
     ResponseResult findMatchDispatchSetById(Map<String, Object> params);
 
-    List<MatchDispatchSet> getModes(Long subjectId, String phone);
+    List<MatchDispatchSet> getModes(Long productId, String phone);
 }

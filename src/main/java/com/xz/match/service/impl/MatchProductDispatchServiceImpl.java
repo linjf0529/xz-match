@@ -161,37 +161,37 @@ public class MatchProductDispatchServiceImpl implements MatchProductDispatchServ
             // 1、物资发放信息
             matchProductDispatchInfoVO.setSignRecordInfo(matchProductReceiveSetVO);
         }
-        //判断是否有发放权限
-        List<MatchDispatchSet> matchDispatchSets = matchDispatchSetService.getModes(subjectId,phone);
-        if(!matchDispatchSets.isEmpty()) {
-            // 物资发放信息
-            Map param = new HashMap();
-            param.put("recordId", recordId);
-            param.put("subjectId", subjectId);
-            List<MatchProductDispatchVO> MatchProductDispatchVOList = matchProductDispatchMapper.selectMatchProductDispatchByRecordIdAndSubjectId(param);
-            for (MatchProductDispatchVO matchProductDispatchVO : MatchProductDispatchVOList) {
-                if (matchProductDispatchVO.getProductId() != null) {
-                    int stockNum = 0;
-                    List<MatchProductSub> MatchProductSubs = matchProductSubService.findMatchProductSubByProductId(matchProductDispatchVO.getProductId());
-                    if (!CollectionUtils.isEmpty(MatchProductSubs)) {
-                        matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
-                        for (MatchProductSub matchProductSub : MatchProductSubs) {
-                            stockNum = stockNum + (matchProductSub.getStockNumber() == null ? 0 : matchProductSub.getStockNumber().intValue());
-                        }
-                        matchProductDispatchVO.setStockNumber(stockNum+"");
+
+        // 物资发放信息
+        Map param = new HashMap();
+        param.put("recordId", recordId);
+        param.put("subjectId", subjectId);
+        List<MatchProductDispatchVO> MatchProductDispatchVOList = matchProductDispatchMapper.selectMatchProductDispatchByRecordIdAndSubjectId(param);
+        for (MatchProductDispatchVO matchProductDispatchVO : MatchProductDispatchVOList) {
+            if (matchProductDispatchVO.getProductId() != null) {
+                int stockNum = 0;
+                List<MatchProductSub> MatchProductSubs = matchProductSubService.findMatchProductSubByProductId(matchProductDispatchVO.getProductId());
+                if (!CollectionUtils.isEmpty(MatchProductSubs)) {
+                    matchProductDispatchVO.setMatchProductSubList(MatchProductSubs);
+                    for (MatchProductSub matchProductSub : MatchProductSubs) {
+                        stockNum = stockNum + (matchProductSub.getStockNumber() == null ? 0 : matchProductSub.getStockNumber().intValue());
                     }
+                    matchProductDispatchVO.setStockNumber(stockNum+"");
                 }
-                Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
-                if (matchProductDispatchVO.getId() == null) {
-                    grantButton = 1;
-                    if (Integer.parseInt(matchProductDispatchVO.getStockNumber()) == 0) {
-                        grantButton = 2;
-                    }
-                }
-                matchProductDispatchVO.setGrantButton(grantButton);
             }
-            matchProductDispatchInfoVO.setMatchProductList(MatchProductDispatchVOList);
+            Integer grantButton = 0;//发放按钮  0不展示发放按钮 1展示按钮 2展示置灰按钮
+            if (matchProductDispatchVO.getId() == null) {
+                grantButton = 1;
+                //判断是否有发放权限
+                List<MatchDispatchSet> matchDispatchSets = matchDispatchSetService.getModes(matchProductDispatchVO.getProductId(),phone);
+                // 发放按钮需置灰，有两种情况：1、库存为0；2、发放人员无发放权限；
+                if (Integer.parseInt(matchProductDispatchVO.getStockNumber()) == 0 || matchDispatchSets.isEmpty()) {
+                    grantButton = 2;
+                }
+            }
+            matchProductDispatchVO.setGrantButton(grantButton);
         }
+        matchProductDispatchInfoVO.setMatchProductList(MatchProductDispatchVOList);
         return ResponseResult.ok().setData(matchProductDispatchInfoVO);
     }
 

@@ -254,9 +254,9 @@ public class MatchDispatchSetServiceImpl implements MatchDispatchSetService{
     }
 
     @Override
-    public List<MatchDispatchSet> getModes(Long subjectId, String phone) {
+    public List<MatchDispatchSet> getModes(Long productId, String phone) {
         Map<String,Object> param = new HashMap<>();
-        param.put("permissionId",subjectId);
+        param.put("permissionId",productId);
         param.put("mobile",phone);
         param.put("disabled",0);// 非禁用的
         return matchDispatchSetMapper.findBy(param);
